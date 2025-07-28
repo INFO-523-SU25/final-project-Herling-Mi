@@ -2,7 +2,7 @@
 title: "Proposal title"
 subtitle: "Proposal"
 author: 
-  - name: "Team Name - Team member 1, Team member 2,..."
+  - name: "The Audiophiles - Yashi Mi & Nathan Herling"
     affiliations:
       - name: "College of Information Science, University of Arizona"
 description: "Project description"

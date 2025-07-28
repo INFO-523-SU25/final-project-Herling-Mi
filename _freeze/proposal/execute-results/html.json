@@ -1,7 +1,8 @@
 {
-  "hash": "df3ef1d2c44188aea29cbb417ada94b6",
+  "hash": "6a663616750ebb07e24d5a2aa5441877",
   "result": {
-    "markdown": "---\ntitle: Proposal title\nsubtitle: Proposal\nformat: html\neditor: visual\n---\n\n::: {#load-pkgs .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\n```\n:::\n\n\n## Dataset\n\n\nA brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.\n\nMake sure to load the data and use inline code for some of this information.\n\n## Questions\n\nThe two questions you want to answer.\n\n## Analysis plan\n\n-   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).\n\n",
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Proposal title\"\nsubtitle: \"Proposal\"\nauthor: \n  - name: \"Team Name - Team member 1, Team member 2,...\"\n    affiliations:\n      - name: \"College of Information Science, University of Arizona\"\ndescription: \"Project description\"\nformat:\n  html:\n    code-tools: true\n    code-overflow: wrap\n    code-line-numbers: true\n    embed-resources: true\neditor: visual\ncode-annotations: hover\nexecute:\n  warning: false\njupyter: python3\n---\n\n::: {#load-pkgs .cell message='false' execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\n```\n:::\n\n\n## Dataset\n\n\nA brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.\n\nMake sure to load the data and use inline code for some of this information.\n\n## Questions\n\nThe two questions you want to answer.\n\n## Analysis plan\n\n-   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).\n\n",
     "supporting": [
       "proposal_files"
     ],
