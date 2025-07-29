@@ -1,0 +1,92 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Proposal title\"\n",
+        "subtitle: \"Proposal\"\n",
+        "author: \n",
+        "  - name: \"The Audiophiles - Yashi Mi & Nathan Herling\"\n",
+        "    affiliations:\n",
+        "      - name: \"College of Information Science, University of Arizona\"\n",
+        "description: \"Project description\"\n",
+        "format:\n",
+        "  html:\n",
+        "    code-tools: true\n",
+        "    code-overflow: wrap\n",
+        "    code-line-numbers: true\n",
+        "    embed-resources: true\n",
+        "editor: visual\n",
+        "code-annotations: hover\n",
+        "execute:\n",
+        "  warning: false\n",
+        "jupyter: python3\n",
+        "---"
+      ],
+      "id": "6a41e4ac"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "message": false
+      },
+      "source": [
+        "#| label: load-pkgs\n",
+        "import numpy as np"
+      ],
+      "id": "load-pkgs",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Dataset\n"
+      ],
+      "id": "1dc7ec72"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "message": false
+      },
+      "source": [
+        "#| label: load-dataset\n"
+      ],
+      "id": "load-dataset",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.\n",
+        "\n",
+        "Make sure to load the data and use inline code for some of this information.\n",
+        "\n",
+        "## Questions\n",
+        "\n",
+        "The two questions you want to answer.\n",
+        "\n",
+        "## Analysis plan\n",
+        "\n",
+        "-   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any)."
+      ],
+      "id": "94c83e53"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Program_Installs\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

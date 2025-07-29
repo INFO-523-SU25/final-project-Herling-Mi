@@ -1,0 +1,38 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"About\"\n",
+        "format: html\n",
+        "editor: visual\n",
+        "jupyter: python3\n",
+        "---\n",
+        "\n",
+        "\n",
+        "This project was developed by **[Team Name]** For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n",
+        "\n",
+        "-   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\n",
+        "\n",
+        "-   Team member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\n",
+        "\n",
+        "-   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\n",
+        "\n",
+        "-   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.)."
+      ],
+      "id": "ae650e3c"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Program_Installs\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
