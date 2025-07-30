@@ -1,8 +1,8 @@
 ---
-title: "Proposal title"
+title: "Develop a music recommendation system based on user listening history"
 subtitle: "Proposal"
 author: 
-  - name: "The Audiophiles - Yashi Mi & Nathan Herling"
+  - name: "The Audiophiles -  Nathan Herling & Yashi Mi"
     affiliations:
       - name: "College of Information Science, University of Arizona"
 description: "Project description"
@@ -25,6 +25,14 @@ jupyter: python3
 import numpy as np
 ```
 
+## Goal
+
+Develop a machine learning–based system that classifies the genre of music from audio files and recommends new songs based on the user’s listening history.
+
+The goal of this project is to build a music recommendation system that intelligently suggests new songs based on the user’s existing preferences and listening history. The system will first classify the genre of each audio track, then recommend songs with similar or complementary characteristics.
+
+The motivation for this project is that detecting languages spoken in audio files and making requests based on user factors are well-suited for a small student project. The project provides valuable learning outcomes by involving real audio data, helping us understand the basics of signal processing, training classification models, and applying recommendation logic.
+
 ## Dataset
 
 ```{python}
@@ -38,7 +46,13 @@ Make sure to load the data and use inline code for some of this information.
 
 ## Questions
 
-The two questions you want to answer.
+1.   Try to classify the genre of an unseen audio file using extracted audio features.
+
+    Develop a system that can accurately classify the genre of music in audio files using established audio feature extraction and machine learning methods. This system should provide hands-on learning opportunities in signal processing and machine learning by working with real music data and training classification models.
+
+2.  Based on genre classification and feature similarity, try to recommend songs that match a user’s listening history.
+
+    Create an extensible recommendation system that could incorporate additional genres, evolving user profiles, and more advanced recommendation strategies, ultimately delivering a personalized and engaging user experience.
 
 ## Analysis plan
 
