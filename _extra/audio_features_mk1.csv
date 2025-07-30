@@ -1,0 +1,21 @@
+Feature,Definition,Variable Type,Output Type,Extractable via Python,Python Library,Notes
+Artist,Name of the performing artist or band.,String,Single string,No,N/A,Usually human entered or scraped from web or metadata.
+Song Title,Name of the song or track title.,String,Single string,No,N/A,Usually human entered or scraped from web or metadata.
+Genre,"Musical style or category, possibly multiple genres.",String Array,List of strings,No,N/A,Typically human assigned or scraped from databases.
+Mean (of features),Average value over time of any time-varying audio feature.,Numeric,Single number,Yes,"numpy, scipy","Apply to any time-series feature (e.g., MFCCs, RMS)."
+Variance,Measure of spread or variability of feature over time.,Numeric,Single number,Yes,"numpy, scipy",Use numpy.var()
+Skewness,Measure of asymmetry of the feature distribution.,Numeric,Single number,Yes,scipy.stats,Use scipy.stats.skew()
+Kurtosis,Measure of tail heaviness of the feature distribution.,Numeric,Single number,Yes,scipy.stats,Use scipy.stats.kurtosis()
+Zero Crossing Rate,Rate audio waveform crosses zero amplitude axis.,Numeric,Single number,Yes,librosa,librosa.feature.zero_crossing_rate()
+RMS Energy,"Root mean square of audio amplitude, approximates loudness.",Numeric,Single number,Yes,librosa,librosa.feature.rms()
+Loudness,"Perceived loudness, usually in decibels.",Numeric,Single number,Yes,"librosa, pydub",Estimate via RMS or pydub gain
+Energy,Total power of audio signal over time.,Numeric,Single number,Yes,"librosa, numpy",Mean RMS squared or signal power
+Tempo,Estimated beats per minute of the track.,Numeric,Single number,Yes,librosa,librosa.beat.beat_track()
+Danceability,How suitable a track is for dancing.,Numeric,Single number,Approximate,"essentia, custom ML",Requires ML or Essentia for approximation
+Key / Key Name,"Musical key of the track (e.g., C, D#, F minor).",Categorical,Single string,Yes,"librosa, essentia",Estimated from chroma features
+Mode / Mode Name,Major or minor tonality.,Categorical,Single string,Yes,"librosa, essentia",Derived from key detection
+FFT (Amplitude vs Frequency),Frequency spectrum magnitude of audio signal.,Numeric Array,1D Array,Yes,"numpy, scipy",np.fft.fft() and np.abs()
+STFT (Short-Time Fourier Transform),Time-varying frequency content representation.,Complex Array,2D Matrix,Yes,librosa,librosa.stft()
+Mel-Spectrogram,Spectrogram with Mel scale frequency bins.,Numeric Array,2D Matrix,Yes,librosa,librosa.feature.melspectrogram()
+Frequency vs dB Spectrum,Frequency spectrum converted to decibel scale.,Numeric Array,1D or 2D Matrix,Yes,librosa,librosa.power_to_db() on FFT or STFT
+Duration (ms),Total length of the audio file in milliseconds.,Numeric,Single number,Yes,librosa,librosa.get_duration() * 1000

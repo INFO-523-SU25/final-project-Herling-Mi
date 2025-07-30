@@ -1,0 +1,61 @@
+ML list:
+Apriori Algorithm
+FP-Growth Algorithm
+Eclat Algorithm
+"GSP 
+(Generalized Sequential Pattern)"
+RuleGrowth Algorithm
+.
+Logistic Regression
+Decision Trees
+Random Forest
+Support Vector Machines (SVM)
+K-Nearest Neighbors (KNN)
+Neural Networks
+Deep Learning
+Naive Bayes
+Gradient Boosting Machines (GBM)
+Rule-Based Classification
+Bagging
+Boosting
+XGBoost
+Linear Discriminant Analysis (LDA)
+Regularized Models (Shrinking)
+Stacking
+.
+K-Means Clustering
+Hierarchical Clustering
+DBSCAN (Density-Based Clustering)
+Agglomerative Clustering
+Mean Shift Clustering
+Affinity Propagation
+Spectral Clustering
+.
+Train-Test Split
+K-Fold Cross-Validation
+Stratified K-Fold
+Leave-One-Out (LOO)
+Grid Search
+Randomized Search
+Bayesian Optimization
+Nested Cross-Validation
+.
+Linear Regression
+Polynomial Regression
+Ridge Regression
+Lasso Regression
+Elastic Net Regression
+Quantile Regression
+"Support Vector Regression
+ (SVR)"
+Decision Tree Regression
+Random Forest Regression
+Gradient Boosting Regression
+.
+PCA
+t-SNE
+Autoencoders
+Isolation Forest
+SVD
+ICA
+

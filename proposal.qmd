@@ -46,9 +46,11 @@ Make sure to load the data and use inline code for some of this information.
 
 ## Questions
 
-1.   Try to classify the genre of an unseen audio file using extracted audio features.
+1.  Try to classify the genre of an unseen audio file using extracted audio features.
 
-    Develop a system that can accurately classify the genre of music in audio files using established audio feature extraction and machine learning methods. This system should provide hands-on learning opportunities in signal processing and machine learning by working with real music data and training classification models.
+```         
+Develop a system that can accurately classify the genre of music in audio files using established audio feature extraction and machine learning methods. This system should provide hands-on learning opportunities in signal processing and machine learning by working with real music data and training classification models.
+```
 
 2.  Based on genre classification and feature similarity, try to recommend songs that match a user’s listening history.
 

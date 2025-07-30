@@ -1,0 +1,26 @@
+Demucs (Deep Extractor for Music Sources) is an open-source tool developed by Meta AI, 
+designed for high-quality music source separation. Originally introduced to outperform traditional 
+spectral mask methods, it uses a deep learning architecture based on convolutional layers and 
+bidirectional LSTM to separate audio into distinct stems like vocals, drums, bass, and others. 
+Unlike classical techniques that rely on frequency-domain heuristics, Demucs operates directly in the time 
+domain, enabling precise extraction of overlapping audio components. For multilingual analysis, 
+Demucs is especially effective because it isolates vocals based purely on acoustic features — not 
+linguistic content — making it an ideal front-end for tasks like spoken language identification or lyric 
+classification in machine learning pipelines.
+*
+languages it can identify: (first 15)
+English
+Spanish
+Mandarin Chinese
+Hindi
+Arabic
+French
+Russian
+Portuguese
+Japanese
+German
+Korean
+Italian
+Turkish
+Vietnamese
+Dutch
