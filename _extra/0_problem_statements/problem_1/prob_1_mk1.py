@@ -34,40 +34,48 @@ Handling Vocal/Audio Tracks:
 """
 
 medium_text = """
-Medium Path: Time-Frequency Features on Vocal & Audio Tracks + CNN
+Medium Path: Time-Frequency Features from Vocal & Audio Tracks + Classical ML (e.g., GMMs)
 
 Pipeline Outline
 
 1. Data Input & Preprocessing:
    - Load separate vocal and audio waveforms for each sample.
-   - Extract Mel-Spectrograms or STFT for both tracks individually.
-   - Normalize or standardize spectral features per track.
+   - Extract time-frequency features such as Mel-Frequency Cepstral Coefficients (MFCCs), spectral centroid, bandwidth, or STFT.
+   - Normalize or standardize features per track.
 
-2. Feature Integration:
-   - Stack vocal and audio spectrograms as separate input channels.
-   - Or concatenate flattened vocal and audio feature vectors before feeding into model.
+2. Feature Engineering & Integration:
+   - Aggregate or summarize time-frequency features across frames (e.g., means, variances).
+   - Combine vocal and audio track features into a single feature vector.
 
-3. Data Augmentation:
-   - Apply augmentations such as time-shifting, pitch shifting, or noise addition on vocal track spectrograms.
-   - Optionally augment audio track spectrograms separately.
+3. Model Selection & Training:
+   - Use classical models suited for time-series or distributions, e.g., Gaussian Mixture Models (GMM), Hidden Markov Models (HMM), or classical classifiers like Random Forest and SVM on summarized features.
+   - Perform hyperparameter tuning via grid/random search.
 
-4. Modeling:
-   - Build CNN architecture that:
-     - Takes vocal track spectrogram as input.
-     - Takes audio track spectrogram as a second input channel or branch.
-   - Fuse learned features before final classification layer.
+4. Validation:
+   - Use stratified K-Fold cross-validation to ensure balanced representation across languages.
+   - Optionally use likelihood-based scoring for GMMs or standard classification metrics for others.
 
-5. Training & Validation:
-   - Use K-Fold Cross-Validation or Train-Test split.
-   - Employ early stopping based on validation loss.
-
-6. Evaluation:
-   - Report accuracy, macro F1.
-   - Perform ablation to compare vocal-only vs combined inputs.
+5. Evaluation:
+   - Evaluate with Accuracy, Precision, Recall, F1-score.
+   - Use confusion matrices to identify common misclassifications.
+   - Perform ablation comparing vocal-only features, audio-only, and combined features.
 
 Handling Vocal/Audio Tracks:
-- Extract and normalize vocal and audio spectrograms separately.
-- Feed as separate channels or inputs into CNN.
+- Process vocal and audio tracks separately up to feature extraction.
+- Merge features carefully to leverage complementary information.
+"""
+
+ml_medium = """
+ML Techniques Used:
+- Gaussian Mixture Models (GMM)
+- Hidden Markov Models (HMM) (optional)
+- Random Forest
+- Support Vector Machines (SVM)
+- Stratified K-Fold Cross-Validation
+- Accuracy, Precision, Recall, F1-score metrics
+- Confusion Matrix analysis
+- Feature Normalization (StandardScaler, Min-Max Scaling)
+- Hyperparameter tuning via grid or random search
 """
 
 hard_text = """

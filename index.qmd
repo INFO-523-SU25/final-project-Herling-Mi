@@ -1,8 +1,8 @@
 ---
-title: "Project Title"
+title: "Audio Alchemy"
 subtitle: "INFO 523 - Final Project"
 author: 
-  - name: "Team name - Team member 1, Team member 2,..."
+  - name: "Yashi Mi & Nathan Herling"
     affiliations:
       - name: "College of Information Science, University of Arizona"
 description: "Project description"

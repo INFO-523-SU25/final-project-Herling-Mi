@@ -2,12 +2,15 @@ project:
   type: website
 
 website:
-  title: Project Title
+  title: ""
+  favicon: _extra/_images/favicon_2.ico  
   navbar:
     right:
       - icon: github
-        href: https://github.com/INFO-523-SU24/final-project # Need to change to your project repo
+        href: https://github.com/INFO-523-SU25/final-project-Herling-Mi
     left:
+      - href: "#"
+        text: "<img src='_extra/_images/head_phones.png' style='height: 28px; transform: scale(3.5); margin-right: 12px; vertical-align: middle;'/>"
       - text: Project
         href: index.qmd
       - text: Proposal
@@ -23,6 +26,7 @@ format:
       light: flatly
       dark: darkly
     toc: true
+    css: _extra/_css/styles.css   # 👈 Add this line
 
 execute:
   freeze: auto

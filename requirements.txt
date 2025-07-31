@@ -1,2 +1,31 @@
+# === Core ===
+numpy
+pandas
+scikit-learn
+
+# === Audio Processing ===
+librosa
+torchaudio
+demucs
+
+# === Deep Learning ===
+torch
+tensorflow
+keras
+
+# === Visualization ===
+matplotlib
+seaborn
+
+# === Recommender Systems & Boosting ===
+xgboost
+lightgbm
+# surprise  # Uncomment if you want to try installing despite known issues
+
+# === Notebook Support ===
 jupyter
 nbformat
+ipython
+
+# === Other Utilities ===
+reportlab  # For PDF generation

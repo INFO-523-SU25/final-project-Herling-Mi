@@ -1,7 +1,8 @@
 {
-  "hash": "0e6b82ab6a634a8b8dc925668c0f975c",
+  "hash": "685ab873753a6cf5e4b8c9801d864b8e",
   "result": {
-    "markdown": "---\ntitle: Project title\nsubtitle: INFO 523 - Project Final\nauthor: Team name\nformat: html\neditor: visual\n---\n\n## Abstract\n\nAdd project abstract here.\n\n",
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Audio Alchemy\"\nsubtitle: \"INFO 523 - Final Project\"\nauthor: \n  - name: \"Team name - Team member 1, Team member 2,...\"\n    affiliations:\n      - name: \"College of Information Science, University of Arizona\"\ndescription: \"Project description\"\nformat:\n   html:\n    code-tools: true\n    code-overflow: wrap\n    embed-resources: true\neditor: visual\nexecute:\n  warning: false\n  echo: false\njupyter: python3\n---\n\n\n\n\n## Abstract\n\nAdd project abstract here.\n\n",
     "supporting": [
       "index_files"
     ],
