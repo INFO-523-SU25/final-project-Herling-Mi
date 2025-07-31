@@ -60,7 +60,7 @@ import seaborn as sns
 from IPython.display import display, HTML
 
 ```
-# Vocal track separation with - DEMUCS
+### Vocal track separation with - DEMUCS
 Demucs (Deep Extractor for Music Sources) is an open-source tool developed by Meta AI, 
 designed for high-quality music source separation. Originally introduced to outperform traditional 
 spectral mask methods, it uses a deep learning architecture based on convolutional layers and 
@@ -71,7 +71,7 @@ Demucs is especially effective because it isolates vocals based purely on acoust
 linguistic content — making it an ideal front-end for tasks like spoken language identification or lyric 
 classification in machine learning pipelines.
 
-# Minimal scripts - Using System Terminal Commands
+### Minimal scripts - Using System Terminal Commands - DEMUCS
 Scripts that run `demucs` using system commands—typically through Python’s `subprocess` or `os` libraries—offer a straightforward way to integrate audio separation tools into Python workflows while interacting with the operating system’s file structure and command-line utilities.
 
 ```{python}
@@ -421,85 +421,104 @@ Both team members will independently construct their machine learning pipelines.
 
 
 ## Questions
-1. How can we leverage statistical and time-frequency features extracted from separated vocal and audio tracks to build effective language recognition models? Specifically, how can traditional machine learning methods — ranging from classical classifiers on simple statistical summaries to Gaussian Mixture Models on richer time-frequency features — be applied in this context? What are the key benefits and limitations of these approaches, and how can careful feature engineering, feature integration, and thorough model evaluation improve the accuracy and robustness of language recognition systems?
+### 1. Language Recognition with Separated Vocal & Audio Tracks
+How can we leverage **statistical** and **time-frequency features** extracted from separated vocal and audio tracks to build effective language recognition models? Specifically, how can traditional machine learning methods — ranging from **classical classifiers** on simple statistical summaries to **Gaussian Mixture Models** on richer time-frequency features — be applied in this context?
 
-2. How can user interaction data combined with basic track metadata and simple audio features be used to build an effective recommendation system using collaborative filtering and traditional machine learning methods? Furthermore, how can advanced audio features, dimensionality reduction, and clustering techniques improve personalized recommendations by better capturing user preferences and track characteristics from both vocal and non-vocal components?
+- What are the key **benefits** and **limitations** of these approaches?  
+- How can **careful feature engineering**, **feature integration**, and **thorough model evaluation** improve the accuracy and robustness of language recognition systems?  
+- How do model results compare and contrast when using **.wav** files versus **.mp3** files?
 
+---
+
+### 2. Recommendation Systems Using Audio Features & User Data
+How can **user interaction data**, combined with basic track metadata and simple audio features, be used to build an effective recommendation system using **collaborative filtering** and traditional machine learning methods?
+
+- Furthermore, how can **advanced audio features**, **dimensionality reduction**, and **clustering techniques** improve personalized recommendations by better capturing user preferences and track characteristics from both vocal and non-vocal components?  
+- How do recommendation model results compare and contrast when using **.wav** files versus **.mp3** files, considering the potential impact of audio quality and compression artifacts on feature extraction and recommendation performance?
 
 ## Analysis plan
 
 ### Preamble: Easy and Medium Paths
-The Easy Path serves as a minimal, foundational implementation aimed at quickly establishing a baseline for language recognition using straightforward statistical features extracted from separated vocal and audio tracks. It relies on classical machine learning models that are simple to train and interpret.
+The Easy Path serves as a minimal, foundational implementation aimed at quickly establishing a baseline for language recognition using straightforward statistical features extracted from separated vocal and audio tracks. It relies on classical machine learning models such as Logistic Regression, Random Forest, and Support Vector Machines, which are simple to train and interpret.
 
-The Medium Path is designed as a more advanced approach to be adopted if the Easy Path does not achieve satisfactory performance or if the problem demands richer, more detailed feature representations. This path leverages time-frequency representations like spectrograms and deep learning models (CNNs) to capture complex audio patterns from both vocal and non-vocal tracks, potentially improving accuracy and robustness.
--   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+The Medium Path provides a more detailed approach that extends beyond simple statistics by incorporating time-frequency features such as Mel-Frequency Cepstral Coefficients (MFCCs), spectral centroid, and bandwidth from both vocal and non-vocal tracks. Instead of deep learning, this path uses classical probabilistic models like Gaussian Mixture Models (GMMs), Hidden Markov Models (HMMs), or advanced classical classifiers trained on aggregated time-frequency features. This allows capturing richer audio characteristics while maintaining interpretability and computational efficiency.
 
-## 1. Data Preparation & Feature Extraction  
-- Load separated vocal and instrumental audio tracks for each sample.  
-- **Easy Path:** Extract statistical features (mean, variance, skewness, kurtosis, RMS energy, zero crossing rate, tempo, loudness) from vocal and audio tracks separately.  
+
+### Analysis Plan for Problem 1: Language Recognition  
+
+### 1. Data Preparation & Feature Extraction - problem 1  
+- Load separated vocal and instrumental audio tracks for each sample in both **.wav** and **.mp3** formats.  
+- **Easy Path:** Extract statistical features (mean, variance, skewness, kurtosis, RMS energy, zero crossing rate, tempo, loudness) separately from vocal and audio tracks.  
 - **Medium Path:** Extract time-frequency features such as MFCCs, spectral centroid, bandwidth, or STFT for vocal and audio tracks. Aggregate these features by computing summary statistics (mean, variance).  
 - Normalize numerical features (StandardScaler or Min-Max scaling).  
-- Encode any categorical metadata if available (e.g., one-hot encoding for language labels or artist).
+- Encode categorical metadata if available (e.g., one-hot encoding for language labels or artist).  
 
-## 2. Model Construction & Training  
+### 2. Model Construction & Training - problem 1  
 - **Easy Path:** Train classical classifiers — Logistic Regression, Random Forest, Support Vector Machines — on statistical feature vectors.  
-- **Medium Path:** Train classical models suited for time-frequency data distributions — Gaussian Mixture Models (GMMs), Hidden Markov Models (HMMs) (optional), or classical classifiers on aggregated time-frequency features.  
-- Perform hyperparameter tuning via grid search or random search where applicable.
+- **Medium Path:**  
+  - Apply **K-Means clustering** on aggregated time-frequency features to group similar audio patterns unsupervised, enhancing feature representation.  
+  - Train classical models suited for time-frequency data — Gaussian Mixture Models (GMMs), Hidden Markov Models (HMMs) (optional), or classical classifiers on combined original and cluster-based features.  
+- Perform hyperparameter tuning via grid or random search where applicable.  
 
-## 3. Validation  
+### 3. Validation - problem 1  
 - Use stratified K-fold cross-validation to ensure balanced representation of languages in training and test splits.  
-- Evaluate model performance on validation folds.
+- Evaluate model performance on validation folds.  
 
-## 4. Performance Evaluation  
-- Use metrics: Accuracy, Precision, Recall, F1-score to measure performance.  
-- Generate confusion matrices to identify specific language confusions and error patterns.  
-- Conduct ablation studies to compare models trained on vocal-only features, audio-only features, and combined vocal + audio features.
+### 4. Performance Evaluation - problem 1  
+- Metrics: Accuracy, Precision, Recall, F1-score.  
+- Generate confusion matrices to analyze language-specific errors.  
+- Conduct ablation studies comparing vocal-only, audio-only, and combined vocal + audio features.  
+- Compare model performance and feature extraction quality between **.wav** and **.mp3** audio formats to assess the impact of audio compression and quality differences on recognition accuracy.  
 
----
 
-# Putative Machine Learning Techniques  
+### Putative Machine Learning Techniques - problem 1
 
 - Logistic Regression, Random Forest, Support Vector Machines (SVM)  
 - Gaussian Mixture Models (GMM), Hidden Markov Models (HMM) (optional)  
+- K-Means Clustering (unsupervised feature grouping)  
 - Feature normalization/scaling (StandardScaler, Min-Max)  
 - Encoding categorical features (One-hot, Label Encoding)  
 - Stratified K-Fold cross-validation  
 - Hyperparameter tuning (Grid Search, Random Search)  
 - Evaluation metrics: Accuracy, Precision, Recall, F1-score, Confusion Matrix  
-- Ablation analysis for feature contribution
+- Ablation analysis for feature contribution  
 
-# Analysis Plan for Problem 2: User Song Recommendation
+---
 
-## 1. Data Preparation & Feature Extraction
-- Load user interaction data with track metadata (artist, genre, audio features).  
+### Analysis Plan for Problem 2: User Song Recommendation  
+
+### 1. Data Preparation & Feature Extraction - problem 2  
+- Load user interaction data combined with track metadata (artist, genre, audio features) in both **.wav** and **.mp3** formats.  
 - Encode categorical metadata (one-hot, label encoding, or embeddings).  
 - Normalize numerical features (Min-Max scaling, StandardScaler).  
 - Construct user-item interaction matrix from implicit feedback or ratings.  
 
-## 2. Model Construction
-- **Easy path:** Collaborative filtering with K-Nearest Neighbors or Logistic Regression using metadata and user preferences.  
-- **Medium path:** Content-based filtering with clustering (K-Means, Hierarchical) and tree-based classifiers (Random Forest, Gradient Boosting).  
+### 2. Model Construction - problem 2  
+- **Easy Path:** Collaborative filtering using K-Nearest Neighbors or Logistic Regression leveraging metadata and user preferences.  
+- **Medium Path:**  
+  - Use **K-Means clustering** or Hierarchical clustering on track features to identify similar groups of songs or users unsupervised.  
+  - Build tree-based classifiers (Random Forest, Gradient Boosting Machines) on clustered feature groups for content-based filtering.  
 
-## 3. Training & Validation
+### 3. Training & Validation - problem 2  
 - Train-Test splits or Stratified K-Fold cross-validation.  
 - Hyperparameter tuning via grid or random search.  
 
-## 4. Performance Evaluation
+### 4. Performance Evaluation - problem 2  
 - Metrics: Precision@K, Recall@K, Accuracy, F1-score.  
-- Offline validation using held-out test sets.  
+- Offline validation on held-out test sets.  
 - Analyze recommendation relevance and diversity.  
-- Ablation studies on vocal-only vs combined vocal+audio features.
+- Perform ablation studies comparing models built with vocal-only features vs combined vocal + audio features.  
+- Compare recommendation system performance using features extracted from **.wav** versus **.mp3** files to understand the effect of audio quality and compression artifacts.  
 
----
 
-# Putative Machine Learning Techniques
+### Putative Machine Learning Techniques - problem 2  
 
-- **Collaborative Filtering:** K-Nearest Neighbors, Logistic Regression for implicit feedback.  
-- **Content-Based Filtering:** Clustering (K-Means, Hierarchical), Random Forest, Gradient Boosting Machines.  
-- **Cross-validation:** Train-Test Split, Stratified K-Fold CV.  
-- **Feature Engineering:** One-hot encoding, embeddings, normalization (Min-Max, StandardScaler).  
-- **Evaluation Metrics:** Precision@K, Recall@K, Accuracy, F1-score.  
-- **Ablation Analysis:** Assess impact of vocal vs non-vocal feature inclusion.  
+- Collaborative Filtering: K-Nearest Neighbors, Logistic Regression for implicit feedback  
+- Content-Based Filtering: K-Means, Hierarchical Clustering (unsupervised grouping), Random Forest, Gradient Boosting Machines  
+- Cross-validation: Train-Test Split, Stratified K-Fold CV  
+- Feature Engineering: One-hot encoding, embeddings, normalization (Min-Max, StandardScaler)  
+- Evaluation Metrics: Precision@K, Recall@K, Accuracy, F1-score  
+- Ablation Analysis: Assess impact of vocal vs non-vocal feature inclusion  
 
 
 
