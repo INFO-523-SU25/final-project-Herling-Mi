@@ -4,7 +4,7 @@ project:
 
 website:
   title: ""
-  favicon: _extra/_images/favicon_2.ico  
+  favicon: _extra/_images/favicon_2.ico
   navbar:
     right:
       - icon: github
