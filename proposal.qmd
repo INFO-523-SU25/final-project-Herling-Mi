@@ -26,6 +26,7 @@ Our team is developing a machine learning system as part of a larger AI-driven m
 The challenge lies in effectively processing real audio data to extract meaningful features, classify genres, and interpret user listening histories. By leveraging signal processing and machine learning techniques, this project aims to automate and improve the recommendation process. Such advancements not only deepen our understanding of audio analysis but also pave the way for smarter, more intuitive music discovery platforms.
 
 ## Python libraries
+
 ```{python}
 #| label: load-pkgs
 #| message: false
@@ -60,18 +61,13 @@ import seaborn as sns
 from IPython.display import display, HTML
 
 ```
+
 ### Vocal track separation with - DEMUCS
-Demucs (Deep Extractor for Music Sources) is an open-source tool developed by Meta AI, 
-designed for high-quality music source separation. Originally introduced to outperform traditional 
-spectral mask methods, it uses a deep learning architecture based on convolutional layers and 
-bidirectional LSTM to separate audio into distinct stems like vocals, drums, bass, and others. 
-Unlike classical techniques that rely on frequency-domain heuristics, Demucs operates directly in the time 
-domain, enabling precise extraction of overlapping audio components. For multilingual analysis, 
-Demucs is especially effective because it isolates vocals based purely on acoustic features — not 
-linguistic content — making it an ideal front-end for tasks like spoken language identification or lyric 
-classification in machine learning pipelines.
+
+Demucs (Deep Extractor for Music Sources) is an open-source tool developed by Meta AI, designed for high-quality music source separation. Originally introduced to outperform traditional spectral mask methods, it uses a deep learning architecture based on convolutional layers and bidirectional LSTM to separate audio into distinct stems like vocals, drums, bass, and others. Unlike classical techniques that rely on frequency-domain heuristics, Demucs operates directly in the time domain, enabling precise extraction of overlapping audio components. For multilingual analysis, Demucs is especially effective because it isolates vocals based purely on acoustic features — not linguistic content — making it an ideal front-end for tasks like spoken language identification or lyric classification in machine learning pipelines.
 
 ### Minimal scripts - Using System Terminal Commands - DEMUCS
+
 Scripts that run `demucs` using system commands—typically through Python’s `subprocess` or `os` libraries—offer a straightforward way to integrate audio separation tools into Python workflows while interacting with the operating system’s file structure and command-line utilities.
 
 ```{python}
@@ -105,22 +101,24 @@ print("✅ Separation complete. Check the 'demucs_output' folder for results.")
 
 ```
 
-
 ## Dataset
+
 ### Data - Provenence
+
 All audio data used in this project was sourced from YouTube, following an automated pipeline designed to gather relevant tracks for training and evaluation:
 
-- A list of artist names was manually curated.
+-   A list of artist names was manually curated.
 
-- For each artist, their top five songs were identified by scraping Google search results.
+-   For each artist, their top five songs were identified by scraping Google search results.
 
-- YouTube links corresponding to those songs were retrieved using a custom scraping script.
+-   YouTube links corresponding to those songs were retrieved using a custom scraping script.
 
-- Audio from each YouTube video was downloaded and stored for analysis.
+-   Audio from each YouTube video was downloaded and stored for analysis.
 
 In addition to audio collection, a secondary scraper was developed to gather metadata. This tool extracted the most commonly associated genres and countries of origin for each artist by querying publicly available sources.
 
 ### Data - Collection
+
 The data collection process involved several custom Python scripts designed to scrape and download the necessary information and audio files:
 
 `genre_scrape.py` — Scrapes top genres associated with artists.
@@ -136,7 +134,9 @@ The data collection process involved several custom Python scripts designed to s
 Together, these scripts automate the extraction of both audio data and relevant metadata to support training and evaluation of the recommendation system.
 
 ### Data - Description
+
 This table provides a comprehensive overview of the audio and metadata features considered during project development. It details each feature’s definition, data type, output format, and extraction notes. While some features may not be ultimately used, the table serves as a complete reference of potential inputs for modeling musical and audio characteristics. All features requiring extraction have, at least prima facie, been verified against available Python libraries capable of performing the extraction.
+
 ```{python}
 #| label: feature-summary-py
 #| echo: false
@@ -212,8 +212,11 @@ df = pd.DataFrame({
 # Style and display the table
 df.style.set_table_attributes("class='table table-striped table-hover'").set_caption("Summary of Audio Features (Simplified)")
 ```
+
 ### Machine Learning Nomenclature
+
 This table defines key terms related to the concept of “tokens” in the context of music machine learning. It clarifies how raw audio features, sequences, and categorical metadata can be represented as tokens for model input. Understanding these distinctions is essential for designing effective audio classification and recommendation systems.
+
 ```{python}
 #| label: mL-Vocab-py
 #| echo: false
@@ -237,7 +240,9 @@ styled_table = df.style.set_table_attributes("class='table table-striped table-h
 # To render in Jupyter or Quarto, just put `styled_table` on the last line
 styled_table
 ```
+
 ### Data - Storage
+
 The example JSON structure below represents a data entry for an artist and their song metadata, including audio file links, user feedback options, and categorical tags. This format organizes information for easy ingestion by machine learning pipelines or user interfaces, capturing both objective metadata (artist, categories, audio features) and subjective user ratings using Likert scales of varying lengths.
 
 Audio files and any complex metadata such as multi-dimensional arrays (e.g., spectrograms) will be stored in separate folders, with their file paths referenced in the JSON under the AudioFile node.
@@ -248,23 +253,24 @@ Audio files and any complex metadata such as multi-dimensional arrays (e.g., spe
 
 `Data:` A comprehensive sub-node capturing detailed metadata about the audio, including:
 
-- Artist and song title
+-   Artist and song title
 
-- Genre(s)
+-   Genre(s)
 
-- Quantitative audio features such as mean, variance, skewness, kurtosis, zero crossing rate, RMS   energy, loudness, energy, tempo, danceability
+-   Quantitative audio features such as mean, variance, skewness, kurtosis, zero crossing rate, RMS energy, loudness, energy, tempo, danceability
 
-- Musical attributes like key and mode
+-   Musical attributes like key and mode
 
-- Complex audio representations like FFT, STFT, mel-spectrogram, frequency vs dB spectrum
+-   Complex audio representations like FFT, STFT, mel-spectrogram, frequency vs dB spectrum
 
-- Duration in milliseconds
+-   Duration in milliseconds
 
 `Likert_2`, `Likert_3`, `Likert_5`: Arrays representing different Likert scales, each with entries for score, label, color, description, and selection status to capture nuanced user feedback.
 
 `category`: An array of genre tags associated with the song.
 
 This JSON schema is designed to be flexible and extensible, accommodating rich metadata and user feedback for building and improving recommendation systems.
+
 ```{python}
 #| label: json-ex
 #| echo: false
@@ -329,204 +335,265 @@ html_code = f"""
 display(HTML(html_code))
 ```
 
-
 ### Data - Second Tier features
+
 The second tier of data features will focus on vocal track extraction, utilizing the DEMUCS library. Currently, the plan is to develop a dedicated script that processes each song’s audio files—both `.mp3` and `.wav` formats—and stores the resulting vocal isolation data in individual, well-organized folders. As additional processing requirements emerge, the structure of the master JSON file may need to be adapted or reorganized to accommodate these new data components seamlessly. This approach ensures flexibility and scalability in handling complex audio feature sets while maintaining clear data management practices.
 
-
 ### The Audiophiles custom audiofile ui
+
 A custom audio player UI that supports `.wav` and `.mp3` files and dynamically renders decibel versus frequency spectrograms for each song. The player features real-time analysis with frequency, time, and dB spectrogram visualizations synchronized to the playback - a scrolling frequency,time,dB heat map. Additionally, there may be a need to build a JSON reader to facilitate the processing and aggregation of Likert scale scores associated with the songs.
 
 ![](_extra/_images/audio_player.png){fig-alt="Custom audio player UI showing spectrogram visualizations" fig-align="center"}
 
 *Figure 1: 'Mk_1' - Custom audio player UI displaying real-time frequency, time, and dB spectrograms synchronized to playback.*
 
-
 ### Additional Script info, Data Storage, Data Extraction:
+
 All additional processing tasks are handled via custom Python scripts. These scripts include tools for downloading `.mp3` and `.mp4` files, and will be maintained individually by each team member. Due to the volume of data involved—approximately `200 .wav` files and `200 .mp3` files—these audio assets will be stored locally on each user’s machine and not uploaded to GitHub.
 
 Once metadata has been successfully extracted and organized, it can be safely stored and versioned within the GitHub repository. Similarly, any machine learning models developed throughout the project will be saved in the GitHub repo for reproducibility and collaboration.
 
 Scripts for metadata extraction will be developed by Nathan and distributed to the rest of the team. Additional scripts and processing pipelines required for addressing specific research tasks will be created by individual team members as needed.
 
-
 ## Individual Duties
 
 **Nathan – Problem #2: User Song Recommendation**
 
-- **Metadata JSON Schema Design**  
-  Designed and implemented the nested `.json` structure to store song metadata, audio links, user ratings, and extracted audio features.
+-   **Metadata JSON Schema Design**\
+    Designed and implemented the nested `.json` structure to store song metadata, audio links, user ratings, and extracted audio features.
 
-- **Metadata Extraction Scripts**  
-  Responsible for writing and maintaining Python scripts to:
-  - Scrape artist genres, countries of origin, and song lists  
-  - Retrieve YouTube links  
-  - Organize metadata for ingestion and storage  
+-   **Metadata Extraction Scripts**\
+    Responsible for writing and maintaining Python scripts to:
 
-- **Audio Visualization Interface**  
-  Developed a custom `.wav/.mp3` player with:
-  - Real-time frequency vs. dB spectrograms  
-  - Static visualizations for spectral energy distribution  
-  - Interactive time-frequency-dB spectrograms during playback  
+    -   Scrape artist genres, countries of origin, and song lists\
+    -   Retrieve YouTube links\
+    -   Organize metadata for ingestion and storage
 
-- **Demucs Integration and Vocal Separation**  
-  Writing scripts to:
-  - Apply the Demucs library for isolating vocal tracks  
-  - Store separated `.wav` and `.mp3` files in structured folders for analysis  
+-   **Audio Visualization Interface**\
+    Developed a custom `.wav/.mp3` player with:
 
-- **User Interface & Data Display**  
-  Building HTML/Quarto-styled displays for rendering `.json` metadata and user feedback in a human-readable format.  
+    -   Real-time frequency vs. dB spectrograms\
+    -   Static visualizations for spectral energy distribution\
+    -   Interactive time-frequency-dB spectrograms during playback
 
----
+-   **Demucs Integration and Vocal Separation**\
+    Writing scripts to:
+
+    -   Apply the Demucs library for isolating vocal tracks\
+    -   Store separated `.wav` and `.mp3` files in structured folders for analysis
+
+-   **User Interface & Data Display**\
+    Building HTML/Quarto-styled displays for rendering `.json` metadata and user feedback in a human-readable format.
+
+------------------------------------------------------------------------
 
 **Yashi – Problem #1: Language Recognition from Audio**
 
-- **Machine Learning Models**  
-  Leading development of:
-  - Language classification models using vocal segments  
-  - Pipelines for training, validation, and testing  
+-   **Machine Learning Models**\
+    Leading development of:
+    -   Language classification models using vocal segments\
+    -   Pipelines for training, validation, and testing
+-   **Audio Feature Extraction**\
+    Responsible for extracting statistical features such as:
+    -   Zero Crossing Rate (ZCR), Root Mean Square (RMS), tempo, and FFT\
+    -   Transforming raw waveform data into usable feature vectors
+-   **Recommendation System Components**\
+    Assisting in the design of:
+    -   Feature-based comparison systems for future personalized recommendations\
+    -   Methods for encoding user preferences and behavior patterns
+-   **Model Evaluation and Testing**\
+    Conducting:
+    -   Accuracy and performance evaluations of models\
+    -   Error analysis using tools such as confusion matrices and cross-validation
 
-- **Audio Feature Extraction**  
-  Responsible for extracting statistical features such as:
-  - Zero Crossing Rate (ZCR), Root Mean Square (RMS), tempo, and FFT  
-  - Transforming raw waveform data into usable feature vectors  
+------------------------------------------------------------------------
 
-- **Recommendation System Components**  
-  Assisting in the design of:
-  - Feature-based comparison systems for future personalized recommendations  
-  - Methods for encoding user preferences and behavior patterns  
-
-- **Model Evaluation and Testing**  
-  Conducting:
-  - Accuracy and performance evaluations of models  
-  - Error analysis using tools such as confusion matrices and cross-validation  
-
----
-
-**Joint Responsibilities**  
+**Joint Responsibilities**\
 Both team members will independently construct their machine learning pipelines. Each pipeline will be trained, tested, evaluated, and iteratively improved based on problem-specific goals. Coordination will ensure that feature extraction and data preprocessing remain compatible across both tasks.
 
 ### 🗂️ Workflow Plan (Final 2.25 Weeks)
 
-| **Phase** | **Dates**         | **Tasks** |
-|-----------|------------------|-----------|
-| **Phase 1: Script Finalization & Distribution** | Aug 1 – Aug 3 | - Finalize all data scraping & audio processing scripts<br>- Distribute scripts to team members<br>- Confirm runtime & environment setup |
-| **Phase 2: Data Collection & Organization** | Aug 4 – Aug 6 | - Each user runs scripts locally<br>- Collect ~200 `.mp3` and `.wav` files per user<br>- Store audio and metadata in standardized folder structure |
-| **Phase 3: Metadata Processing** | Aug 7 – Aug 8 | - Parse, clean, and validate `.json` metadata<br>- Integrate new entries into master metadata files<br>- Ensure feature coverage (e.g., genre, tempo, duration) |
-| **Phase 4: ML Pipeline Construction** | Aug 9 – Aug 10 | - Each user builds their custom ML pipeline<br>- Define preprocessing, feature extraction, model architecture |
-| **Phase 5: ML Testing & Iteration – Round 1** | Aug 11 – Aug 13 | - Run training and validation pipelines<br>- Tune hyperparameters<br>- Log and assess intermediate results |
-| **Phase 6: ML Testing & Iteration – Round 2** | Aug 14 – Aug 16 | - Refine pipelines based on feedback<br>- Add second-tier features (e.g., vocal-only inputs)<br>- Evaluate early model performance |
-| **Phase 7: Final Evaluation & Model Selection** | Aug 17 – Aug 18 | - Select best models per user task<br>- Create evaluation reports<br>- Generate confusion matrices, ROC curves, etc. |
-| **Phase 8: Write-Up & Presentation Prep** | Aug 19 – Aug 21 | - Complete final Quarto write-up<br>- Polish visualizations and tables<br>- Build and rehearse project presentation |
-
+| **Phase** | **Dates** | **Tasks** |
+|--------------------|--------------------------------|--------------------|
+| **Phase 1: Script Finalization & Distribution** | Aug 1 – Aug 3 | \- Finalize all data scraping & audio processing scripts<br>- Distribute scripts to team members<br>- Confirm runtime & environment setup |
+| **Phase 2: Data Collection & Organization** | Aug 4 – Aug 6 | \- Each user runs scripts locally<br>- Collect \~200 `.mp3` and `.wav` files per user<br>- Store audio and metadata in standardized folder structure |
+| **Phase 3: Metadata Processing** | Aug 7 – Aug 8 | \- Parse, clean, and validate `.json` metadata<br>- Integrate new entries into master metadata files<br>- Ensure feature coverage (e.g., genre, tempo, duration) |
+| **Phase 4: ML Pipeline Construction** | Aug 9 – Aug 10 | \- Each user builds their custom ML pipeline<br>- Define preprocessing, feature extraction, model architecture |
+| **Phase 5: ML Testing & Iteration – Round 1** | Aug 11 – Aug 13 | \- Run training and validation pipelines<br>- Tune hyperparameters<br>- Log and assess intermediate results |
+| **Phase 6: ML Testing & Iteration – Round 2** | Aug 14 – Aug 16 | \- Refine pipelines based on feedback<br>- Add second-tier features (e.g., vocal-only inputs)<br>- Evaluate early model performance |
+| **Phase 7: Final Evaluation & Model Selection** | Aug 17 – Aug 18 | \- Select best models per user task<br>- Create evaluation reports<br>- Generate confusion matrices, ROC curves, etc. |
+| **Phase 8: Write-Up & Presentation Prep** | Aug 19 – Aug 21 | \- Complete final Quarto write-up<br>- Polish visualizations and tables<br>- Build and rehearse project presentation |
 
 ## Questions
+
 ### 1. Language Recognition with Separated Vocal & Audio Tracks
+
 How can we leverage **statistical** and **time-frequency features** extracted from separated vocal and audio tracks to build effective language recognition models? Specifically, how can traditional machine learning methods — ranging from **classical classifiers** on simple statistical summaries to **Gaussian Mixture Models** on richer time-frequency features — be applied in this context?
 
-- What are the key **benefits** and **limitations** of these approaches?  
-- How can **careful feature engineering**, **feature integration**, and **thorough model evaluation** improve the accuracy and robustness of language recognition systems?  
-- How do model results compare and contrast when using **.wav** files versus **.mp3** files?
+-   What are the key **benefits** and **limitations** of these approaches?\
+-   How can **careful feature engineering**, **feature integration**, and **thorough model evaluation** improve the accuracy and robustness of language recognition systems?\
+-   How do model results compare and contrast when using **.wav** files versus **.mp3** files?
 
----
+------------------------------------------------------------------------
 
 ### 2. Recommendation Systems Using Audio Features & User Data
+
 How can **user interaction data**, combined with basic track metadata and simple audio features, be used to build an effective recommendation system using **collaborative filtering** and traditional machine learning methods?
 
-- Furthermore, how can **advanced audio features**, **dimensionality reduction**, and **clustering techniques** improve personalized recommendations by better capturing user preferences and track characteristics from both vocal and non-vocal components?  
-- How do recommendation model results compare and contrast when using **.wav** files versus **.mp3** files, considering the potential impact of audio quality and compression artifacts on feature extraction and recommendation performance?
+-   Furthermore, how can **advanced audio features**, **dimensionality reduction**, and **clustering techniques** improve personalized recommendations by better capturing user preferences and track characteristics from both vocal and non-vocal components?\
+-   How do recommendation model results compare and contrast when using **.wav** files versus **.mp3** files, considering the potential impact of audio quality and compression artifacts on feature extraction and recommendation performance?
 
 ## Analysis plan
 
 ### Preamble: Easy and Medium Paths
+
 The Easy Path serves as a minimal, foundational implementation aimed at quickly establishing a baseline for language recognition using straightforward statistical features extracted from separated vocal and audio tracks. It relies on classical machine learning models such as Logistic Regression, Random Forest, and Support Vector Machines, which are simple to train and interpret.
 
 The Medium Path provides a more detailed approach that extends beyond simple statistics by incorporating time-frequency features such as Mel-Frequency Cepstral Coefficients (MFCCs), spectral centroid, and bandwidth from both vocal and non-vocal tracks. Instead of deep learning, this path uses classical probabilistic models like Gaussian Mixture Models (GMMs), Hidden Markov Models (HMMs), or advanced classical classifiers trained on aggregated time-frequency features. This allows capturing richer audio characteristics while maintaining interpretability and computational efficiency.
 
+### Analysis Plan for Problem 1: Language Recognition
 
-### Analysis Plan for Problem 1: Language Recognition  
+### 1. Data Preparation & Feature Extraction - problem 1
 
-### 1. Data Preparation & Feature Extraction - problem 1  
-- Load separated vocal and instrumental audio tracks for each sample in both **.wav** and **.mp3** formats.  
-- **Easy Path:** Extract statistical features (mean, variance, skewness, kurtosis, RMS energy, zero crossing rate, tempo, loudness) separately from vocal and audio tracks.  
-- **Medium Path:** Extract time-frequency features such as MFCCs, spectral centroid, bandwidth, or STFT for vocal and audio tracks. Aggregate these features by computing summary statistics (mean, variance).  
-- Normalize numerical features (StandardScaler or Min-Max scaling).  
-- Encode categorical metadata if available (e.g., one-hot encoding for language labels or artist).  
+-   Load separated vocal and instrumental audio tracks for each sample in both **.wav** and **.mp3** formats.\
+-   **Easy Path:** Extract statistical features (mean, variance, skewness, kurtosis, RMS energy, zero crossing rate, tempo, loudness) separately from vocal and audio tracks.\
+-   **Medium Path:** Extract time-frequency features such as MFCCs, spectral centroid, bandwidth, or STFT for vocal and audio tracks. Aggregate these features by computing summary statistics (mean, variance).\
+-   Normalize numerical features (StandardScaler or Min-Max scaling).\
+-   Encode categorical metadata if available (e.g., one-hot encoding for language labels or artist).
 
-### 2. Model Construction & Training - problem 1  
-- **Easy Path:** Train classical classifiers — Logistic Regression, Random Forest, Support Vector Machines — on statistical feature vectors.  
-- **Medium Path:**  
-  - Apply **K-Means clustering** on aggregated time-frequency features to group similar audio patterns unsupervised, enhancing feature representation.  
-  - Train classical models suited for time-frequency data — Gaussian Mixture Models (GMMs), Hidden Markov Models (HMMs) (optional), or classical classifiers on combined original and cluster-based features.  
-- Perform hyperparameter tuning via grid or random search where applicable.  
+### 2. Model Construction & Training - problem 1
 
-### 3. Validation - problem 1  
-- Use stratified K-fold cross-validation to ensure balanced representation of languages in training and test splits.  
-- Evaluate model performance on validation folds.  
+-   **Easy Path:** Train classical classifiers — Logistic Regression, Random Forest, Support Vector Machines — on statistical feature vectors.\
+-   **Medium Path:**
+    -   Apply **K-Means clustering** on aggregated time-frequency features to group similar audio patterns unsupervised, enhancing feature representation.\
+    -   Train classical models suited for time-frequency data — Gaussian Mixture Models (GMMs), Hidden Markov Models (HMMs) (optional), or classical classifiers on combined original and cluster-based features.\
+-   Perform hyperparameter tuning via grid or random search where applicable.
 
-### 4. Performance Evaluation - problem 1  
-- Metrics: Accuracy, Precision, Recall, F1-score.  
-- Generate confusion matrices to analyze language-specific errors.  
-- Conduct ablation studies comparing vocal-only, audio-only, and combined vocal + audio features.  
-- Compare model performance and feature extraction quality between **.wav** and **.mp3** audio formats to assess the impact of audio compression and quality differences on recognition accuracy.  
+### 3. Validation - problem 1
 
+-   Use stratified K-fold cross-validation to ensure balanced representation of languages in training and test splits.\
+-   Evaluate model performance on validation folds.
+
+### 4. Performance Evaluation - problem 1
+
+-   Metrics: Accuracy, Precision, Recall, F1-score.\
+-   Generate confusion matrices to analyze language-specific errors.\
+-   Conduct ablation studies comparing vocal-only, audio-only, and combined vocal + audio features.\
+-   Compare model performance and feature extraction quality between **.wav** and **.mp3** audio formats to assess the impact of audio compression and quality differences on recognition accuracy.
 
 ### Putative Machine Learning Techniques - problem 1
 
-- Logistic Regression, Random Forest, Support Vector Machines (SVM)  
-- Gaussian Mixture Models (GMM), Hidden Markov Models (HMM) (optional)  
-- K-Means Clustering (unsupervised feature grouping)  
-- Feature normalization/scaling (StandardScaler, Min-Max)  
-- Encoding categorical features (One-hot, Label Encoding)  
-- Stratified K-Fold cross-validation  
-- Hyperparameter tuning (Grid Search, Random Search)  
-- Evaluation metrics: Accuracy, Precision, Recall, F1-score, Confusion Matrix  
-- Ablation analysis for feature contribution  
+-   Logistic Regression, Random Forest, Support Vector Machines (SVM)\
+-   Gaussian Mixture Models (GMM), Hidden Markov Models (HMM) (optional)\
+-   K-Means Clustering (unsupervised feature grouping)\
+-   Feature normalization/scaling (StandardScaler, Min-Max)\
+-   Encoding categorical features (One-hot, Label Encoding)\
+-   Stratified K-Fold cross-validation\
+-   Hyperparameter tuning (Grid Search, Random Search)\
+-   Evaluation metrics: Accuracy, Precision, Recall, F1-score, Confusion Matrix\
+-   Ablation analysis for feature contribution
 
----
+------------------------------------------------------------------------
 
-### Analysis Plan for Problem 2: User Song Recommendation  
+### Analysis Plan for Problem 2: User Song Recommendation
 
-### 1. Data Preparation & Feature Extraction - problem 2  
-- Load user interaction data combined with track metadata (artist, genre, audio features) in both **.wav** and **.mp3** formats.  
-- Encode categorical metadata (one-hot, label encoding, or embeddings).  
-- Normalize numerical features (Min-Max scaling, StandardScaler).  
-- Construct user-item interaction matrix from implicit feedback or ratings.  
+### 1. Data Preparation & Feature Extraction - problem 2
 
-### 2. Model Construction - problem 2  
-- **Easy Path:** Collaborative filtering using K-Nearest Neighbors or Logistic Regression leveraging metadata and user preferences.  
-- **Medium Path:**  
-  - Use **K-Means clustering** or Hierarchical clustering on track features to identify similar groups of songs or users unsupervised.  
-  - Build tree-based classifiers (Random Forest, Gradient Boosting Machines) on clustered feature groups for content-based filtering.  
+-   Load user interaction data combined with track metadata (artist, genre, audio features) in both **.wav** and **.mp3** formats.\
+-   Encode categorical metadata (one-hot, label encoding, or embeddings).\
+-   Normalize numerical features (Min-Max scaling, StandardScaler).\
+-   Construct user-item interaction matrix from implicit feedback or ratings.
 
-### 3. Training & Validation - problem 2  
-- Train-Test splits or Stratified K-Fold cross-validation.  
-- Hyperparameter tuning via grid or random search.  
+### 2. Model Construction - problem 2
 
-### 4. Performance Evaluation - problem 2  
-- Metrics: Precision@K, Recall@K, Accuracy, F1-score.  
-- Offline validation on held-out test sets.  
-- Analyze recommendation relevance and diversity.  
-- Perform ablation studies comparing models built with vocal-only features vs combined vocal + audio features.  
-- Compare recommendation system performance using features extracted from **.wav** versus **.mp3** files to understand the effect of audio quality and compression artifacts.  
+-   **Easy Path:** Collaborative filtering using K-Nearest Neighbors or Logistic Regression leveraging metadata and user preferences.\
+-   **Medium Path:**
+    -   Use **K-Means clustering** or Hierarchical clustering on track features to identify similar groups of songs or users unsupervised.\
+    -   Build tree-based classifiers (Random Forest, Gradient Boosting Machines) on clustered feature groups for content-based filtering.
 
+### 3. Training & Validation - problem 2
 
-### Putative Machine Learning Techniques - problem 2  
+-   Train-Test splits or Stratified K-Fold cross-validation.\
+-   Hyperparameter tuning via grid or random search.
 
-- Collaborative Filtering: K-Nearest Neighbors, Logistic Regression for implicit feedback  
-- Content-Based Filtering: K-Means, Hierarchical Clustering (unsupervised grouping), Random Forest, Gradient Boosting Machines  
-- Cross-validation: Train-Test Split, Stratified K-Fold CV  
-- Feature Engineering: One-hot encoding, embeddings, normalization (Min-Max, StandardScaler)  
-- Evaluation Metrics: Precision@K, Recall@K, Accuracy, F1-score  
-- Ablation Analysis: Assess impact of vocal vs non-vocal feature inclusion  
+### 4. Performance Evaluation - problem 2
 
+-   Metrics: Precision\@K, Recall\@K, Accuracy, F1-score.\
+-   Offline validation on held-out test sets.\
+-   Analyze recommendation relevance and diversity.\
+-   Perform ablation studies comparing models built with vocal-only features vs combined vocal + audio features.\
+-   Compare recommendation system performance using features extracted from **.wav** versus **.mp3** files to understand the effect of audio quality and compression artifacts.
 
+### Putative Machine Learning Techniques - problem 2
+
+-   Collaborative Filtering: K-Nearest Neighbors, Logistic Regression for implicit feedback\
+-   Content-Based Filtering: K-Means, Hierarchical Clustering (unsupervised grouping), Random Forest, Gradient Boosting Machines\
+-   Cross-validation: Train-Test Split, Stratified K-Fold CV\
+-   Feature Engineering: One-hot encoding, embeddings, normalization (Min-Max, StandardScaler)\
+-   Evaluation Metrics: Precision\@K, Recall\@K, Accuracy, F1-score\
+-   Ablation Analysis: Assess impact of vocal vs non-vocal feature inclusion
 
 ## Repo Oraganization
-[Yashi - #ToDo]
 
-::: {.callout-note}
-**Note:** Current Proposal 1.0.0. Subject to change.  
+-   **\_extra:** Houses supplementary project materials such as problem statements, ML library documentation, and feature lists. Serves as a flexible space for reference materials.
+
+    -   **0_problem_statements：**Contains structured descriptions of the project’s problem statements, including tiered Easy/Medium/Hard pipelines.
+
+    -   **mL_lib_info：**Holds reference documents describing the machine learning techniques considered for the project.
+
+    -   **audio_features_mk1.csv：**A CSV file listing all audio features to be extracted, including definitions, variable types, and extraction methods.
+
+    -   **code.qmd：**A Quarto markdown file containing core code and documentation for the project.
+
+    -   **example_web_site.md:** Example documentation for a project website setup.
+
+    -   **og_data_vars_defs.py:** Python definitions for handling and processing project data variables.
+
+    -   **README.md:** Main project overview, setup instructions, and usage guidelines.
+
+-   **\_freeze:** Contains frozen Quarto document builds for reproducibility, organized by document (`about`, `index`, `presentation`, `proposal`).
+
+-   **github:** Contains GitHub-specific configuration, including:
+
+    -   **ISSUE_TEMPLATE**: Templates for creating consistent GitHub issues.
+
+    -   **workflows**: GitHub Actions workflows for automation (e.g., building Quarto site).
+
+-   **data:** Houses datasets and associated documentation:
+
+    -   **customtheming.scss**: Custom SCSS styling for the Quarto output.
+
+    -   **README.md**: Data usage description.
+
+-   **docs:** Contains rendered Quarto output for deployment (e.g., GitHub Pages):
+
+    -   **\_extra**: Supplementary files included in documentation.
+
+    -   **site_libs**: JavaScript and CSS libraries for the generated site.
+
+    -   **index.html**: Rendered project index page.
+
+    -   **proposal.html**: Rendered proposal page.
+
+    -   **search.json**: Search index for the site.
+
+-   **images：**Contains project image assets, including visualizations, diagrams, and decorative images for presentation
+
+-   **presentation_files：**Stores materials supporting the final presentation, such as figures and supplementary assets.
+
+-   **gitignore：**Specifies files and folders to be excluded from Git version control.
+
+-   **about.qmd：**A Quarto document providing background on the project purpose and introducing team members.
+
+-   **index.qmd：**The main Quarto page for the project, containing the core narrative, methodology, code, visualizations, and results.
+
+-   **presentation.qmd：**A Quarto file containing the final presentation slides for the project results.
+
+-   **proposal.qmd：**A Quarto file for the project proposal, including dataset descriptions, problem statements, analysis plan, and weekly plan.
+
+-   **README.md：**The main project README file, summarizing project objectives, setup instructions, and usage guidelines.
+
+::: callout-note
+**Note:** Current Proposal 1.0.0. Subject to change.\
 (version.feature.patch notation)
 :::
-
