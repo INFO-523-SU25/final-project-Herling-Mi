@@ -21,7 +21,7 @@ jupyter: python3
 
 ## Proposal
 
-Our team is developing a machine learning system as part of a larger AI-driven music recommendation service. The primary objective is to build a model capable of recognizing the language(s) spoken in audio files and assessing whether new songs align with a user’s preferences. Understanding spoken language within music tracks, combined with genre classification, enables more personalized and accurate recommendations. This capability is essential for enhancing user experience by suggesting songs that resonate with individual tastes.
+Our team is developing a machine learning system as part of a larger AI-driven music recommendation service. The primary objectives are to build a model capable of recognizing the language(s) spoken in audio files and assessing whether new songs align with a user’s preferences. Understanding spoken language within music tracks, combined with genre classification, enables more personalized and accurate recommendations. This capability is essential for enhancing user experience by suggesting songs that resonate with individual tastes.
 
 The challenge lies in effectively processing real audio data to extract meaningful features, classify genres, and interpret user listening histories. By leveraging signal processing and machine learning techniques, this project aims to automate and improve the recommendation process. Such advancements not only deepen our understanding of audio analysis but also pave the way for smarter, more intuitive music discovery platforms.
 
@@ -64,7 +64,7 @@ from IPython.display import display, HTML
 
 ### Vocal track separation with - DEMUCS
 
-Demucs (Deep Extractor for Music Sources) is an open-source tool developed by Meta AI, designed for high-quality music source separation. Originally introduced to outperform traditional spectral mask methods, it uses a deep learning architecture based on convolutional layers and bidirectional LSTM to separate audio into distinct stems like vocals, drums, bass, and others. Unlike classical techniques that rely on frequency-domain heuristics, Demucs operates directly in the time domain, enabling precise extraction of overlapping audio components. For multilingual analysis, Demucs is especially effective because it isolates vocals based purely on acoustic features — not linguistic content — making it an ideal front-end for tasks like spoken language identification or lyric classification in machine learning pipelines.
+Demucs (Deep Extractor for Music Sources) is an open-source tool developed by Meta AI, designed for high-quality music source separation. Originally introduced to outperform traditional spectral mask methods, it uses a deep learning architecture based on convolutional layers and bidirectional LSTM  (Long Short-Term Memory) to separate audio into distinct stems like vocals, drums, bass, and others. Unlike classical techniques that rely on frequency-domain heuristics, Demucs operates directly in the time domain, enabling precise extraction of overlapping audio components. For multilingual analysis, Demucs is especially effective because it isolates vocals based purely on acoustic features — not linguistic content — making it an ideal front-end for tasks like spoken language identification or lyric classification in machine learning pipelines.
 
 ### Minimal scripts - Using System Terminal Commands - DEMUCS
 
@@ -120,8 +120,6 @@ In addition to audio collection, a secondary scraper was developed to gather met
 ### Data - Collection
 
 The data collection process involved several custom Python scripts designed to scrape and download the necessary information and audio files:
-
-`genre_scrape.py` — Scrapes top genres associated with artists.
 
 `artist_5_song_list_scrape.py` — Retrieves the top five songs per artist from Google search results.
 
@@ -247,6 +245,10 @@ The example JSON structure below represents a data entry for an artist and their
 
 Audio files and any complex metadata such as multi-dimensional arrays (e.g., spectrograms) will be stored in separate folders, with their file paths referenced in the JSON under the AudioFile node.
 
+**JSON Node Storage Categories**
+
+In hierarchical data structures like JSON, a **node** represents a single element in the tree. Nodes can be categorized by the type of data they store and their structural role. Here is a list of the strucured schemea in our JSON:
+
 `AudioFile:` Nested object containing lists of links to YouTube, WAV, and MP3 versions of the audio files.
 
 `Region, User:` Lists to hold geographic metadata and user identifiers. The User field, along with the Likert rating arrays, are pre-built placeholders designed to support future features such as user accounts and the collection of personalized likeability or preference ratings.
@@ -269,7 +271,7 @@ Audio files and any complex metadata such as multi-dimensional arrays (e.g., spe
 
 `category`: An array of genre tags associated with the song.
 
-This JSON schema is designed to be flexible and extensible, accommodating rich metadata and user feedback for building and improving recommendation systems.
+This JSON schema is designed to be flexible and extensible, accommodating rich metadata and user feedback for building and improving recommendation systems. Below is a partially filled Node, with all schema present.
 
 ```{python}
 #| label: json-ex
@@ -341,7 +343,7 @@ The second tier of data features will focus on vocal track extraction, utilizing
 
 ### The Audiophiles custom audiofile ui
 
-A custom audio player UI that supports `.wav` and `.mp3` files and dynamically renders decibel versus frequency spectrograms for each song. The player features real-time analysis with frequency, time, and dB spectrogram visualizations synchronized to the playback - a scrolling frequency,time,dB heat map. Additionally, there may be a need to build a JSON reader to facilitate the processing and aggregation of Likert scale scores associated with the songs.
+A custom audio player UI that supports `.wav` and `.mp3` files and dynamically renders decibel versus frequency spectrograms for each song. The player features real-time analysis with frequency, time, and dB spectrogram visualizations synchronized to the playback - i.e., a scrolling frequency,time,dB heat map. Additionally, there may be a need to build a JSON reader to facilitate the processing and aggregation of Likert scale scores associated with the songs.
 
 ![](_extra/_images/audio_player.png){fig-alt="Custom audio player UI showing spectrogram visualizations" fig-align="center"}
 
