@@ -1,0 +1,335 @@
+import os
+import pandas as pd
+import json
+
+# Step 1: Create directory if it doesn't exist
+folder_name = "Nathans_processed_music_list"
+os.makedirs(folder_name, exist_ok=True)
+
+
+# Data setup: list of dicts for each row
+data = [
+    {
+        "User": "Nathan",
+        "Artist": "Audioslave",
+        "Songs": "['Like a Stone', 'Cochise', 'Show Me How to Live']",
+        "Category": "['Alternative rock / hard rock / post-grunge', 'Hard rock / alternative metal', 'Hard rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Rob Zombie",
+        "Songs": "['Dragula', 'Get Your Boots On ! That's The End Of Rock And Roll', 'More Human Than Human']",
+        "Category": "['Industrial metal', 'Heavy metal', 'Industrial metal / alternative metal']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Billy Joel",
+        "Songs": "['I Go To Extremes', 'Uptown Girl', 'A Matter Of Trust']",
+        "Category": "['Pop rock', 'Pop rock / soft rock', 'Pop rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Motorhead",
+        "Songs": "['Ace of Spades', 'Overkill', 'Born to Raise Hell']",
+        "Category": "['Heavy metal / speed metal', 'Heavy metal / speed metal', 'Heavy metal']",
+        "Region": "['United Kingdom']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Electric Six",
+        "Songs": "['Danger! High Voltage', 'Gay Bar', 'Dance Commander']",
+        "Category": "['Rock / dance-rock', 'Rock / dance-rock', 'Rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Ratt",
+        "Songs": "['Round and Round', 'Lay It Down', 'Wanted Man']",
+        "Category": "['Glam metal / hard rock', 'Glam metal / hard rock', 'Glam metal / hard rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Van Halen",
+        "Songs": "['Jump', 'Panama', 'Hot for Teacher']",
+        "Category": "['Hard rock', 'Hard rock', 'Hard rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "The Hives",
+        "Songs": "['Hate To Say I Told You So', 'Tick Tick Boom', 'Walk Idiot Walk']",
+        "Category": "['Garage rock revival', 'Garage rock revival', 'Garage rock revival']",
+        "Region": "['Sweden']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "The White Stripes",
+        "Songs": "['Seven Nation Army', 'Icky Thump', 'Blue Orchid']",
+        "Category": "['Garage rock', 'Garage rock', 'Garage rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Velvet Revolver",
+        "Songs": "['Slither', 'Fall to Pieces', 'She Builds Quick Machines']",
+        "Category": "['Hard rock', 'Hard rock', 'Hard rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Violent Femmes",
+        "Songs": "['Blister in the Sun', 'Add It Up', 'Kiss Off']",
+        "Category": "['Folk punk / alternative rock', 'Folk punk / alternative rock', 'Folk punk / alternative rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "George Michael",
+        "Songs": "['Careless Whisper,', \"George Michael-I'm Your Man-Live at Earls Court 2008\", 'Faith.']",
+        "Category": "['Pop', 'Pop', 'Pop']",
+        "Region": "['United Kingdom']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Olivia Newton John",
+        "Songs": "['Make A Move On Me', 'Magic', 'Physical']",
+        "Category": "['Pop', 'Pop', 'Pop']",
+        "Region": "['Australia', 'United Kingdom']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Poison",
+        "Songs": "['Every Rose Has Its Thorn', 'Talk Dirty to Me', \"Nothin' But a Good Time\"]",
+        "Category": "['Glam metal / hard rock', 'Glam metal / hard rock', 'Glam metal / hard rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "The Pretenders",
+        "Songs": "['Brass in Pocket', 'Back on the Chain Gang', \"Don't Get Me Wrong\"]",
+        "Category": "['New wave / punk rock', 'New wave / punk rock', 'New wave / punk rock']",
+        "Region": "['United Kingdom']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "The Doors",
+        "Songs": "['Light My Fire', 'Riders on the Storm', 'Break On Through (To the Other Side)']",
+        "Category": "['Psychedelic rock', 'Psychedelic rock', 'Psychedelic rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Robbie Dupree",
+        "Songs": "['Steal Away', 'Hot Rod Hearts', 'Brooklyn Girls']",
+        "Category": "['Soft rock / yacht rock', 'Soft rock / yacht rock', 'Soft rock / yacht rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Sara Bareilles",
+        "Songs": "['Love Song', 'Bottle It Up', 'Gonna Get Over You']",
+        "Category": "['Pop', 'Pop', 'Pop']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Silverchair",
+        "Songs": "['Tomorrow', 'Freak', 'Straight Lines']",
+        "Category": "['Alternative rock / grunge', 'Alternative rock / grunge', 'Alternative rock']",
+        "Region": "['Australia']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Stone Sour",
+        "Songs": "['Through Glass', 'Bother', 'Rose Red Violent Blue (This Song Is Dumb & So Am I)']",
+        "Category": "['Alternative metal / hard rock', 'Alternative metal / hard rock', 'Alternative metal / hard rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Ronnie Milsap",
+        "Songs": "['Smoky Mountain Rain', \"(There's) No Gettin' Over Me\", 'Stranger in My House']",
+        "Category": "['Country', 'Country', 'Country']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Steve Earle",
+        "Songs": "['Guitar Town', 'Copperhead Road', 'I Feel Alright']",
+        "Category": "['Country rock', 'Country rock', 'Country rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Sum 41",
+        "Songs": "['Fat Lip', 'In Too Deep', 'The Hell Song']",
+        "Category": "['Pop punk / punk rock', 'Pop punk / punk rock', 'Pop punk / punk rock']",
+        "Region": "['Canada']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Talking Heads",
+        "Songs": "['Psycho Killer', 'Once in a Lifetime', 'and This Must Be the Place (Naive Melody)']",
+        "Category": "['New wave / art punk', 'New wave / art punk', 'New wave / art punk']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Carly Rae Jepsen",
+        "Songs": "['Call Me Maybe', 'The Loneliest Time (feat. Rufus Wainwright),', 'Your Type']",
+        "Category": "['Pop', 'Pop', 'Pop']",
+        "Region": "['Canada']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "The All-American Rejects",
+        "Songs": "['Swing, Swing', 'Dirty Little Secret', 'Gives You Hell']",
+        "Category": "['Pop rock / alternative rock', 'Pop rock / alternative rock', 'Pop rock / alternative rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "The B-52s",
+        "Songs": "['Love Shack', 'Rock Lobster', 'and Roam']",
+        "Category": "['New wave / dance rock', 'New wave / dance rock', 'New wave / dance rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "The Revivalists",
+        "Songs": "['Wish I Knew You', 'Soulfight', 'It Was A Sin']",
+        "Category": "['Alternative rock / roots rock', 'Alternative rock / roots rock', 'Alternative rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Kongos",
+        "Songs": "['Come with Me Now', 'Take It From Me', \"I'm Only Joking\"]",
+        "Category": "['Alternative rock / indie rock', 'Alternative rock / indie rock', 'Alternative rock']",
+        "Region": "['South Africa', 'United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Vampire Weekend",
+        "Songs": "['A-Punk', 'Oxford Comma', 'Diane Young']",
+        "Category": "['Indie rock / alternative rock', 'Indie rock / alternative rock', 'Indie rock / alternative rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Volbeat",
+        "Songs": "[\"A Warrior's Call\", 'Lola Montez', 'Still Counting']",
+        "Category": "['Heavy metal / rockabilly', 'Heavy metal / rockabilly', 'Heavy metal / rockabilly']",
+        "Region": "['Denmark']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "AC/DC",
+        "Songs": "['Highway to Hell', 'Back in Black', 'Thunderstruck']",
+        "Category": "['Hard rock / rock and roll', 'Hard rock / rock and roll', 'Hard rock / rock and roll']",
+        "Region": "['Australia']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Olivia Rodrigo",
+        "Songs": "['drivers license', 'good 4 u', 'vampire']",
+        "Category": "['Pop', 'Pop punk / pop', 'Pop']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Harry Styles",
+        "Songs": "['As It Was', 'Watermelon Sugar', 'Adore You']",
+        "Category": "['Pop', 'Pop', 'Pop']",
+        "Region": "['United Kingdom']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Dua Lipa",
+        "Songs": "['Levitating', \"Don't Start Now\", 'New Rules']",
+        "Category": "['Pop / dance-pop', 'Pop / dance-pop', 'Pop']",
+        "Region": "['United Kingdom']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Foo Fighters",
+        "Songs": "['Best of You', 'Everlong', 'The Pretender']",
+        "Category": "['Alternative rock / post-grunge', 'Alternative rock / post-grunge', 'Alternative rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "Weezer",
+        "Songs": "[\"Say It Ain't So\", 'Buddy Holly', 'Hash Pipe']",
+        "Category": "['Alternative rock', 'Alternative rock', 'Alternative rock']",
+        "Region": "['United States']",
+        "YT_link": "[None, None, None]"
+    },
+    {
+        "User": "Nathan",
+        "Artist": "The HU",
+        "Songs": "[\"Shoog Shoog\",\"The Gereg \",\"Yuve Yuve Yu\"]",
+        "Category": "['Mongolian folk metal / folk rock', 'Mongolian folk metal / folk rock', 'Mongolian folk metal / folk rock']",
+        "Region": "['Mongolia']",
+        "YT_link": "[None, None, None]"
+    }
+]
+
+# Step 3: Create DataFrame
+df = pd.DataFrame(data)
+
+# Step 4: Define file paths
+csv_path = os.path.join(folder_name, "Nathans_music_list_processed.csv")
+xlsx_path = os.path.join(folder_name, "Nathans_music_list_processed.xlsx")
+json_path = os.path.join(folder_name, "Nathans_music_list_processed.json")
+
+# Step 5: Save files
+df.to_csv(csv_path, index=False)
+df.to_excel(xlsx_path, index=False)
+df.to_json(json_path, orient="records", indent=2)
+
+# Step 6: Confirmation message
+print("\n✅ Processing complete. Files saved to:")
+print(f"📄 {xlsx_path}")
+print(f"📄 {csv_path}")
+print(f"📄 {json_path}")
