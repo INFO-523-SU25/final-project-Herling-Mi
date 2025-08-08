@@ -1,4 +1,5 @@
 import os
+os.environ["DEMUCS_AUDIO_BACKEND"] = "soundfile" 
 import subprocess
 import concurrent.futures
 from datetime import datetime
@@ -28,12 +29,12 @@ def process_audio_file(audio_file):
         return
 
     command = [
-        "demucs",
+        "python", "-m", "demucs",
+        "-n", "mdx_extra_q",
         "--two-stems=vocals",
         "--out", OUTPUT_FOLDER,
         audio_file
     ]
-
     print(f"🔄 Running Demucs on: {audio_file}")
     try:
         subprocess.run(command, check=True)
@@ -58,8 +59,7 @@ def separate_audio_files_thread_pool(audio_files):
 if __name__ == "__main__":
     # Example list of audio files
     audio_files = [
-        r"C:\Users\Mr_Green\OneDrive\Desktop\0_Sum_25\INFO_523\HWs\group_project\audio_wavs\Gloria_Gaynor_I_Will_Survive.wav",
-        r"C:\Users\Mr_Green\OneDrive\Desktop\0_Sum_25\INFO_523\HWs\group_project\Yashis_Suite\Final_org_attempt_mk1\Yashis_processed_music_list\wav\[MV] MeloMance(멜로망스) _ Love, Maybe(사랑인가 봐) (사내맞선 OST 스페셜 트랙) (Live Clip Ver.).wav",
+        r"/Users/mq/Desktop/INFO523/Herling-Mi/_extra/_Audio_Files_/Yashi_s_Music/wav/Bryan_Adams_Heaven.wav",
         # Add more paths here
     ]
 
