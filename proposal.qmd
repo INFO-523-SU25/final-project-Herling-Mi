@@ -337,6 +337,16 @@ html_code = f"""
 display(HTML(html_code))
 ```
 
+### Likert Scale Feature - indepth explanation
+The Likert score will most likely be implemented in the second phase of the project. It was included in the initial design of the `.JSON` file with the idea that incorporating it early would enable potential use in the current phase and support software design aligned with future phases or iterations of the project. The intended use of the Likert score is as a UI/UX feature for users. The initial approach will involve encoding the Likert scores and using them as input features, rather than as target variables. The machine learning component will aim to provide a gradient of score values, allowing users to express preferences (likes/dislikes) with greater precision. The goal is to develop a model capable of handling varying Likert scale gradients and their corresponding precision for more accurate recommendations.. 						
+						
+		
+::: to_do_box
+**#_To_DO** \
+Yashi - fill in your proposal update here. Add any grammar polishing you'd like.\
+Delete this when you've finished.
+:::
+						
 ### Data - Second Tier features
 
 The second tier of data features will focus on vocal track extraction, utilizing the DEMUCS library. Currently, the plan is to develop a dedicated script that processes each song’s audio files—both `.mp3` and `.wav` formats—and stores the resulting vocal isolation data in individual, well-organized folders. As additional processing requirements emerge, the structure of the master JSON file may need to be adapted or reorganized to accommodate these new data components seamlessly. This approach ensures flexibility and scalability in handling complex audio feature sets while maintaining clear data management practices.
