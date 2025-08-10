@@ -64,7 +64,7 @@ from IPython.display import display, HTML
 
 ### Vocal track separation with - DEMUCS
 
-Demucs (Deep Extractor for Music Sources) is an open-source tool developed by Meta AI, designed for high-quality music source separation. Originally introduced to outperform traditional spectral mask methods, it uses a deep learning architecture based on convolutional layers and bidirectional LSTM  (Long Short-Term Memory) to separate audio into distinct stems like vocals, drums, bass, and others. Unlike classical techniques that rely on frequency-domain heuristics, Demucs operates directly in the time domain, enabling precise extraction of overlapping audio components. For multilingual analysis, Demucs is especially effective because it isolates vocals based purely on acoustic features — not linguistic content — making it an ideal front-end for tasks like spoken language identification or lyric classification in machine learning pipelines.
+Demucs (Deep Extractor for Music Sources) is an open-source tool developed by Meta AI, designed for high-quality music source separation. Originally introduced to outperform traditional spectral mask methods, it uses a deep learning architecture based on convolutional layers and bidirectional LSTM (Long Short-Term Memory) to separate audio into distinct stems like vocals, drums, bass, and others. Unlike classical techniques that rely on frequency-domain heuristics, Demucs operates directly in the time domain, enabling precise extraction of overlapping audio components. For multilingual analysis, Demucs is especially effective because it isolates vocals based purely on acoustic features — not linguistic content — making it an ideal front-end for tasks like spoken language identification or lyric classification in machine learning pipelines.
 
 ### Minimal scripts - Using System Terminal Commands - DEMUCS
 
@@ -338,15 +338,11 @@ display(HTML(html_code))
 ```
 
 ### Likert Scale Feature - indepth explanation
-The Likert score will most likely be implemented in the second phase of the project. It was included in the initial design of the `.JSON` file with the idea that incorporating it early would enable potential use in the current phase and support software design aligned with future phases or iterations of the project. The intended use of the Likert score is as a UI/UX feature for users. The initial approach will involve encoding the Likert scores and using them as input features, rather than as target variables. The machine learning component will aim to provide a gradient of score values, allowing users to express preferences (likes/dislikes) with greater precision. The goal is to develop a model capable of handling varying Likert scale gradients and their corresponding precision for more accurate recommendations.. 						
-						
-		
-::: to_do_box
-**#_To_DO** \
-Yashi - fill in your proposal update here. Add any grammar polishing you'd like.\
-Delete this when you've finished.
-:::
-						
+
+The Likert score will most likely be implemented in the second phase of the project. It was included in the initial design of the `.JSON` file with the idea that incorporating it early would enable potential use in the current phase and support software design aligned with future phases or iterations of the project. The intended use of the Likert score is as a UI/UX feature for users. The initial approach will involve encoding the Likert scores and using them as input features, rather than as target variables. The machine learning component will aim to provide a gradient of score values, allowing users to express preferences (likes/dislikes) with greater precision. The goal is to develop a model capable of handling varying Likert scale gradients and their corresponding precision for more accurate recommendations..
+
+In our design, each user will have their own Likert score database (or user-specific rating entries) linked to their unique user ID. This ensures that preference modeling and recommendation outputs are truly personalized. The idea is to allow users to “score” their like or dislike of individual songs and then see how the recommendation model adapts to those inputs. To make the interaction more engaging, users can choose between a 2-, 3-, or 5-point Likert scale.
+
 ### Data - Second Tier features
 
 The second tier of data features will focus on vocal track extraction, utilizing the DEMUCS library. Currently, the plan is to develop a dedicated script that processes each song’s audio files—both `.mp3` and `.wav` formats—and stores the resulting vocal isolation data in individual, well-organized folders. As additional processing requirements emerge, the structure of the master JSON file may need to be adapted or reorganized to accommodate these new data components seamlessly. This approach ensures flexibility and scalability in handling complex audio feature sets while maintaining clear data management practices.
