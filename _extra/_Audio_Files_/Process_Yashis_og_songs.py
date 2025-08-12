@@ -4,7 +4,7 @@ import os
 import re
 
 # === File & Folder Setup ===
-input_file = "Yashis_Music_list.xlsx"
+input_file = "/Users/mq/Desktop/INFO523/Herling-Mi/_extra/_Audio_Files_/Yashi_s_Music/Yashis_Music_list.xlsx"
 output_folder = "Yashis_processed_music_list"
 os.makedirs(output_folder, exist_ok=True)
 
