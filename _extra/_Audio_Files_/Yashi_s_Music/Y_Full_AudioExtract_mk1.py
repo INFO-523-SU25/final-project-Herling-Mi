@@ -10,7 +10,7 @@ import ast
 import json
 
 # === CONFIGURATION ===
-CSV_INPUT_PATH = r"Yashis_Music_list_processed_complete_with_YT_links.csv"
+CSV_INPUT_PATH = "Yashi_s_Music/Yashis_Music_list_processed_complete_with_YT_links.csv"
 MP3_FOLDER = "mp3"
 WAV_FOLDER = "wav"
 TIMEOUT_SECONDS = 120
