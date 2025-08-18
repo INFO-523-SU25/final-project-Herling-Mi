@@ -224,7 +224,7 @@ plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
 
 <!--Slide 5 -->
 ##
-Q1 Overview - Yashi describe your quetion and how you implemented mL [libraries, validation]
+Q1 Overview - Yashi describe your question and how you implemented mL [libraries, validation]
 
 <!--Slide 6 -->
 ##
@@ -232,37 +232,37 @@ Q1 Results [1/3] - Yashi graphs? Learning Curve, ROC, any hyperparameter optimiz
 
 <!--Slide 7 -->
 ##
-Q1 Results [2/3] - Yashi. Results (% scores)
+Q1 Results [2/3] - Yashi. Results (% scores) Validation methods.
 
 <!--Slide 8 -->
 ##
-Q1 Summary [3/3] - Summarize
+Q1 Summary [3/3] - Yashi. Summarize - what you did/results.
 
 <!--Slide 9 -->
 ##
-Q2 Overview
+Q2 Overview - Nathan describe your question and how you implemented mL [libraries, validation] 
 
 <!--Slide 10 -->
 ##
-Q2 Results [1/3]
+Q2 Results [1/3] - Nathan  graphs? Learning Curve, ROC, any hyperparameter optimization?
 
 <!--Slide 11 -->
 ##
-Q2 Results [2/3]
+Q2 Results [2/3] - Nathan Results (% scores) Validation methods.
 
 <!--Slide 12 -->
 ##
-Q2 Results [3/3]
+Q2 Results [3/3] - Nathan. Summarize - what you did/results.
 
 <!--Slide 13 -->
 ##
-Q2 Summary
+Q2 Summary - Nathan 
 
 <!--Slide 14 -->
 ##
-Full Summary
+Full Summary - Nathan talk about both question findings.
 
 <!--Slide 15 -->
 ##
-In Closing
+In Closing - Nathan
 
