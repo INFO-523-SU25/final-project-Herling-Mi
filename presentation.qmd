@@ -10,7 +10,7 @@ title-slide-attributes:
 footer: |
   <div style="
     position: relative;
-    bottom: 0;
+    bottom: -10px;
     left: 650px;
     right: 0;
     height: 50px;
@@ -19,10 +19,12 @@ footer: |
     align-items: center;
     justify-content: space-between;
     padding: 0 24px 0 40px;
+    z-index: 9999;
     box-sizing: border-box;
-  ">
-    <span style="font-size: 2em; padding-right: 200px;">Wednesday-August-20-2025</span>
-    <img src="images/audio_chrome_5.png" height="41" style="vertical-align: middle;" />
+    margin-top: 200px; /* adjust to push it further down */
+  ">   
+    <span style="position: relative; font-size: 2em; padding-right: 500px;margin-top: -30px">Wednesday-August-20-2025</span>
+    <img src="images/audio_chrome_5.png" height="80" style="vertical-align: middle;margin-top: -10px;" />
   </div>  
 format:
   revealjs:
