@@ -29,3 +29,4 @@ ipython
 
 # === Other Utilities ===
 reportlab  # For PDF generation
+seaborn

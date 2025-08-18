@@ -10,8 +10,8 @@
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.42">
 
-  <meta name="author" content="Author names">
-  <title>Project title</title>
+  <meta name="author" content="">
+  <title>presentation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -31,6 +31,7 @@
     }
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-db28581e62606a00efa0e30e8c2a042b.css">
+  <link rel="stylesheet" href="slide_styles.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -127,378 +128,330 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="images/watercolour_sys02_img34_teacup-ocean.jpg" data-background-opacity="0.7" data-background-size="stretch" data-slide-number="none" class="quarto-title-block center">
-  <h1 class="title">Project title</h1>
-  <p class="subtitle">INFO 523 - Summer 2025 - Final Project</p>
 
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Author names 
+<section class="slide level2">
+
+<div class="banner-container" style="margin-bottom: 30px;">
+<p><img data-src="images/banner_mk2.png" class="banner-image" style="max-width: 100%; height: auto;"></p>
 </div>
-</div>
+<!-- Parent Container -->
+<div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; padding: 40px; box-sizing: border-box;">
+
+  <!-- LEFT column: Image + Audiophiles block -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start; margin-right: 20px; transform: translate(-60px, -20px);">
+    <!-- Image -->
+    <div style="margin-bottom: 10px; margin-left: 40px;">
+      <img src="images/DS_group_mk5.png" alt="Water Drop" style="height: 300px;">
+    </div>
+    <!-- Audiophiles block -->
+    <div style="
+      display: flex;
+      align-items: center;
+      border: 1px solid black;
+      border-radius: 12px;
+      padding: 10px 16px;
+      background-color: #fff;
+      width: 380px;
+    ">
+      <img src="images/head_phones.png" alt="Logo" style="height: 120px; margin-right: 16px;">
+      <span style="
+        font-size: 22px;
+        font-family: Arial, sans-serif;
+        color: #333;
+      ">
+        <strong>The AudioPhiles:</strong><br> Nathan Herling<br> &amp; Yashi Mi
+      </span>
+    </div>
+  </div>
+
+  <!-- RIGHT column: Title + course info -->
+  <div style="display: flex; flex-direction: column; justify-content: flex-start; height: 300px; text-align: right;">
+    <!-- Title block -->
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      text-align: left;
+      line-height: 1.4;
+      color: #1B9FAB;
+      margin-bottom: 20px;
+    ">
+      Audio Alchemy:<br>
+      Decoding Sound for Smarter UX
+    </div>
+
+    <!-- INFO 523 block -->
+    <div style="
+      font-size: 30px;
+      color: #AB0520;
+      border: 3px solid #AB0520;
+      border-radius: 16px;
+      padding: 16px 24px;
+      background-color: #fff5f7;
+      box-shadow: 0 4px 10px rgba(171, 5, 32, 0.2);
+      display: inline-block;
+      margin-top: 0px;
+      width: 100%;
+    ">
+      INFO 523 — Summer 2025 - Final Project
+    </div>
+  </div>
+
 </div>
 
+
+<!--Slide 2 -->
 </section>
-<section>
-<section id="using-quarto-for-presentations" class="title-slide slide level1 center">
-<h1>Using Quarto for presentations</h1>
+<section id="section" class="slide level2">
+<h2></h2>
+<div style="margin: -20px auto; border: 2px solid #ccc; border-radius: 10px; padding: 12px 20px; background-color: #fdfdfd; font-size: 0.60em; line-height: 1.3; max-width: 110%;">
 
+  <h3 style="color:#007ACC; margin: 0 0 4px;">🎯 Project Description &amp; Goals</h3>
+  <p style="margin: 0 0 4px;">Our team is developing a machine learning system for an AI-driven music recommendation service.<br>The main goals are:</p>
+  <ul style="margin: 0 0 4px 16px; padding-left: 0; list-style-position: outside;">
+    <li style="margin: 0;">Build a model capable of recognizing the language(s) spoken in audio files.</li>
+    <li style="margin: 0;">Assess whether new songs align with a user’s musical preferences.</li>
+  </ul>
+
+  <hr style="margin: 6px 0; border: none; border-top: 1px solid #ddd;">
+
+  <h3 style="color:#32CD32; margin: 0 0 4px;">❓ Research Question 1 – Language Recognition</h3>
+  <p style="margin: 0 0 4px;"><strong>How can we leverage statistical and time-frequency features from separated vocal and audio tracks to build effective language recognition models?</strong></p>
+  <ul style="margin: 0 0 4px 16px; padding-left: 0; list-style-position: outside;">
+    <li style="margin: 0;">What are the strengths and limitations of classical models (e.g., SVMs, Random Forest, Logistic Regression)?</li>
+    <li style="margin: 0;">How do feature engineering and validation improve model robustness?</li>
+  </ul>
+
+  <hr style="margin: 6px 0; border: none; border-top: 1px solid #ddd;">
+
+  <h3 style="color:#32CD32; margin: 0 0 4px;">❓ Research Question 2 – Recommendation System [Genre Recognition]</h3>
+  <p style="margin: 0 0 4px;"><strong>Starting with genre recognition as part of the user UI/UX, can a user’s preferred genres be learned through feature analysis of audio files?</strong></p>
+  <ul style="margin: 0 0 0 16px; padding-left: 0; list-style-position: outside;">
+    <li style="margin: 0;">Using classical supervised models: Can audio features be extracted and models trained to recognize a user's preferred genres?</li>
+    <li style="margin: 0;">Using frequency/time heatmap image extraction: Are classical models capable of determining musical genres?</li>
+  </ul>
+
+</div>
+<!--Slide 3-->
 </section>
-<section id="quarto" class="slide level2">
-<h2>Quarto</h2>
-<ul>
-<li><p>The presentation is created using the Quarto CLI</p></li>
-<li><p><code>##</code> sets the start of a new slide</p></li>
-</ul>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div style="font-family: Arial, sans-serif; font-size: 0.75em; line-height: 1.4; width: 100%; margin: -10px auto 20px auto; padding: 16px; border: 1.5px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+  <h3 style="color: #007ACC; margin-bottom: 12px; text-align: center;">Data Files and Extraction Workflow</h3>
+  <ul style="padding-left: 20px; color: #333; margin: 0;">
+    <li><strong>User Input:</strong> Initial CSV files containing song names; optionally including genre, language, and artist information.</li>
+    <li><strong>Data Completion:</strong> Automated web scraping to fill missing metadata fields such as genre, language, and artist.</li>
+    <li><strong>YouTube Integration:</strong> Web scraping YouTube to find matching song links, then storing these links and related metadata in a JSON file.</li>
+    <li><strong>Audio Acquisition:</strong> Downloading .wav audio files from YouTube links for each song.</li>
+    <li><strong>Feature Extraction:</strong> Using Python scripts to analyze audio files and extract features (e.g., fundamental frequency, MFCCs, tempo).</li>
+    <li><strong>Output Files:</strong> Extracted audio features are saved into CSV files; visualizations like spectrograms are saved as PNG images.</li>
+  </ul>
+</div>
+<!--Slide 4 -->
 </section>
-<section id="layouts" class="slide level2">
-<h2>Layouts</h2>
-<p>You can use plain text</p>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>or bullet points<sup>1</sup></li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p>or in two columns</p>
-</div></div>
-<ul>
-<li><p>like</p></li>
-<li><p>this</p></li>
-</ul>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>And add footnotes</p></li></ol></aside></section>
-<section id="code" class="slide level2">
-<h2>Code</h2>
-<div id="8b275238" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-stdout">
-<pre><code>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                    mpg   R-squared:                       0.073
-Model:                            OLS   Adj. R-squared:                  0.070
-Method:                 Least Squares   F-statistic:                     30.59
-Date:                Sat, 09 Aug 2025   Prob (F-statistic):           5.84e-08
-Time:                        16:20:54   Log-Likelihood:                -1346.4
-No. Observations:                 392   AIC:                             2697.
-Df Residuals:                     390   BIC:                             2705.
-Df Model:                           1                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-const         35.8015      2.266     15.800      0.000      31.347      40.257
-speed       -354.7055     64.129     -5.531      0.000    -480.788    -228.623
-==============================================================================
-Omnibus:                       27.687   Durbin-Watson:                   0.589
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               18.976
-Skew:                           0.420   Prob(JB):                     7.57e-05
-Kurtosis:                       2.323   Cond. No.                         169.
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
-</div>
-</div>
-</section>
-<section id="plots" class="slide level2">
-<h2>Plots</h2>
-
-<img data-src="presentation_files/figure-revealjs/cell-6-output-1.png" class="r-stretch"></section>
-<section id="plot-and-text" class="slide level2">
-<h2>Plot and text</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><p>Some text</p></li>
-<li><p>goes here</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div id="9d1da065" class="cell" data-fig.width="5.5" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-7-output-1.png"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section></section>
-<section>
-<section id="a-new-section" class="title-slide slide level1 center">
-<h1>A new section…</h1>
-
-</section>
-<section id="tables" class="slide level2">
-<h2>Tables</h2>
-<p>If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,</p>
-<div id="0c756a52" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display" data-execution_count="7">
-<table border="1" class="dataframe">
-
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div style="max-width: 100%; margin: 0 -80px 0 -80px; font-family: Arial, sans-serif; font-size: 0.65em; line-height: 1.2; border: 1.5px solid #ccc; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;">
+<h2 style="color: #007ACC; margin: 0 0 8px 0; text-align: center; font-size: 1.2em;">
+Feature Scraping
+</h2>
+<table style="width: 100%; border-collapse: collapse; table-layout: fixed; word-wrap: break-word;">
 <thead>
-
-<tr style="text-align: right;">
-
-<th>
+<tr style="background-color: #007ACC; color: white; text-align: left;">
+<th style="width: 25%; padding: 4px 8px; border: 1px solid #ccc;">
+Feature
 </th>
-
-<th>
-species
+<th style="width: 75%; padding: 4px 8px; border: 1px solid #ccc;">
+Description
 </th>
-
-<th>
-island
-</th>
-
-<th>
-bill_length_mm
-</th>
-
-<th>
-bill_depth_mm
-</th>
-
-<th>
-flipper_length_mm
-</th>
-
-<th>
-body_mass_g
-</th>
-
-<th>
-sex
-</th>
-
 </tr>
-
 </thead>
-
 <tbody>
-
 <tr>
-
-<th>
-0
-</th>
-
-<td>
-Adelie
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+fundamental_freq
 </td>
-
-<td>
-Torgersen
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Fundamental frequency (mean pitch via librosa.pyin)
 </td>
-
-<td>
-39.1
-</td>
-
-<td>
-18.7
-</td>
-
-<td>
-181.0
-</td>
-
-<td>
-3750.0
-</td>
-
-<td>
-Male
-</td>
-
 </tr>
-
 <tr>
-
-<th>
-1
-</th>
-
-<td>
-Adelie
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+freq_e_1
 </td>
-
-<td>
-Torgersen
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Dominant spectral energy #1 (highest energy frequency bin)
 </td>
-
-<td>
-39.5
-</td>
-
-<td>
-17.4
-</td>
-
-<td>
-186.0
-</td>
-
-<td>
-3800.0
-</td>
-
-<td>
-Female
-</td>
-
 </tr>
-
 <tr>
-
-<th>
-2
-</th>
-
-<td>
-Adelie
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+freq_e_2
 </td>
-
-<td>
-Torgersen
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Dominant spectral energy #2 (2nd highest energy frequency bin)
 </td>
-
-<td>
-40.3
-</td>
-
-<td>
-18.0
-</td>
-
-<td>
-195.0
-</td>
-
-<td>
-3250.0
-</td>
-
-<td>
-Female
-</td>
-
 </tr>
-
 <tr>
-
-<th>
-4
-</th>
-
-<td>
-Adelie
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+freq_e_3
 </td>
-
-<td>
-Torgersen
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Dominant spectral energy #3 (3rd highest energy frequency bin)
 </td>
-
-<td>
-36.7
-</td>
-
-<td>
-19.3
-</td>
-
-<td>
-193.0
-</td>
-
-<td>
-3450.0
-</td>
-
-<td>
-Female
-</td>
-
 </tr>
-
 <tr>
-
-<th>
-5
-</th>
-
-<td>
-Adelie
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+key
 </td>
-
-<td>
-Torgersen
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Estimated musical key (C, C#, D, …, B) via chroma features
 </td>
-
-<td>
-39.3
-</td>
-
-<td>
-20.6
-</td>
-
-<td>
-190.0
-</td>
-
-<td>
-3650.0
-</td>
-
-<td>
-Male
-</td>
-
 </tr>
-
+<tr>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+duration
+</td>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Length of audio in seconds
+</td>
+</tr>
+<tr>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+zero_crossing_rate
+</td>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Average zero crossing rate (signal sign changes)
+</td>
+</tr>
+<tr>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+mfcc_mean
+</td>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Mean of 13 MFCC coefficients (timbre features)
+</td>
+</tr>
+<tr>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+mfcc_std
+</td>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Standard deviation of MFCC coefficients
+</td>
+</tr>
+<tr>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+tempo
+</td>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Estimated tempo in beats per minute (BPM)
+</td>
+</tr>
+<tr>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+rms_energy
+</td>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Root mean square energy (loudness measure)
+</td>
+</tr>
+<tr>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+track_type
+</td>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Audio track type (0=full mix, 1=vocal only, 2=no vocals)
+</td>
+</tr>
+<tr>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+mel_spectrogram
+</td>
+<td style="padding: 4px 8px; border: 1px solid #ccc;">
+Mel-scaled spectrogram representing frequency content over time (human hearing range)
+</td>
+</tr>
 </tbody>
-
 </table>
 </div>
 </div>
+<!--Slide 5 -->
 </section>
-<section id="images" class="slide level2">
-<h2>Images</h2>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p>Q1 Overview - Yashi describe your quetion and how you implemented mL [libraries, validation]</p>
+<!--Slide 6 -->
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<p>Q1 Results [1/3] - Yashi graphs? Learning Curve, ROC, any hyperparameter optimization?</p>
+<!--Slide 7 -->
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<p>Q1 Results [2/3] - Yashi. Results (% scores)</p>
+<!--Slide 8 -->
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<p>Q1 Summary [3/3] - Summarize</p>
+<!--Slide 9 -->
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<p>Q2 Overview</p>
+<!--Slide 10 -->
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<p>Q2 Results [1/3]</p>
+<!--Slide 11 -->
+</section>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<p>Q2 Results [2/3]</p>
+<!--Slide 12 -->
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<p>Q2 Results [3/3]</p>
+<!--Slide 13 -->
+</section>
+<section id="section-11" class="slide level2">
+<h2></h2>
+<p>Q2 Summary</p>
+<!--Slide 14 -->
+</section>
+<section id="section-12" class="slide level2">
+<h2></h2>
+<p>Full Summary</p>
+<!--Slide 15 -->
+</section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<p>In Closing</p>
 
-<img data-src="images/watercolour_sys02_img34_teacup-ocean.png" width="500" class="r-stretch quarto-figure-center"><p class="caption">Image credit: Danielle Navarro, Percolate.</p></section>
-<section id="math-expressions" class="slide level2 smaller">
-<h2>Math Expressions</h2>
-<p>You can write LaTeX math expressions inside a pair of dollar signs, e.g.&nbsp;$\alpha+\beta$ renders <span class="math inline">\(\alpha + \beta\)</span>. You can use the display style with double dollar signs:</p>
-<pre><code>$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$</code></pre>
-<p><span class="math display">\[
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-\]</span></p>
-<p>Limitations:</p>
-<ol type="1">
-<li><p>The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting <code>$$</code> must appear in the very beginning of a line, followed immediately by a non-space character, and the ending <code>$$</code> must be at the end of a line, led by a non-space character;</p></li>
-<li><p>There should not be spaces after the opening <code>$</code> or before the closing <code>$</code>.</p></li>
-</ol>
-</section></section>
-<section>
-<section id="wrap-up" class="title-slide slide level1 center">
-<h1>Wrap up</h1>
 
 </section>
-<section id="feeling-adventurous" class="slide level2">
-<h2>Feeling adventurous?</h2>
-<ul>
-<li><p>You are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.</p></li>
-<li><p>But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.</p></li>
-</ul>
-
-
-</section></section>
-
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-
+<div style="
+  position: relative;
+  bottom: 0;
+  left: 650px;
+  right: 0;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px 0 40px;
+  box-sizing: border-box;
+">
+<p><span style="font-size: 2em; padding-right: 200px;">Wednesday-August-20-2025</span> <img src="images/audio_chrome_5.png" height="41" style="vertical-align: middle;"></p>
+</div>
 </div>
 </div></div>
 
@@ -551,7 +504,7 @@ Male
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',

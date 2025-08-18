@@ -43,6 +43,13 @@ track_type_specs = {name: (df["track_type"] == code) for code, name in track_typ
 for name, mask in track_type_specs.items():
     print(f"{name}: {int(mask.sum())} samples")
 
+# Check language distribution per track_type group
+for track_type_code, ablation_name in track_type_all.items():
+    mask = df["track_type"] == track_type_code
+    languages = df.loc[mask, "language"].astype(str)
+    print(f"Languages in {ablation_name}:")
+    print(languages.value_counts())
+
 # Set up Stratified K-Fold cross-validation
 k = 5
 skf = StratifiedKFold(n_splits=k, shuffle=True, random_state=42)
@@ -66,13 +73,18 @@ scoring = {
 
 rows = []
 
-# Model evaluation loop
+# Model evaluation loop with fix for single-class subsets
 for track_type_code, ablation_name in track_type_all.items():
     mask = df["track_type"] == track_type_code
     df_eval = df.loc[mask].reset_index(drop=True)
 
     X = df_eval[df_number_feature].copy()
     y = le.transform(df_eval["language"].astype(str))
+
+    unique_classes = np.unique(y)
+    if len(unique_classes) < 2:
+        print(f"Skipping {ablation_name} because it contains only one class: {unique_classes}")
+        continue  # Skip subsets with only one class in the target
 
     for name, clf in models.items():
         # Use skf and n_jobs=1 to avoid multiprocessing errors

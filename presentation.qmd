@@ -1,16 +1,34 @@
 ---
-title: "Project title"
-subtitle: "INFO 523 - Summer 2025 - Final Project"
-author: "Author names"
+title: ""
+subtitle: ""
+author: ""
 title-slide-attributes:
-  data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
-  data-background-size: stretch
-  data-background-opacity: "0.7"
-  data-slide-number: none
+  data-background-image: ""
+  data-background-size: ""
+  data-background-opacity: ""
+  data-slide-number: true
+footer: |
+  <div style="
+    position: relative;
+    bottom: 0;
+    left: 650px;
+    right: 0;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px 0 40px;
+    box-sizing: border-box;
+  ">
+    <span style="font-size: 2em; padding-right: 200px;">Wednesday-August-20-2025</span>
+    <img src="images/audio_chrome_5.png" height="41" style="vertical-align: middle;" />
+  </div>  
 format:
   revealjs:
     theme:  ['data/customtheming.scss']
-  
+    css: slide_styles.css
+    slide-number: true
 editor: visual
 jupyter: python3
 execute:
@@ -41,127 +59,210 @@ plt.rcParams['savefig.dpi'] = 300
 plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
 ```
 
-```{python}
-#| label: load-data
-#| include: false
-# Load data in Python
-mtcars = sns.load_dataset('mpg').dropna()  # mtcars dataset is similar to the mpg dataset from seaborn
-mtcars['speed'] = mtcars['horsepower'] / mtcars['weight']
 
-penguins = sns.load_dataset('penguins').dropna()
-```
-
-# Using Quarto for presentations
-
-## Quarto
-
--   The presentation is created using the Quarto CLI
-
--   `##` sets the start of a new slide
-
-## Layouts
-
-You can use plain text
-
-::::: columns
-::: {.column width="40%"}
--   or bullet points[^1]
+::: {.banner-container style="margin-bottom: 30px;"}
+![](images/banner_mk2.png){.banner-image style="max-width: 100%; height: auto;"}
 :::
 
-::: {.column width="60%"}
-or in two columns
+```{=html}
+<!-- Parent Container -->
+<div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; padding: 40px; box-sizing: border-box;">
+
+  <!-- LEFT column: Image + Audiophiles block -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start; margin-right: 20px; transform: translate(-60px, -20px);">
+    <!-- Image -->
+    <div style="margin-bottom: 10px; margin-left: 40px;">
+      <img src="images/DS_group_mk5.png" alt="Water Drop" style="height: 300px;" />
+    </div>
+    <!-- Audiophiles block -->
+    <div style="
+      display: flex;
+      align-items: center;
+      border: 1px solid black;
+      border-radius: 12px;
+      padding: 10px 16px;
+      background-color: #fff;
+      width: 380px;
+    ">
+      <img src="images/head_phones.png" alt="Logo" style="height: 120px; margin-right: 16px;" />
+      <span style="
+        font-size: 22px;
+        font-family: Arial, sans-serif;
+        color: #333;
+      ">
+        <strong>The AudioPhiles:</strong><br> Nathan Herling<br> & Yashi Mi
+      </span>
+    </div>
+  </div>
+
+  <!-- RIGHT column: Title + course info -->
+  <div style="display: flex; flex-direction: column; justify-content: flex-start; height: 300px; text-align: right;">
+    <!-- Title block -->
+    <div style="
+      font-size: 70px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      text-align: left;
+      line-height: 1.4;
+      color: #1B9FAB;
+      margin-bottom: 20px;
+    ">
+      Audio Alchemy:<br>
+      Decoding Sound for Smarter UX
+    </div>
+
+    <!-- INFO 523 block -->
+    <div style="
+      font-size: 30px;
+      color: #AB0520;
+      border: 3px solid #AB0520;
+      border-radius: 16px;
+      padding: 16px 24px;
+      background-color: #fff5f7;
+      box-shadow: 0 4px 10px rgba(171, 5, 32, 0.2);
+      display: inline-block;
+      margin-top: 0px;
+      width: 100%;
+    ">
+      INFO 523 — Summer 2025 - Final Project
+    </div>
+  </div>
+
+</div>
+
+
+```
+
+
+<!--Slide 2 -->
+##
+```{=html}
+<div style="margin: -20px auto; border: 2px solid #ccc; border-radius: 10px; padding: 12px 20px; background-color: #fdfdfd; font-size: 0.60em; line-height: 1.3; max-width: 110%;">
+
+  <h3 style="color:#007ACC; margin: 0 0 4px;">🎯 Project Description & Goals</h3>
+  <p style="margin: 0 0 4px;">Our team is developing a machine learning system for an AI-driven music recommendation service.<br>The main goals are:</p>
+  <ul style="margin: 0 0 4px 16px; padding-left: 0; list-style-position: outside;">
+    <li style="margin: 0;">Build a model capable of recognizing the language(s) spoken in audio files.</li>
+    <li style="margin: 0;">Assess whether new songs align with a user’s musical preferences.</li>
+  </ul>
+
+  <hr style="margin: 6px 0; border: none; border-top: 1px solid #ddd;">
+
+  <h3 style="color:#32CD32; margin: 0 0 4px;">❓ Research Question 1 – Language Recognition</h3>
+  <p style="margin: 0 0 4px;"><strong>How can we leverage statistical and time-frequency features from separated vocal and audio tracks to build effective language recognition models?</strong></p>
+  <ul style="margin: 0 0 4px 16px; padding-left: 0; list-style-position: outside;">
+    <li style="margin: 0;">What are the strengths and limitations of classical models (e.g., SVMs, Random Forest, Logistic Regression)?</li>
+    <li style="margin: 0;">How do feature engineering and validation improve model robustness?</li>
+  </ul>
+
+  <hr style="margin: 6px 0; border: none; border-top: 1px solid #ddd;">
+
+  <h3 style="color:#32CD32; margin: 0 0 4px;">❓ Research Question 2 – Recommendation System [Genre Recognition]</h3>
+  <p style="margin: 0 0 4px;"><strong>Starting with genre recognition as part of the user UI/UX, can a user’s preferred genres be learned through feature analysis of audio files?</strong></p>
+  <ul style="margin: 0 0 0 16px; padding-left: 0; list-style-position: outside;">
+    <li style="margin: 0;">Using classical supervised models: Can audio features be extracted and models trained to recognize a user's preferred genres?</li>
+    <li style="margin: 0;">Using frequency/time heatmap image extraction: Are classical models capable of determining musical genres?</li>
+  </ul>
+
+</div>
+```
+
+
+
+<!--Slide 3-->
+##
+```{=html}
+<div style="font-family: Arial, sans-serif; font-size: 0.75em; line-height: 1.4; width: 100%; margin: -10px auto 20px auto; padding: 16px; border: 1.5px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+  <h3 style="color: #007ACC; margin-bottom: 12px; text-align: center;">Data Files and Extraction Workflow</h3>
+  <ul style="padding-left: 20px; color: #333; margin: 0;">
+    <li><strong>User Input:</strong> Initial CSV files containing song names; optionally including genre, language, and artist information.</li>
+    <li><strong>Data Completion:</strong> Automated web scraping to fill missing metadata fields such as genre, language, and artist.</li>
+    <li><strong>YouTube Integration:</strong> Web scraping YouTube to find matching song links, then storing these links and related metadata in a JSON file.</li>
+    <li><strong>Audio Acquisition:</strong> Downloading .wav audio files from YouTube links for each song.</li>
+    <li><strong>Feature Extraction:</strong> Using Python scripts to analyze audio files and extract features (e.g., fundamental frequency, MFCCs, tempo).</li>
+    <li><strong>Output Files:</strong> Extracted audio features are saved into CSV files; visualizations like spectrograms are saved as PNG images.</li>
+  </ul>
+</div>
+```
+
+<!--Slide 4 -->
+##
+::: {.cell}
+<div style="max-width: 100%; margin: 0 -80px 0 -80px; font-family: Arial, sans-serif; font-size: 0.65em; line-height: 1.2; border: 1.5px solid #ccc; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;">
+
+  <h2 style="color: #007ACC; margin: 0 0 8px 0; text-align: center; font-size: 1.2em;">Feature Scraping</h2>
+
+  <table style="width: 100%; border-collapse: collapse; table-layout: fixed; word-wrap: break-word;">
+    <thead>
+      <tr style="background-color: #007ACC; color: white; text-align: left;">
+        <th style="width: 25%; padding: 4px 8px; border: 1px solid #ccc;">Feature</th>
+        <th style="width: 75%; padding: 4px 8px; border: 1px solid #ccc;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">fundamental_freq</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Fundamental frequency (mean pitch via librosa.pyin)</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">freq_e_1</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Dominant spectral energy #1 (highest energy frequency bin)</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">freq_e_2</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Dominant spectral energy #2 (2nd highest energy frequency bin)</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">freq_e_3</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Dominant spectral energy #3 (3rd highest energy frequency bin)</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">key</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Estimated musical key (C, C#, D, ..., B) via chroma features</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">duration</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Length of audio in seconds</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">zero_crossing_rate</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Average zero crossing rate (signal sign changes)</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">mfcc_mean</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Mean of 13 MFCC coefficients (timbre features)</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">mfcc_std</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Standard deviation of MFCC coefficients</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">tempo</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Estimated tempo in beats per minute (BPM)</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">rms_energy</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Root mean square energy (loudness measure)</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">track_type</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Audio track type (0=full mix, 1=vocal only, 2=no vocals)</td></tr>
+      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">mel_spectrogram</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Mel-scaled spectrogram representing frequency content over time (human hearing range)</td></tr>
+    </tbody>
+  </table>
+</div>
 :::
-:::::
 
-[^1]: And add footnotes
 
--   like
 
--   this
 
-## Code
 
-```{python}
-from sklearn.linear_model import LinearRegression
-import statsmodels.api as sm
-import pandas as pd
+<!--Slide 5 -->
+##
+Q1 Overview - Yashi describe your quetion and how you implemented mL [libraries, validation]
 
-# Fit a linear regression model
-X = mtcars[['speed']]
-y = mtcars['mpg']
-model = LinearRegression().fit(X, y)
+<!--Slide 6 -->
+##
+Q1 Results [1/3] - Yashi graphs? Learning Curve, ROC, any hyperparameter optimization?
 
-# Summary of the model
-X2 = sm.add_constant(X)
-est = sm.OLS(y, X2)
-est2 = est.fit()
-print(est2.summary())
-```
+<!--Slide 7 -->
+##
+Q1 Results [2/3] - Yashi. Results (% scores)
 
-## Plots
+<!--Slide 8 -->
+##
+Q1 Summary [3/3] - Summarize
 
-```{python}
-penguins['species'] = penguins['species'].apply(lambda x: "Adelie" if x == "Adelie" else "Other")
-sns.scatterplot(data=penguins, x='flipper_length_mm', y='body_mass_g', hue='species')
-plt.show()
-```
+<!--Slide 9 -->
+##
+Q2 Overview
 
-## Plot and text
+<!--Slide 10 -->
+##
+Q2 Results [1/3]
 
-::::: columns
-::: {.column width="50%"}
--   Some text
+<!--Slide 11 -->
+##
+Q2 Results [2/3]
 
--   goes here
-:::
+<!--Slide 12 -->
+##
+Q2 Results [3/3]
 
-::: {.column width="50%"}
-```{python}
-#| warning: false
-#| fig.width: 5.5
-fig, ax = plt.subplots(figsize=(5.5, 5.5 * 0.618))
-sns.boxplot(data=penguins, x='bill_length_mm', y='species', hue='species', ax=ax)
-plt.show()
-```
-:::
-:::::
+<!--Slide 13 -->
+##
+Q2 Summary
 
-# A new section...
+<!--Slide 14 -->
+##
+Full Summary
 
-## Tables
+<!--Slide 15 -->
+##
+In Closing
 
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-```{python}
-penguins.head().to_html()
-```
-
-## Images
-
-![Image credit: Danielle Navarro, Percolate.](images/watercolour_sys02_img34_teacup-ocean.png){fig-align="center" width="500"}
-
-## Math Expressions {.smaller}
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. \$\\alpha+\\beta\$ renders $\alpha + \beta$. You can use the display style with double dollar signs:
-
-```         
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-$$
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-$$
-
-Limitations:
-
-1.  The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-2.  There should not be spaces after the opening `$` or before the closing `$`.
-
-# Wrap up
-
-## Feeling adventurous?
-
--   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
-
--   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.

@@ -1,0 +1,2 @@
+0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+song_title,artist,country,language,fundamental_freq,freq_e_1,freq_e_2,freq_e_3,audio_file_type,duration,zero_crossing_rate,mfcc_mean,mfcc_std,tempo,rms_energy,complete_song,vocal_only

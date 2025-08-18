@@ -86,56 +86,56 @@
   {
     "objectID": "presentation.html#quarto",
     "href": "presentation.html#quarto",
-    "title": "Project title",
+    "title": "Using Quarto for presentations",
     "section": "Quarto",
     "text": "Quarto\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
   },
   {
     "objectID": "presentation.html#layouts",
     "href": "presentation.html#layouts",
-    "title": "Project title",
+    "title": "Using Quarto for presentations",
     "section": "Layouts",
     "text": "Layouts\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\nlike\nthis\n\nAnd add footnotes"
   },
   {
     "objectID": "presentation.html#code",
     "href": "presentation.html#code",
-    "title": "Project title",
+    "title": "Using Quarto for presentations",
     "section": "Code",
-    "text": "Code\n\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.073\nModel:                            OLS   Adj. R-squared:                  0.070\nMethod:                 Least Squares   F-statistic:                     30.59\nDate:                Sat, 09 Aug 2025   Prob (F-statistic):           5.84e-08\nTime:                        16:20:54   Log-Likelihood:                -1346.4\nNo. Observations:                 392   AIC:                             2697.\nDf Residuals:                     390   BIC:                             2705.\nDf Model:                           1                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         35.8015      2.266     15.800      0.000      31.347      40.257\nspeed       -354.7055     64.129     -5.531      0.000    -480.788    -228.623\n==============================================================================\nOmnibus:                       27.687   Durbin-Watson:                   0.589\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               18.976\nSkew:                           0.420   Prob(JB):                     7.57e-05\nKurtosis:                       2.323   Cond. No.                         169.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "Code\n\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.073\nModel:                            OLS   Adj. R-squared:                  0.070\nMethod:                 Least Squares   F-statistic:                     30.59\nDate:                Mon, 18 Aug 2025   Prob (F-statistic):           5.84e-08\nTime:                        08:56:08   Log-Likelihood:                -1346.4\nNo. Observations:                 392   AIC:                             2697.\nDf Residuals:                     390   BIC:                             2705.\nDf Model:                           1                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         35.8015      2.266     15.800      0.000      31.347      40.257\nspeed       -354.7055     64.129     -5.531      0.000    -480.788    -228.623\n==============================================================================\nOmnibus:                       27.687   Durbin-Watson:                   0.589\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               18.976\nSkew:                           0.420   Prob(JB):                     7.57e-05\nKurtosis:                       2.323   Cond. No.                         169.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "presentation.html#plot-and-text",
     "href": "presentation.html#plot-and-text",
-    "title": "Project title",
+    "title": "Using Quarto for presentations",
     "section": "Plot and text",
     "text": "Plot and text\n\n\n\nSome text\ngoes here"
   },
   {
     "objectID": "presentation.html#tables",
     "href": "presentation.html#tables",
-    "title": "Project title",
+    "title": "Using Quarto for presentations",
     "section": "Tables",
     "text": "Tables\nIf you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\n\n\n\nisland\n\n\n\nbill_length_mm\n\n\n\nbill_depth_mm\n\n\n\nflipper_length_mm\n\n\n\nbody_mass_g\n\n\n\nsex\n\n\n\n\n\n\n\n\n\n\n\n0\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n39.1\n\n\n\n18.7\n\n\n\n181.0\n\n\n\n3750.0\n\n\n\nMale\n\n\n\n\n\n\n\n1\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n39.5\n\n\n\n17.4\n\n\n\n186.0\n\n\n\n3800.0\n\n\n\nFemale\n\n\n\n\n\n\n\n2\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n40.3\n\n\n\n18.0\n\n\n\n195.0\n\n\n\n3250.0\n\n\n\nFemale\n\n\n\n\n\n\n\n4\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n36.7\n\n\n\n19.3\n\n\n\n193.0\n\n\n\n3450.0\n\n\n\nFemale\n\n\n\n\n\n\n\n5\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n39.3\n\n\n\n20.6\n\n\n\n190.0\n\n\n\n3650.0\n\n\n\nMale"
   },
   {
     "objectID": "presentation.html#images",
     "href": "presentation.html#images",
-    "title": "Project title",
+    "title": "Using Quarto for presentations",
     "section": "Images",
     "text": "Images\n\nImage credit: Danielle Navarro, Percolate."
   },
   {
     "objectID": "presentation.html#math-expressions",
     "href": "presentation.html#math-expressions",
-    "title": "Project title",
+    "title": "Using Quarto for presentations",
     "section": "Math Expressions",
     "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\n\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\n\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
   },
   {
     "objectID": "presentation.html#feeling-adventurous",
     "href": "presentation.html#feeling-adventurous",
-    "title": "Project title",
+    "title": "Using Quarto for presentations",
     "section": "Feeling adventurous?",
     "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
   },
@@ -149,8 +149,246 @@
   {
     "objectID": "presentation.html#plots",
     "href": "presentation.html#plots",
-    "title": "Project title",
+    "title": "Using Quarto for presentations",
     "section": "Plots",
     "text": "Plots"
+  },
+  {
+    "objectID": "Yashi analysis.html",
+    "href": "Yashi analysis.html",
+    "title": "Load the dataset",
+    "section": "",
+    "text": "import pandas as pd import numpy as np import matplotlib.pyplot as plt import seaborn as sns from pandas.plotting import scatter_matrix\nfrom sklearn.impute import SimpleImputer from sklearn.preprocessing import LabelEncoder, StandardScaler from sklearn.feature_selection import SelectKBest, f_regression from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier from sklearn.model_selection import train_test_split, StratifiedKFold, cross_validate from sklearn.decomposition import PCA from sklearn.linear_model import LogisticRegression, Ridge, RidgeCV, LassoCV from sklearn.tree import DecisionTreeClassifier from sklearn.svm import SVC from sklearn.metrics import accuracy_score, mean_squared_error, r2_score, make_scorer, precision_score, recall_score, f1_score\n\nLoad the dataset\ndf = pd.read_csv(“data/Y_audio_philes_final_features_mk1.csv”)\nprint(df.head()) print(df.info()) print(“Missing values per column:”) print(df.isnull().sum())\n\n\nFeature selection\ndf_non_feature = [“artist”, “country”, “language”, “track_type”] df_number_feature = [c for c in df.select_dtypes(include=[np.number]).columns if c not in df_non_feature] print(“Numerical features used:”, df_number_feature)\n\n\nStandardize numerical features globally\nscaler = StandardScaler() df[df_number_feature] = scaler.fit_transform(df[df_number_feature])\n\n\nEncode target variable\nle = LabelEncoder() y_all = le.fit_transform(df[“language”].astype(str)) label_names = le.classes_\n\n\nDefine track_type groups\ntrack_type_all = {0: “complete_song”, 1: “vocal_only”, 2: “no_vocal”} track_type_specs = {name: (df[“track_type”] == code) for code, name in track_type_all.items()} for name, mask in track_type_specs.items(): print(f”{name}: {int(mask.sum())} samples”)\n\n\nSet up Stratified K-Fold cross-validation\nk = 5 skf = StratifiedKFold(n_splits=k, shuffle=True, random_state=42)\n\n\nDefine models\nmodels = { “LogReg”: LogisticRegression(max_iter=500, class_weight=“balanced”, random_state=42), “RandomForest”: RandomForestClassifier( n_estimators=400, class_weight=“balanced_subsample”, random_state=42, n_jobs=-1 ), “SVM_linear”: SVC(kernel=“linear”, class_weight=“balanced”, random_state=42), }\n\n\nDefine scoring dictionary with exact metric names\nscoring = { “accuracy”: make_scorer(accuracy_score), “precision”: make_scorer(precision_score, average=“macro”), “recall”: make_scorer(recall_score, average=“macro”), “f1”: make_scorer(f1_score, average=“macro”), }\nrows = []\n\n\nModel evaluation loop\nfor track_type_code, ablation_name in track_type_all.items(): mask = df[“track_type”] == track_type_code df_eval = df.loc[mask].reset_index(drop=True)\nX = df_eval[df_number_feature].copy()\ny = le.transform(df_eval[\"language\"].astype(str))\n\nfor name, clf in models.items():\n    # Use skf and n_jobs=1 to avoid multiprocessing errors\n    cv_results = cross_validate(\n        clf,\n        X,\n        y,\n        cv=skf,\n        scoring=scoring,\n        n_jobs=1,\n        return_train_score=False,\n    )\n    acc = np.mean(cv_results[\"test_accuracy\"])\n    prec = np.mean(cv_results[\"test_precision\"])\n    rec = np.mean(cv_results[\"test_recall\"])\n    f1 = np.mean(cv_results[\"test_f1\"])\n    rows.append({\n        \"ablation\": ablation_name,\n        \"model\": name,\n        \"acc\": acc,\n        \"prec\": prec,\n        \"rec\": rec,\n        \"f1\": f1,\n    })\n    print(f\"[{ablation_name} - {name}] Acc={acc:.3f} | Prec={prec:.3f} | Rec={rec:.3f} | F1={f1:.3f}\")\n\n\nFinal model selection\nchosen_ablation = “vocal_only” chosen_model = “SVM_linear” print(f”[Final model] Ablation = {chosen_ablation} | Model = {chosen_model}“)\ndf_best = df.loc[track_type_specs[chosen_ablation]].reset_index(drop=True) X_best = df_best[df_number_feature].copy() y_best = le.transform(df_best[“language”].astype(str))\nfinal_clf = SVC(kernel=“linear”, class_weight=“balanced”, random_state=42) final_clf.fit(X_best, y_best)\nprint(f”[Final Train] Done on {chosen_ablation} - {chosen_model} | n_samples = {len(df_best)}“)"
+  },
+  {
+    "objectID": "presentation.html#our-dataset",
+    "href": "presentation.html#our-dataset",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-1",
+    "href": "presentation.html#our-dataset-1",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-2",
+    "href": "presentation.html#our-dataset-2",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-3",
+    "href": "presentation.html#our-dataset-3",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-4",
+    "href": "presentation.html#our-dataset-4",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-5",
+    "href": "presentation.html#our-dataset-5",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-6",
+    "href": "presentation.html#our-dataset-6",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-7",
+    "href": "presentation.html#our-dataset-7",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-8",
+    "href": "presentation.html#our-dataset-8",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-9",
+    "href": "presentation.html#our-dataset-9",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-10",
+    "href": "presentation.html#our-dataset-10",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-11",
+    "href": "presentation.html#our-dataset-11",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-12",
+    "href": "presentation.html#our-dataset-12",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-13",
+    "href": "presentation.html#our-dataset-13",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#our-dataset-14",
+    "href": "presentation.html#our-dataset-14",
+    "title": "",
+    "section": "Our Dataset",
+    "text": "Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#questionsgoals",
+    "href": "presentation.html#questionsgoals",
+    "title": "",
+    "section": "Questions/Goals",
+    "text": "Questions/Goals"
+  },
+  {
+    "objectID": "presentation.html#data-filesfeature-extraction",
+    "href": "presentation.html#data-filesfeature-extraction",
+    "title": "",
+    "section": "Data Files/Feature Extraction",
+    "text": "Data Files/Feature Extraction\n\n##Feature Scraping\n\n##Q1 overview\n\n##Q1 results [1/3]\n\n##Q1 results [2/3]\n\n##Q1 summary [3/3]\n\n##Q2 overview\n\n##Q2 results [1/3]\n\n##Q2 results [2/3]\n\n##Q2 results [3/3]\n\n##Q2 Summary\n\n##Full Summary\n\n##In closing ## Our Dataset"
+  },
+  {
+    "objectID": "presentation.html#section",
+    "href": "presentation.html#section",
+    "title": "",
+    "section": "",
+    "text": "🎯 Project Description & Goals\n  Our team is developing a machine learning system for an AI-driven music recommendation service.The main goals are:\n  \n    Build a model capable of recognizing the language(s) spoken in audio files.\n    Assess whether new songs align with a user’s musical preferences.\n  \n\n  \n\n  ❓ Research Question 1 – Language Recognition\n  How can we leverage statistical and time-frequency features from separated vocal and audio tracks to build effective language recognition models?\n  \n    What are the strengths and limitations of classical models (e.g., SVMs, Random Forest, Logistic Regression)?\n    How do feature engineering and validation improve model robustness?\n  \n\n  \n\n  ❓ Research Question 2 – Recommendation System [Genre Recognition]\n  Starting with genre recognition as part of the user UI/UX, can a user’s preferred genres be learned through feature analysis of audio files?\n  \n    Using classical supervised models: Can audio features be extracted and models trained to recognize a user's preferred genres?\n    Using frequency/time heatmap image extraction: Are classical models capable of determining musical genres?"
+  },
+  {
+    "objectID": "presentation.html#section-1",
+    "href": "presentation.html#section-1",
+    "title": "",
+    "section": "",
+    "text": "Data Files and Extraction Workflow\n  \n    User Input: Initial CSV files containing song names; optionally including genre, language, and artist information.\n    Data Completion: Automated web scraping to fill missing metadata fields such as genre, language, and artist.\n    YouTube Integration: Web scraping YouTube to find matching song links, then storing these links and related metadata in a JSON file.\n    Audio Acquisition: Downloading .wav audio files from YouTube links for each song.\n    Feature Extraction: Using Python scripts to analyze audio files and extract features (e.g., fundamental frequency, MFCCs, tempo).\n    Output Files: Extracted audio features are saved into CSV files; visualizations like spectrograms are saved as PNG images."
+  },
+  {
+    "objectID": "presentation.html#section-2",
+    "href": "presentation.html#section-2",
+    "title": "",
+    "section": "",
+    "text": "Feature Scraping\n\n\n\n\n\nFeature\n\n\nDescription\n\n\n\n\n\n\nfundamental_freq\n\n\nFundamental frequency (mean pitch via librosa.pyin)\n\n\n\n\nfreq_e_1\n\n\nDominant spectral energy #1 (highest energy frequency bin)\n\n\n\n\nfreq_e_2\n\n\nDominant spectral energy #2 (2nd highest energy frequency bin)\n\n\n\n\nfreq_e_3\n\n\nDominant spectral energy #3 (3rd highest energy frequency bin)\n\n\n\n\nkey\n\n\nEstimated musical key (C, C#, D, …, B) via chroma features\n\n\n\n\nduration\n\n\nLength of audio in seconds\n\n\n\n\nzero_crossing_rate\n\n\nAverage zero crossing rate (signal sign changes)\n\n\n\n\nmfcc_mean\n\n\nMean of 13 MFCC coefficients (timbre features)\n\n\n\n\nmfcc_std\n\n\nStandard deviation of MFCC coefficients\n\n\n\n\ntempo\n\n\nEstimated tempo in beats per minute (BPM)\n\n\n\n\nrms_energy\n\n\nRoot mean square energy (loudness measure)\n\n\n\n\ntrack_type\n\n\nAudio track type (0=full mix, 1=vocal only, 2=no vocals)\n\n\n\n\nmel_spectrogram\n\n\nMel-scaled spectrogram representing frequency content over time (human hearing range)"
+  },
+  {
+    "objectID": "presentation.html#section-3",
+    "href": "presentation.html#section-3",
+    "title": "",
+    "section": "",
+    "text": "Q1 Overview - Yashi describe your quetion and how you implemented mL [libraries, validation]"
+  },
+  {
+    "objectID": "presentation.html#section-4",
+    "href": "presentation.html#section-4",
+    "title": "",
+    "section": "",
+    "text": "Q1 Results [1/3] - Yashi graphs? Learning Curve, ROC, any hyperparameter optimization?"
+  },
+  {
+    "objectID": "presentation.html#section-5",
+    "href": "presentation.html#section-5",
+    "title": "",
+    "section": "",
+    "text": "Q1 Results [2/3] - Yashi. Results (% scores)"
+  },
+  {
+    "objectID": "presentation.html#section-6",
+    "href": "presentation.html#section-6",
+    "title": "",
+    "section": "",
+    "text": "Q1 Summary [3/3] - Summarize"
+  },
+  {
+    "objectID": "presentation.html#section-7",
+    "href": "presentation.html#section-7",
+    "title": "",
+    "section": "",
+    "text": "Q2 Overview"
+  },
+  {
+    "objectID": "presentation.html#section-8",
+    "href": "presentation.html#section-8",
+    "title": "",
+    "section": "",
+    "text": "Q2 Results [1/3]"
+  },
+  {
+    "objectID": "presentation.html#section-9",
+    "href": "presentation.html#section-9",
+    "title": "",
+    "section": "",
+    "text": "Q2 Results [2/3]"
+  },
+  {
+    "objectID": "presentation.html#section-10",
+    "href": "presentation.html#section-10",
+    "title": "",
+    "section": "",
+    "text": "Q2 Results [3/3]"
+  },
+  {
+    "objectID": "presentation.html#section-11",
+    "href": "presentation.html#section-11",
+    "title": "",
+    "section": "",
+    "text": "Q2 Summary"
+  },
+  {
+    "objectID": "presentation.html#section-12",
+    "href": "presentation.html#section-12",
+    "title": "",
+    "section": "",
+    "text": "Full Summary"
+  },
+  {
+    "objectID": "presentation.html#section-13",
+    "href": "presentation.html#section-13",
+    "title": "",
+    "section": "",
+    "text": "In Closing"
+  },
+  {
+    "objectID": "presentation.html#section-14",
+    "href": "presentation.html#section-14",
+    "title": "",
+    "section": "",
+    "text": "In Closing"
+  },
+  {
+    "objectID": "presentation.html#project-overview-research-questions",
+    "href": "presentation.html#project-overview-research-questions",
+    "title": "",
+    "section": "🔍 Project Overview & Research Questions",
+    "text": "🔍 Project Overview & Research Questions\n\n\n  🎯 Project Description & Goals\n  \n    Our team is developing a machine learning system for an AI-driven music recommendation service. The main goals are:\n  \n  \n    To build a model capable of recognizing the language(s) spoken in audio files\n    To assess whether new songs align with a user’s musical preferences\n  \n  \n    By separating vocal tracks and analyzing audio features such as tempo, loudness, genre, and language, we aim to create a highly personalized and accurate recommendation system.\n  \n\n  \n\n  ❓ Research Question 1 – Language Recognition\n  How can we leverage statistical and time-frequency features extracted from separated vocal and audio tracks to build effective language recognition models?\n  \n    What are the strengths and limitations of classical methods like SVMs or GMMs in this domain?\n    How do engineered features and model validation techniques impact robustness?\n    Does file format (.wav vs .mp3) affect accuracy due to compression artifacts?\n  \n\n  \n\n  ❓ Research Question 2 – Recommendation System\n  How can user interaction data combined with audio and metadata be used to build an effective recommendation system using collaborative filtering or traditional ML?\n  \n    Can audio features and clustering improve personalization?\n    What impact do vocal vs. full-mix inputs have?\n    Does audio quality (.wav vs .mp3) influence feature extraction and recommendation performance?"
   }
 ]

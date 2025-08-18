@@ -1,0 +1,115 @@
+
+
+/* Date in bottom-right corner */
+.slide-date {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  font-size: 0.9em;
+  color: #444;
+}
+
+
+.scientific-box {
+  width: 100%;
+  max-width: 100%;
+  background-color: #f0f0f0; /* light grey background */
+  border: 1px solid #007BFF; /* thin blue border */
+  border-radius: 8px;        /* curved corners */
+  
+  /* Enough height for vertical centering */
+  min-height: 50px;          /* or fixed height: height: 50px; */
+  
+  padding: 15px 5px 0 20px;     /* left padding increased, no top/bottom padding */
+  box-sizing: border-box;    /* includes padding and border in total width */
+  
+  display: flex;             /* use flexbox */
+  align-items: center;       /* vertically center content */
+}
+
+.scientific-box2 {
+  width: 100%;
+  max-width: 100%;
+  background-color: #f0f0f0; /* light grey background */
+  border: 1px solid #007BFF; /* thin blue border */
+  border-radius: 8px;        /* curved corners */
+
+  min-height: 50px;
+  margin-bottom: 20px; /* or whatever spacing you want */
+
+  padding: 15px 5px 0 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;        /* stack children vertically */
+  align-items: flex-start;       /* align text to left */
+  justify-content: flex-start;   /* align text to top */
+  text-align: left;              /* ensure text inside is left-aligned */
+}
+
+
+
+.salmon-box {
+  background-color: salmon;      /* salmon background */
+  border: 1px solid black;       /* thin black border */
+  border-radius: 8px;             /* curved corners */
+  padding: 10px -5px -5px -5px;            /* inner spacing */
+  box-sizing: border-box;        /* include padding and border in size */
+  max-width: 10%;               /* full width allowed */
+}
+
+.table-wrapper {
+  background-color: #f5f7fa;   /* light grey background */
+  border: 1px solid #007BFF;   /* thin blue border */
+  border-radius: 6px;           /* slightly rounded corners */
+  padding: 12px;                /* space inside the div */
+  margin: 16px 0;               /* vertical spacing around the wrapper */
+}
+
+.banner-container {
+  width: 180%; /* More consistent within Reveal.js scaling */
+  margin-top: -50px !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  /* Remove any vertical flex alignment gaps */
+  align-items: flex-start !important;
+  margin-left: -10%;  /* Push left by 25% of its container */
+  margin-right: -30%;  /* Push left by 25% of its container */
+}
+
+.banner-image {
+  display: block;    /* remove any inline spacing */
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  height: 120px;     /* fixed height as you want */
+  object-fit: cover;
+}
+
+.cell_text_block {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+<style>
+.full-plot-container {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible; /* allow overflow if needed */
+  display: flex;
+  justify-content: flex-start; /* align left */
+  align-items: flex-start;     /* align top */
+}
+
+.full-plot-container img,
+.full-plot-container svg {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 100vh !important; /* limit to viewport height */
+  display: block;
+  margin-top: 0;
+  margin-left: 0;
+  transform: translate(-10px, -100px); /* small nudge left and up */
+}
+</style>
