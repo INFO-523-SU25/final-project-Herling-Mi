@@ -16,7 +16,7 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, mean_squared_error, r2_score, make_scorer, precision_score, recall_score, f1_score
 
 # Load the dataset
-df = pd.read_csv("data/Y_audio_philes_final_features_mk1.csv")
+df = pd.read_csv("_extra/_Audio_Files_/Yashi_s_Music/Y_audio_philes_final_features_mk1_filled_Yashi.csv")
 
 print(df.head())
 print(df.info())

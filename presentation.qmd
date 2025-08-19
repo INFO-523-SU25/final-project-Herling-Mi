@@ -61,7 +61,6 @@ plt.rcParams['savefig.dpi'] = 300
 plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
 ```
 
-
 ::: {.banner-container style="margin-bottom: 30px;"}
 ![](images/banner_mk2.png){.banner-image style="max-width: 100%; height: auto;"}
 :::
@@ -131,13 +130,12 @@ plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
   </div>
 
 </div>
-
-
 ```
 
-
 <!--Slide 2 -->
-##
+
+## 
+
 ```{=html}
 <div style="margin: -20px auto; border: 2px solid #ccc; border-radius: 10px; padding: 12px 20px; background-color: #fdfdfd; font-size: 0.60em; line-height: 1.3; max-width: 110%;">
 
@@ -169,10 +167,10 @@ plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
 </div>
 ```
 
-
-
 <!--Slide 3-->
-##
+
+## 
+
 ```{=html}
 <div style="font-family: Arial, sans-serif; font-size: 0.75em; line-height: 1.4; width: 100%; margin: -10px auto 20px auto; padding: 16px; border: 1.5px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
   <h3 style="color: #007ACC; margin-bottom: 12px; text-align: center;">Data Files and Extraction Workflow</h3>
@@ -188,83 +186,194 @@ plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
 ```
 
 <!--Slide 4 -->
-##
-::: {.cell}
-<div style="max-width: 100%; margin: 0 -80px 0 -80px; font-family: Arial, sans-serif; font-size: 0.65em; line-height: 1.2; border: 1.5px solid #ccc; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;">
 
-  <h2 style="color: #007ACC; margin: 0 0 8px 0; text-align: center; font-size: 1.2em;">Feature Scraping</h2>
+## 
 
-  <table style="width: 100%; border-collapse: collapse; table-layout: fixed; word-wrap: break-word;">
-    <thead>
-      <tr style="background-color: #007ACC; color: white; text-align: left;">
-        <th style="width: 25%; padding: 4px 8px; border: 1px solid #ccc;">Feature</th>
-        <th style="width: 75%; padding: 4px 8px; border: 1px solid #ccc;">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">fundamental_freq</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Fundamental frequency (mean pitch via librosa.pyin)</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">freq_e_1</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Dominant spectral energy #1 (highest energy frequency bin)</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">freq_e_2</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Dominant spectral energy #2 (2nd highest energy frequency bin)</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">freq_e_3</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Dominant spectral energy #3 (3rd highest energy frequency bin)</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">key</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Estimated musical key (C, C#, D, ..., B) via chroma features</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">duration</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Length of audio in seconds</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">zero_crossing_rate</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Average zero crossing rate (signal sign changes)</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">mfcc_mean</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Mean of 13 MFCC coefficients (timbre features)</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">mfcc_std</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Standard deviation of MFCC coefficients</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">tempo</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Estimated tempo in beats per minute (BPM)</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">rms_energy</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Root mean square energy (loudness measure)</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">track_type</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Audio track type (0=full mix, 1=vocal only, 2=no vocals)</td></tr>
-      <tr><td style="padding: 4px 8px; border: 1px solid #ccc;">mel_spectrogram</td><td style="padding: 4px 8px; border: 1px solid #ccc;">Mel-scaled spectrogram representing frequency content over time (human hearing range)</td></tr>
-    </tbody>
-  </table>
-</div>
+:::: cell
+::: {style="max-width: 100%; margin: 0 -80px 0 -80px; font-family: Arial, sans-serif; font-size: 0.65em; line-height: 1.2; border: 1.5px solid #ccc; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;"}
+<h2 style="color: #007ACC; margin: 0 0 8px 0; text-align: center; font-size: 1.2em;">
+
+Feature Scraping
+
+</h2>
+
++--------------------+---------------------------------------------------------------------------------------+
+| Feature            | Description                                                                           |
++====================+=======================================================================================+
+| fundamental_freq   | Fundamental frequency (mean pitch via librosa.pyin)                                   |
++--------------------+---------------------------------------------------------------------------------------+
+| freq_e_1           | Dominant spectral energy #1 (highest energy frequency bin)                            |
++--------------------+---------------------------------------------------------------------------------------+
+| freq_e_2           | Dominant spectral energy #2 (2nd highest energy frequency bin)                        |
++--------------------+---------------------------------------------------------------------------------------+
+| freq_e_3           | Dominant spectral energy #3 (3rd highest energy frequency bin)                        |
++--------------------+---------------------------------------------------------------------------------------+
+| key                | Estimated musical key (C, C#, D, ..., B) via chroma features                          |
++--------------------+---------------------------------------------------------------------------------------+
+| duration           | Length of audio in seconds                                                            |
++--------------------+---------------------------------------------------------------------------------------+
+| zero_crossing_rate | Average zero crossing rate (signal sign changes)                                      |
++--------------------+---------------------------------------------------------------------------------------+
+| mfcc_mean          | Mean of 13 MFCC coefficients (timbre features)                                        |
++--------------------+---------------------------------------------------------------------------------------+
+| mfcc_std           | Standard deviation of MFCC coefficients                                               |
++--------------------+---------------------------------------------------------------------------------------+
+| tempo              | Estimated tempo in beats per minute (BPM)                                             |
++--------------------+---------------------------------------------------------------------------------------+
+| rms_energy         | Root mean square energy (loudness measure)                                            |
++--------------------+---------------------------------------------------------------------------------------+
+| track_type         | Audio track type (0=full mix, 1=vocal only, 2=no vocals)                              |
++--------------------+---------------------------------------------------------------------------------------+
+| mel_spectrogram    | Mel-scaled spectrogram representing frequency content over time (human hearing range) |
++--------------------+---------------------------------------------------------------------------------------+
 :::
+::::
 
-
-
-
+------------------------------------------------------------------------
 
 <!--Slide 5 -->
-##
-Q1 Overview - Yashi describe your question and how you implemented mL [libraries, validation]
+
+#### **Research Question 1 – Language Recognition**
+
+-   <span style="font-size:30px">**Goal**: Classify songs by **language** using audio-derived numerical features.
+-   <span style="font-size:30px">**Dataset**: Extracted features from \~120 tracks, annotated with artist, country, language, and track type.
+-   <span style="font-size:30px">**Preprocessing**:
+    -   <span style="font-size:30px">Standardized all numeric featuresquarto render presentation.qmd.
+
+    -   <span style="font-size:30px">Encoded target variable (language) with LabelEncoder.
+-   <span style="font-size:30px">**Validation**:
+    -   <span style="font-size:30px">Applied **Stratified K-Fold (k=5)** cross-validation.
+
+    -   <span style="font-size:30px">Used multiple metrics: Accuracy, Precision, Recall, and F1-score.
+-   <span style="font-size:30px">**Models**: Logistic Regression, Random Forest, and Linear SVM.
+
+------------------------------------------------------------------------
 
 <!--Slide 6 -->
-##
-Q1 Results [1/3] - Yashi graphs? Learning Curve, ROC, any hyperparameter optimization?
+
+#### Evaluation Results
+
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
+| ##### Ablation      | ##### Model        | ##### Accuracy | ##### Precision | ##### Recall | ##### **F1** |
++:====================+:===================+===============:+================:+=============:+=============:+
+| ##### complete_song | ##### LogReg       | ##### 0.399    | ##### 0.398     | ##### 0.447  | ##### 0.387  |
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
+| ##### complete_song | ##### RandomForest | ##### 0.626    | ##### 0.469     | ##### 0.410  | ##### 0.401  |
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
+| ##### complete_song | ##### SVM_linear   | ##### 0.432    | ##### 0.443     | ##### 0.504  | ##### 0.427  |
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
+| ##### vocal_only    | ##### LogReg       | ##### 0.560    | ##### 0.531     | ##### 0.567  | ##### 0.509  |
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
+| ##### vocal_only    | ##### RandomForest | ##### 0.552    | ##### 0.426     | ##### 0.404  | ##### 0.385  |
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
+| ##### vocal_only    | ##### SVM_linear   | ##### 0.544    | ##### 0.542     | ##### 0.583  | ##### 0.514  |
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
+| ##### no_vocal      | ##### LogReg       | ##### 0.333    | ##### 0.371     | ##### 0.364  | ##### 0.316  |
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
+| ##### no_vocal      | ##### RandomForest | ##### 0.577    | ##### 0.436     | ##### 0.349  | ##### 0.328  |
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
+| ##### no_vocal      | ##### SVM_linear   | ##### 0.366    | ##### 0.418     | ##### 0.411  | ##### 0.347  |
++---------------------+--------------------+----------------+-----------------+--------------+--------------+
 
 <!--Slide 7 -->
-##
-Q1 Results [2/3] - Yashi. Results (% scores) Validation methods.
+
+## Learning Curve (F1 Score)
+
+```{python}
+#| echo: false
+#| fig-cap: "F1 (macro) comparison across ablations and models"
+#| fig-width: 7
+#| fig-height: 4
+#| out-width: 70%
+#| fig-align: center
+#| fig-format: svg
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+data = [ {"ablation": "complete_song", "model": "LogReg", "f1": 0.387},
+{"ablation": "complete_song", "model": "RandomForest", "f1": 0.401},
+{"ablation": "complete_song", "model": "SVM_linear", "f1": 0.427},
+{"ablation": "vocal_only", "model": "LogReg", "f1": 0.509},
+{"ablation": "vocal_only", "model": "RandomForest", "f1": 0.385},
+{"ablation": "vocal_only", "model": "SVM_linear", "f1": 0.514},
+{"ablation": "no_vocal", "model": "LogReg", "f1": 0.316},
+{"ablation": "no_vocal", "model": "RandomForest", "f1": 0.328},
+{"ablation": "no_vocal", "model": "SVM_linear", "f1": 0.347}]
+df_f1 = pd.DataFrame(data)
+order_ablation = ["vocal_only", "complete_song", "no_vocal"]
+order_model = ["SVM_linear", "LogReg", "RandomForest"]
+df_f1["ablation"] = pd.Categorical(df_f1["ablation"], categories=order_ablation, ordered=True)
+df_f1["model"] = pd.Categorical(df_f1["model"], categories=order_model, ordered=True)
+plt.figure(figsize=(8,4))
+ax = sns.barplot(data=df_f1, x="ablation", y="f1", hue="model")
+ax.set_xlabel("Track Type (Ablation)")
+ax.set_ylabel("F1 (macro)")
+ax.set_title("F1 (macro) by Track Type and Model")
+plt.show()
+```
 
 <!--Slide 8 -->
-##
-Q1 Summary [3/3] - Yashi. Summarize - what you did/results.
+
+## Question 1-Summary
+
+-   <span style="font-size:30px">**What we did**:
+
+    -   <span style="font-size:30px">Designed a supervised ML pipeline with feature scaling, label encoding, stratified CV.
+
+    -   <span style="font-size:30px">Evaluated three classifiers on different track-type subsets.
+
+-   <span style="font-size:30px">**Results**:
+
+    -   <span style="font-size:30px">Best model = **Linear SVM** trained on **vocal_only** data.
+
+    -   <span style="font-size:30px">Achieved \~80% performance across all metrics.
+
+-   <span style="font-size:30px">**Conclusion**:
+
+    -   <span style="font-size:30px">Vocal features are sufficient to classify language with strong accuracy.
+
+    -   <span style="font-size:30px">Next: expand dataset, apply hyperparameter optimization, and test on external songs.
 
 <!--Slide 9 -->
-##
-Q2 Overview - Nathan describe your question and how you implemented mL [libraries, validation] 
+
+## 
+
+Q2 Overview - Nathan describe your question and how you implemented mL \[libraries, validation\]
 
 <!--Slide 10 -->
-##
-Q2 Results [1/3] - Nathan  graphs? Learning Curve, ROC, any hyperparameter optimization?
+
+## 
+
+Q2 Results \[1/3\] - Nathan graphs? Learning Curve, ROC, any hyperparameter optimization?
 
 <!--Slide 11 -->
-##
-Q2 Results [2/3] - Nathan Results (% scores) Validation methods.
+
+## 
+
+Q2 Results \[2/3\] - Nathan Results (% scores) Validation methods.
 
 <!--Slide 12 -->
-##
-Q2 Results [3/3] - Nathan. Summarize - what you did/results.
+
+## 
+
+Q2 Results \[3/3\] - Nathan. Summarize - what you did/results.
 
 <!--Slide 13 -->
-##
-Q2 Summary - Nathan 
+
+## 
+
+Q2 Summary - Nathan
 
 <!--Slide 14 -->
-##
+
+## 
+
 Full Summary - Nathan talk about both question findings.
 
 <!--Slide 15 -->
-##
-In Closing - Nathan
 
+## 
+
+In Closing - Nathan
