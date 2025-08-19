@@ -131,7 +131,7 @@
 
 <section class="slide level2">
 
-<div class="banner-container" style="margin-bottom: 30px;">
+<div class="banner-container" style="margin-bottom: 30px; margin-left: -130px;">
 <p><img data-src="images/banner_mk2.png" class="banner-image" style="max-width: 100%; height: auto;"></p>
 </div>
 <!-- Parent Container -->
@@ -147,20 +147,13 @@
     <div style="
       display: flex;
       align-items: center;
-      border: 1px solid black;
+      border: 1px solid white;
       border-radius: 12px;
-      padding: 10px 16px;
+      padding: 10px 10px;
       background-color: #fff;
       width: 380px;
     ">
-      <img src="images/head_phones.png" alt="Logo" style="height: 120px; margin-right: 16px;">
-      <span style="
-        font-size: 22px;
-        font-family: Arial, sans-serif;
-        color: #333;
-      ">
-        <strong>The AudioPhiles:</strong><br> Nathan Herling<br> &amp; Yashi Mi
-      </span>
+      <img src="images/audio_phile_logo_mk2.png" alt="Logo" style="height: 160px; margin-right: 0px;">
     </div>
   </div>
 
@@ -198,37 +191,39 @@
   </div>
 
 </div>
-
-
 <!--Slide 2 -->
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
-<div style="margin: -20px auto; border: 2px solid #ccc; border-radius: 10px; padding: 12px 20px; background-color: #fdfdfd; font-size: 0.60em; line-height: 1.3; max-width: 110%;">
+<div style="margin: -20px -60px -80px -80px; border: 5px solid midnightblue; border-radius: 10px; padding: 12px 20px; background-color: #fdfdfd; font-size: 0.60em; line-height: 1.3; width: 110%;">
 
-  <h3 style="color:#007ACC; margin: 0 0 4px;">🎯 Project Description &amp; Goals</h3>
-  <p style="margin: 0 0 4px;">Our team is developing a machine learning system for an AI-driven music recommendation service.<br>The main goals are:</p>
+
+  <h3 style="color:#007ACC; margin: 0 0 4px;">🤖 Project Description &amp; Goals</h3>
+<p style="margin: 0 0 4px; font-weight: bold;">
+  Our team is developing a machine learning system for an AI-driven music recommendation service.<br>
+  The main goals are:
+</p>
   <ul style="margin: 0 0 4px 16px; padding-left: 0; list-style-position: outside;">
     <li style="margin: 0;">Build a model capable of recognizing the language(s) spoken in audio files.</li>
     <li style="margin: 0;">Assess whether new songs align with a user’s musical preferences.</li>
   </ul>
 
-  <hr style="margin: 6px 0; border: none; border-top: 1px solid #ddd;">
+  <hr style="margin: 6px 0; border: none; border-top: 2px solid #aaa;">
 
-  <h3 style="color:#32CD32; margin: 0 0 4px;">❓ Research Question 1 – Language Recognition</h3>
-  <p style="margin: 0 0 4px;"><strong>How can we leverage statistical and time-frequency features from separated vocal and audio tracks to build effective language recognition models?</strong></p>
+  <h3 style="color:#32CD32; margin: 0 0 4px;">✦ Question 1 – Language Recognition</h3>
+  <p style="margin: 0 0 4px;font-weight: bold;"><strong>How can we leverage statistical and time-frequency features from separated vocal and audio tracks to build effective language recognition models?</strong></p>
   <ul style="margin: 0 0 4px 16px; padding-left: 0; list-style-position: outside;">
     <li style="margin: 0;">What are the strengths and limitations of classical models (e.g., SVMs, Random Forest, Logistic Regression)?</li>
     <li style="margin: 0;">How do feature engineering and validation improve model robustness?</li>
   </ul>
 
-  <hr style="margin: 6px 0; border: none; border-top: 1px solid #ddd;">
+  <hr style="margin: 6px 0; border: none; border-top: 2px solid #aaa;">
 
-  <h3 style="color:#32CD32; margin: 0 0 4px;">❓ Research Question 2 – Recommendation System [Genre Recognition]</h3>
-  <p style="margin: 0 0 4px;"><strong>Starting with genre recognition as part of the user UI/UX, can a user’s preferred genres be learned through feature analysis of audio files?</strong></p>
+  <h3 style="color:#32CD32; margin: 0 0 4px;">✦ Question 2 – Recommendation System [Genre Recognition]</h3>
+  <p style="margin: 0 0 4px;font-weight: bold;"><strong>Starting with genre recognition as part of the user UI/UX, can a user’s preferred genres be learned through feature analysis of audio files?</strong></p>
   <ul style="margin: 0 0 0 16px; padding-left: 0; list-style-position: outside;">
     <li style="margin: 0;">Using classical supervised models: Can audio features be extracted and models trained to recognize a user's preferred genres?</li>
-    <li style="margin: 0;">Using frequency/time heatmap image extraction: Are classical models capable of determining musical genres?</li>
+    <li style="margin: 0;">Using frequency/time heatmap image extraction: Are classical models capable of determining musical genres from spectrogram-like representations?</li>
   </ul>
 
 </div>
@@ -236,15 +231,16 @@
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
-<div style="font-family: Arial, sans-serif; font-size: 0.75em; line-height: 1.4; width: 100%; margin: -10px auto 20px auto; padding: 16px; border: 1.5px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
-  <h3 style="color: #007ACC; margin-bottom: 12px; text-align: center;">Data Files and Extraction Workflow</h3>
+<div style="margin: -20px -60px -80px -80px; border: 5px solid midnightblue; border-radius: 10px; padding: 12px 20px; background-color: #fdfdfd; font-size: 0.75em; line-height: 1.3; width: 110%;">
+
+  <h3 style="color: #007ACC; margin-bottom: 12px; text-align: center;">🧩 Data Files and Extraction Workflow</h3>
   <ul style="padding-left: 20px; color: #333; margin: 0;">
-    <li><strong>User Input:</strong> Initial CSV files containing song names; optionally including genre, language, and artist information.</li>
-    <li><strong>Data Completion:</strong> Automated web scraping to fill missing metadata fields such as genre, language, and artist.</li>
-    <li><strong>YouTube Integration:</strong> Web scraping YouTube to find matching song links, then storing these links and related metadata in a JSON file.</li>
-    <li><strong>Audio Acquisition:</strong> Downloading .wav audio files from YouTube links for each song.</li>
-    <li><strong>Feature Extraction:</strong> Using Python scripts to analyze audio files and extract features (e.g., fundamental frequency, MFCCs, tempo).</li>
-    <li><strong>Output Files:</strong> Extracted audio features are saved into CSV files; visualizations like spectrograms are saved as PNG images.</li>
+    <li><strong>User Input:</strong> Providing initial <code>CSV</code> files containing song names, optionally including genre, language, and artist information.</li>
+    <li><strong>Data Completion:</strong> Performing automated web scraping with <code>Python</code> scripts, filling in missing metadata fields such as genre, language, and artist.</li>
+    <li><strong>YouTube Integration:</strong> Scraping YouTube with <code>Python</code> scripts, finding matching song <code>URLs</code>, and storing these links and related metadata in a <code>JSON</code> file.</li>
+    <li><strong>Audio Acquisition:</strong> Downloading <code>.wav</code> audio files from YouTube <code>URLs</code> for each song with <code>Python</code> scripts.</li>
+    <li><strong>Feature Extraction:</strong> Using <code>Python</code> (<code>numpy</code> and <code>librosa</code> libraries) scripts for analyzing audio files and extracting features (e.g., fundamental frequency, MFCCs, tempo).</li>
+    <li><strong>Output Files:</strong> Saving extracted audio features as <code>CSV</code> files; saving visualizations such as spectrograms as <code>.png</code> images. From here, constructing machine learning pipelines with <code>Python</code> libraries.</li>
   </ul>
 </div>
 <!--Slide 4 -->
@@ -252,185 +248,355 @@
 <section id="section-2" class="slide level2">
 <h2></h2>
 <div class="cell">
-<div style="max-width: 100%; margin: 0 -80px 0 -80px; font-family: Arial, sans-serif; font-size: 0.65em; line-height: 1.2; border: 1.5px solid #ccc; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;">
-<h2 style="color: #007ACC; margin: 0 0 8px 0; text-align: center; font-size: 1.2em;">
-Feature Scraping
+<div style="width: 125%; margin: -40px -140px 30px -160px; font-family: Arial, sans-serif; font-size: 0.65em; line-height: 1.2; border: 5px solid midnightblue; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;">
+<h2 style="color: #007ACC; margin: -10px 0 -10px 0; text-align: center; font-size: 2.0em;">
+<p>🔍 Feature Scraping</p>
 </h2>
-<table style="width: 100%; border-collapse: collapse; table-layout: fixed; word-wrap: break-word;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
 <thead>
-<tr style="background-color: #007ACC; color: white; text-align: left;">
-<th style="width: 25%; padding: 4px 8px; border: 1px solid #ccc;">
-Feature
-</th>
-<th style="width: 75%; padding: 4px 8px; border: 1px solid #ccc;">
-Description
-</th>
+<tr class="header">
+<th>Feature</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-fundamental_freq
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Fundamental frequency (mean pitch via librosa.pyin)
-</td>
+<tr class="odd">
+<td>fundamental_freq</td>
+<td>Fundamental frequency (mean pitch via librosa.pyin)</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-freq_e_1
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Dominant spectral energy #1 (highest energy frequency bin)
-</td>
+<tr class="even">
+<td>freq_e_1</td>
+<td>Dominant spectral energy #1 (highest energy frequency bin)</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-freq_e_2
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Dominant spectral energy #2 (2nd highest energy frequency bin)
-</td>
+<tr class="odd">
+<td>freq_e_2</td>
+<td>Dominant spectral energy #2 (2nd highest energy frequency bin)</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-freq_e_3
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Dominant spectral energy #3 (3rd highest energy frequency bin)
-</td>
+<tr class="even">
+<td>freq_e_3</td>
+<td>Dominant spectral energy #3 (3rd highest energy frequency bin)</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-key
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Estimated musical key (C, C#, D, …, B) via chroma features
-</td>
+<tr class="odd">
+<td>key</td>
+<td>Estimated musical key (C, C#, D, …, B) via chroma features</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-duration
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Length of audio in seconds
-</td>
+<tr class="even">
+<td>duration</td>
+<td>Length of audio in seconds</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-zero_crossing_rate
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Average zero crossing rate (signal sign changes)
-</td>
+<tr class="odd">
+<td>zero_crossing_rate</td>
+<td>Average zero crossing rate (signal sign changes)</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-mfcc_mean
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Mean of 13 MFCC coefficients (timbre features)
-</td>
+<tr class="even">
+<td>mfcc_mean</td>
+<td>Mean of 13 MFCC coefficients (timbre features)</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-mfcc_std
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Standard deviation of MFCC coefficients
-</td>
+<tr class="odd">
+<td>mfcc_std</td>
+<td>Standard deviation of MFCC coefficients</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-tempo
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Estimated tempo in beats per minute (BPM)
-</td>
+<tr class="even">
+<td>tempo</td>
+<td>Estimated tempo in beats per minute (BPM)</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-rms_energy
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Root mean square energy (loudness measure)
-</td>
+<tr class="odd">
+<td>rms_energy</td>
+<td>Root mean square energy (loudness measure)</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-track_type
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Audio track type (0=full mix, 1=vocal only, 2=no vocals)
-</td>
+<tr class="even">
+<td>track_type</td>
+<td>Audio track type (0=full mix, 1=vocal only, 2=no vocals)</td>
 </tr>
-<tr>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-mel_spectrogram
-</td>
-<td style="padding: 4px 8px; border: 1px solid #ccc;">
-Mel-scaled spectrogram representing frequency content over time (human hearing range)
-</td>
+<tr class="odd">
+<td>mel_spectrogram</td>
+<td>Mel-scaled spectrogram representing frequency content over time (human hearing range)</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <!--Slide 5 -->
+<div>
+  <div style="text-align: center; margin-bottom: 16px;">
+    <h4>📊 <strong>Research Question 1 – Language Recognition</strong></h4>
+  </div>
+
+  <div style="font-size: 30px; line-height: 1.4;">
+    <ul>
+      <li><strong>Goal</strong>: Classify songs by <strong>language</strong> using audio-derived numerical features.</li>
+      <li><strong>Dataset</strong>: Extracted features from ~120 tracks, annotated with artist, country, language, and track type.</li>
+      <li><strong>Preprocessing</strong>:
+        <ul>
+          <li>Standardized all numeric features.</li>
+          <li>Encoded target variable (language) with LabelEncoder.</li>
+        </ul>
+      </li>
+      <li><strong>Validation</strong>:
+        <ul>
+          <li>Applied <strong>Stratified K-Fold (k=5)</strong> cross-validation.</li>
+          <li>Used multiple metrics: Accuracy, Precision, Recall, and F1-score.</li>
+        </ul>
+      </li>
+      <li><strong>Models</strong>: Logistic Regression, Random Forest, and Linear SVM.</li>
+    </ul>
+  </div>
+</div>
+</section>
+<section class="slide level2">
+
+<!--Slide 6 -->
+<div style="text-align: center; margin-bottom: 12px;">
+<h4>
+Evaluation Results
+</h4>
+</div>
+<div class="cell">
+<div style="width: 120%; margin: 20px -140px 30px -120px; font-family: Arial, sans-serif; font-size: 0.65em; line-height: 1.2; border: 2px solid midnightblue; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;">
+<h2 style="color: #007ACC; margin: 0 0 8px 0; text-align: center; font-size: 1.2em;">
+Model Performance – Ablation Study
+</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 14%">
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ablation</th>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>complete_song</td>
+<td>LogReg</td>
+<td>0.399</td>
+<td>0.398</td>
+<td>0.447</td>
+<td>0.387</td>
+</tr>
+<tr class="even">
+<td>complete_song</td>
+<td>RandomForest</td>
+<td>0.626</td>
+<td>0.469</td>
+<td>0.410</td>
+<td>0.401</td>
+</tr>
+<tr class="odd">
+<td>complete_song</td>
+<td>SVM_linear</td>
+<td>0.432</td>
+<td>0.443</td>
+<td>0.504</td>
+<td>0.427</td>
+</tr>
+<tr class="even">
+<td>vocal_only</td>
+<td>LogReg</td>
+<td>0.560</td>
+<td>0.531</td>
+<td>0.567</td>
+<td>0.509</td>
+</tr>
+<tr class="odd">
+<td>vocal_only</td>
+<td>RandomForest</td>
+<td>0.552</td>
+<td>0.426</td>
+<td>0.404</td>
+<td>0.385</td>
+</tr>
+<tr class="even">
+<td>vocal_only</td>
+<td>SVM_linear</td>
+<td>0.544</td>
+<td>0.542</td>
+<td>0.583</td>
+<td>0.514</td>
+</tr>
+<tr class="odd">
+<td>no_vocal</td>
+<td>LogReg</td>
+<td>0.333</td>
+<td>0.371</td>
+<td>0.364</td>
+<td>0.316</td>
+</tr>
+<tr class="even">
+<td>no_vocal</td>
+<td>RandomForest</td>
+<td>0.577</td>
+<td>0.436</td>
+<td>0.349</td>
+<td>0.328</td>
+</tr>
+<tr class="odd">
+<td>no_vocal</td>
+<td>SVM_linear</td>
+<td>0.366</td>
+<td>0.418</td>
+<td>0.411</td>
+<td>0.347</td>
+</tr>
+<tr class="even">
+<td><strong>Column Min</strong></td>
+<td>-</td>
+<td>0.333</td>
+<td>0.371</td>
+<td>0.349</td>
+<td>0.316</td>
+</tr>
+<tr class="odd">
+<td><strong>Column Max</strong></td>
+<td>-</td>
+<td>0.626</td>
+<td>0.542</td>
+<td>0.583</td>
+<td>0.514</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </section>
 <section id="section-3" class="slide level2">
-<h2></h2>
-<p>Q1 Overview - Yashi describe your question and how you implemented mL [libraries, validation]</p>
-<!--Slide 6 -->
+<h2><!--Slide 7 --></h2>
+<div style="text-align: center; margin-top: -40px; margin-right: 10px; margin-bottom: 30px; margin-left: 5px;">
+<h4>
+F1 (macro) comparison across ablations and models
+</h4>
+</div>
+
+<!--Slide 8 -->
+<img data-src="presentation_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="question-1-summary" class="slide level2">
+<h2>📌 Question 1-Summary</h2>
+<div style="font-size: 30px; line-height: 1.4;">
+  <ul>
+    <li><strong>What we did</strong>:
+      <ul>
+        <li>Designed a supervised ML pipeline with feature scaling, label encoding, stratified CV.</li>
+        <li>Evaluated three classifiers on different track-type subsets.</li>
+      </ul>
+    </li>
+    <li><strong>Results</strong>:
+      <ul>
+        <li>Best model = <strong>Linear SVM</strong> trained on <strong>vocal_only</strong> data.</li>
+        <li>Achieved ~80% performance across all metrics.</li>
+      </ul>
+    </li>
+    <li><strong>Conclusion</strong>:
+      <ul>
+        <li>Vocal features are sufficient to classify language with strong accuracy.</li>
+        <li>Next: expand dataset, apply hyperparameter optimization, and test on external songs.</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--Slide 9 -->
 </section>
 <section id="section-4" class="slide level2">
 <h2></h2>
-<p>Q1 Results [1/3] - Yashi graphs? Learning Curve, ROC, any hyperparameter optimization?</p>
-<!--Slide 7 -->
+<p>Q2 (A/B) Overview - Nathan describe your question and how you implemented mL [libraries, validation]</p>
+<!--Slide 10 -->
 </section>
 <section id="section-5" class="slide level2">
 <h2></h2>
-<p>Q1 Results [2/3] - Yashi. Results (% scores) Validation methods.</p>
-<!--Slide 8 -->
+<p>Q2 (A) Results - Nathan graphs? Learning Curve, ROC, any hyperparameter optimization?</p>
+<!--Slide 11 -->
 </section>
 <section id="section-6" class="slide level2">
 <h2></h2>
-<p>Q1 Summary [3/3] - Yashi. Summarize - what you did/results.</p>
-<!--Slide 9 -->
+<p>Q2 (A) Results - Nathan Results (% scores) Validation methods.</p>
+<!--Slide 12 -->
 </section>
 <section id="section-7" class="slide level2">
 <h2></h2>
-<p>Q2 Overview - Nathan describe your question and how you implemented mL [libraries, validation]</p>
-<!--Slide 10 -->
+<p>Q2 (B) Results - Nathan. Summarize - what you did/results.</p>
+<!--Slide 13 -->
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
-<p>Q2 Results [1/3] - Nathan graphs? Learning Curve, ROC, any hyperparameter optimization?</p>
-<!--Slide 11 -->
+<p>Q2 (B) Results [3/3] - Nathan. Summarize - what you did/results.</p>
+<!--Slide 14 -->
 </section>
 <section id="section-9" class="slide level2">
 <h2></h2>
-<p>Q2 Results [2/3] - Nathan Results (% scores) Validation methods.</p>
-<!--Slide 12 -->
+<p>Q2 Summary - Nathan</p>
+<!--Slide 15 -->
 </section>
 <section id="section-10" class="slide level2">
 <h2></h2>
-<p>Q2 Results [3/3] - Nathan. Summarize - what you did/results.</p>
-<!--Slide 13 -->
+<p>Full Summary - Nathan talk about both question findings.</p>
+<!--Slide 16 -->
 </section>
 <section id="section-11" class="slide level2">
 <h2></h2>
-<p>Q2 Summary - Nathan</p>
-<!--Slide 14 -->
-</section>
-<section id="section-12" class="slide level2">
-<h2></h2>
-<p>Full Summary - Nathan talk about both question findings.</p>
-<!--Slide 15 -->
-</section>
-<section id="section-13" class="slide level2">
-<h2></h2>
-<p>In Closing - Nathan</p>
+<div class="banner-container" style="margin-bottom: 30px; margin-left: -130px;">
+<p><img data-src="images/banner_mk2.png" class="banner-image" style="max-width: 100%; height: auto;"></p>
+</div>
+<!-- Parent container -->
+<div style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* vertical center for right image */
+    width: 100%;
+    height: 500px; /* adjust height as needed */
+    position: relative;
+    padding: 40px;
+    box-sizing: border-box;
+    margin-left: -40px;
+">
+
+  <!-- LEFT column: top text + bottom logo -->
+  <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+    
+    <!-- TOP LEFT: Text block -->
+    <div style="text-align: left;">
+      <h3>Thank you for listening</h3>
+      <ul style="font-size: 35px; margin-top: 20px;">
+        <li>Your attention was appreciated.</li>
+        <li>Questions welcome.</li>
+      </ul>
+      <p>Team Members:</p>
+    </div>
+
+    <!-- BOTTOM LEFT: Logo -->
+    <div style="
+        display: inline-block;
+        padding: 4px;
+        margin-top: -30px;
+        margin-right: 150px;
+        margin-left: -50px;
+    ">
+      <img src="images/audio_phile_logo_mk2.png" alt="AudioPhile Logo" style="height: 180px;">
+    </div>
+    
+  </div>
+
+  <!-- RIGHT column: vertical-centered GIF -->
+  <div style="display: flex; align-items: center;margin-left: 10px;margin-right: -80px">
+    <img src="images/rotating_cube_signal_4.gif" alt="Rotating Cube" style="height: 300px;">
+  </div>
+
+</div>
 
 
 </section>

@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "Audio Alchemy",
     "section": "",
-    "text": "Add project abstract here."
+    "text": "Music recommendation systems increasingly rely on machine learning to capture the complexity of user preferences, yet existing models struggle to account for language diversity and nuanced audio features in songs. This project applies signal processing, vocal separation (DEMUCS library), and machine learning techniques to classify song languages and integrate them with genre metadata for improved personalization. By combining automated data collection with advanced audio analysis, the system provides a foundation for smarter, more inclusive recommendation platforms that enhance user experience across diverse musical contexts. The project first applied Random Forests and Gaussian Mixture Models with 5-fold cross-validation for audio genre identification, then advanced to CNNs on spectrogram heat maps validated via a train/validation/test split with early stopping, evaluated through accuracy, precision, recall, F1-score, confusion matrices, and ROC curves.\n\nNathan #_to_Do\n\n(Nathan) - sentence about results.\n\nYashi #_to_Do\n\n(Yashi) - sentence about Part 2. (Yashi) - sentence about results."
   },
   {
     "objectID": "index.html#abstract",
     "href": "index.html#abstract",
     "title": "Audio Alchemy",
     "section": "",
-    "text": "Add project abstract here."
+    "text": "Music recommendation systems increasingly rely on machine learning to capture the complexity of user preferences, yet existing models struggle to account for language diversity and nuanced audio features in songs. This project applies signal processing, vocal separation (DEMUCS library), and machine learning techniques to classify song languages and integrate them with genre metadata for improved personalization. By combining automated data collection with advanced audio analysis, the system provides a foundation for smarter, more inclusive recommendation platforms that enhance user experience across diverse musical contexts. The project first applied Random Forests and Gaussian Mixture Models with 5-fold cross-validation for audio genre identification, then advanced to CNNs on spectrogram heat maps validated via a train/validation/test split with early stopping, evaluated through accuracy, precision, recall, F1-score, confusion matrices, and ROC curves.\n\nNathan #_to_Do\n\n(Nathan) - sentence about results.\n\nYashi #_to_Do\n\n(Yashi) - sentence about Part 2. (Yashi) - sentence about results."
   },
   {
     "objectID": "proposal.html",
@@ -74,7 +74,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This project was developed by [Team Name] For INFO 523 - Data Mining and Discovery at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nTeam member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\nTeam member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\nTeam member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\nTeam member 4: One sentence description of Team member 4 (e.g., year, major, etc.)."
+    "text": "This project was developed by [Team Name] For INFO 523 - Data Mining and Discovery at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nTeam member 1: Yashi Mi - Data Science MS student - year 1.\nTeam member 2: Nathan Herling - Data Science MS student - year 1."
   },
   {
     "objectID": "presentation.html",
@@ -158,7 +158,7 @@
     "href": "Yashi analysis.html",
     "title": "Load the dataset",
     "section": "",
-    "text": "import pandas as pd import numpy as np import matplotlib.pyplot as plt import seaborn as sns from pandas.plotting import scatter_matrix\nfrom sklearn.impute import SimpleImputer from sklearn.preprocessing import LabelEncoder, StandardScaler from sklearn.feature_selection import SelectKBest, f_regression from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier from sklearn.model_selection import train_test_split, StratifiedKFold, cross_validate from sklearn.decomposition import PCA from sklearn.linear_model import LogisticRegression, Ridge, RidgeCV, LassoCV from sklearn.tree import DecisionTreeClassifier from sklearn.svm import SVC from sklearn.metrics import accuracy_score, mean_squared_error, r2_score, make_scorer, precision_score, recall_score, f1_score\n\nLoad the dataset\ndf = pd.read_csv(“data/Y_audio_philes_final_features_mk1.csv”)\nprint(df.head()) print(df.info()) print(“Missing values per column:”) print(df.isnull().sum())\n\n\nFeature selection\ndf_non_feature = [“artist”, “country”, “language”, “track_type”] df_number_feature = [c for c in df.select_dtypes(include=[np.number]).columns if c not in df_non_feature] print(“Numerical features used:”, df_number_feature)\n\n\nStandardize numerical features globally\nscaler = StandardScaler() df[df_number_feature] = scaler.fit_transform(df[df_number_feature])\n\n\nEncode target variable\nle = LabelEncoder() y_all = le.fit_transform(df[“language”].astype(str)) label_names = le.classes_\n\n\nDefine track_type groups\ntrack_type_all = {0: “complete_song”, 1: “vocal_only”, 2: “no_vocal”} track_type_specs = {name: (df[“track_type”] == code) for code, name in track_type_all.items()} for name, mask in track_type_specs.items(): print(f”{name}: {int(mask.sum())} samples”)\n\n\nSet up Stratified K-Fold cross-validation\nk = 5 skf = StratifiedKFold(n_splits=k, shuffle=True, random_state=42)\n\n\nDefine models\nmodels = { “LogReg”: LogisticRegression(max_iter=500, class_weight=“balanced”, random_state=42), “RandomForest”: RandomForestClassifier( n_estimators=400, class_weight=“balanced_subsample”, random_state=42, n_jobs=-1 ), “SVM_linear”: SVC(kernel=“linear”, class_weight=“balanced”, random_state=42), }\n\n\nDefine scoring dictionary with exact metric names\nscoring = { “accuracy”: make_scorer(accuracy_score), “precision”: make_scorer(precision_score, average=“macro”), “recall”: make_scorer(recall_score, average=“macro”), “f1”: make_scorer(f1_score, average=“macro”), }\nrows = []\n\n\nModel evaluation loop\nfor track_type_code, ablation_name in track_type_all.items(): mask = df[“track_type”] == track_type_code df_eval = df.loc[mask].reset_index(drop=True)\nX = df_eval[df_number_feature].copy()\ny = le.transform(df_eval[\"language\"].astype(str))\n\nfor name, clf in models.items():\n    # Use skf and n_jobs=1 to avoid multiprocessing errors\n    cv_results = cross_validate(\n        clf,\n        X,\n        y,\n        cv=skf,\n        scoring=scoring,\n        n_jobs=1,\n        return_train_score=False,\n    )\n    acc = np.mean(cv_results[\"test_accuracy\"])\n    prec = np.mean(cv_results[\"test_precision\"])\n    rec = np.mean(cv_results[\"test_recall\"])\n    f1 = np.mean(cv_results[\"test_f1\"])\n    rows.append({\n        \"ablation\": ablation_name,\n        \"model\": name,\n        \"acc\": acc,\n        \"prec\": prec,\n        \"rec\": rec,\n        \"f1\": f1,\n    })\n    print(f\"[{ablation_name} - {name}] Acc={acc:.3f} | Prec={prec:.3f} | Rec={rec:.3f} | F1={f1:.3f}\")\n\n\nFinal model selection\nchosen_ablation = “vocal_only” chosen_model = “SVM_linear” print(f”[Final model] Ablation = {chosen_ablation} | Model = {chosen_model}“)\ndf_best = df.loc[track_type_specs[chosen_ablation]].reset_index(drop=True) X_best = df_best[df_number_feature].copy() y_best = le.transform(df_best[“language”].astype(str))\nfinal_clf = SVC(kernel=“linear”, class_weight=“balanced”, random_state=42) final_clf.fit(X_best, y_best)\nprint(f”[Final Train] Done on {chosen_ablation} - {chosen_model} | n_samples = {len(df_best)}“)"
+    "text": "import pandas as pd import numpy as np import matplotlib.pyplot as plt import seaborn as sns from pandas.plotting import scatter_matrix\nfrom sklearn.impute import SimpleImputer from sklearn.preprocessing import LabelEncoder, StandardScaler from sklearn.feature_selection import SelectKBest, f_regression from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier from sklearn.model_selection import train_test_split, StratifiedKFold, cross_validate from sklearn.decomposition import PCA from sklearn.linear_model import LogisticRegression, Ridge, RidgeCV, LassoCV from sklearn.tree import DecisionTreeClassifier from sklearn.svm import SVC from sklearn.metrics import accuracy_score, mean_squared_error, r2_score, make_scorer, precision_score, recall_score, f1_score\n\nLoad the dataset\ndf = pd.read_csv(“_extra/Audio_Files/Yashi_s_Music/Y_audio_philes_final_features_mk1_filled_Yashi.csv”)\nprint(df.head()) print(df.info()) print(“Missing values per column:”) print(df.isnull().sum())\n\n\nFeature selection\ndf_non_feature = [“artist”, “country”, “language”, “track_type”] df_number_feature = [c for c in df.select_dtypes(include=[np.number]).columns if c not in df_non_feature] print(“Numerical features used:”, df_number_feature)\n\n\nStandardize numerical features globally\nscaler = StandardScaler() df[df_number_feature] = scaler.fit_transform(df[df_number_feature])\n\n\nEncode target variable\nle = LabelEncoder() y_all = le.fit_transform(df[“language”].astype(str)) label_names = le.classes_\n\n\nDefine track_type groups\ntrack_type_all = {0: “complete_song”, 1: “vocal_only”, 2: “no_vocal”} track_type_specs = {name: (df[“track_type”] == code) for code, name in track_type_all.items()} for name, mask in track_type_specs.items(): print(f”{name}: {int(mask.sum())} samples”)\n\n\nSet up Stratified K-Fold cross-validation\nk = 5 skf = StratifiedKFold(n_splits=k, shuffle=True, random_state=42)\n\n\nDefine models\nmodels = { “LogReg”: LogisticRegression(max_iter=500, class_weight=“balanced”, random_state=42), “RandomForest”: RandomForestClassifier( n_estimators=400, class_weight=“balanced_subsample”, random_state=42, n_jobs=-1 ), “SVM_linear”: SVC(kernel=“linear”, class_weight=“balanced”, random_state=42), }\n\n\nDefine scoring dictionary with exact metric names\nscoring = { “accuracy”: make_scorer(accuracy_score), “precision”: make_scorer(precision_score, average=“macro”), “recall”: make_scorer(recall_score, average=“macro”), “f1”: make_scorer(f1_score, average=“macro”), }\nrows = []\n\n\nModel evaluation loop\nfor track_type_code, ablation_name in track_type_all.items(): mask = df[“track_type”] == track_type_code df_eval = df.loc[mask].reset_index(drop=True)\nX = df_eval[df_number_feature].copy()\ny = le.transform(df_eval[\"language\"].astype(str))\n\nfor name, clf in models.items():\n    # Use skf and n_jobs=1 to avoid multiprocessing errors\n    cv_results = cross_validate(\n        clf,\n        X,\n        y,\n        cv=skf,\n        scoring=scoring,\n        n_jobs=1,\n        return_train_score=False,\n    )\n    acc = np.mean(cv_results[\"test_accuracy\"])\n    prec = np.mean(cv_results[\"test_precision\"])\n    rec = np.mean(cv_results[\"test_recall\"])\n    f1 = np.mean(cv_results[\"test_f1\"])\n    rows.append({\n        \"ablation\": ablation_name,\n        \"model\": name,\n        \"acc\": acc,\n        \"prec\": prec,\n        \"rec\": rec,\n        \"f1\": f1,\n    })\n    print(f\"[{ablation_name} - {name}] Acc={acc:.3f} | Prec={prec:.3f} | Rec={rec:.3f} | F1={f1:.3f}\")\n\n\nFinal model selection\nchosen_ablation = “vocal_only” chosen_model = “SVM_linear” print(f”[Final model] Ablation = {chosen_ablation} | Model = {chosen_model}“)\ndf_best = df.loc[track_type_specs[chosen_ablation]].reset_index(drop=True) X_best = df_best[df_number_feature].copy() y_best = le.transform(df_best[“language”].astype(str))\nfinal_clf = SVC(kernel=“linear”, class_weight=“balanced”, random_state=42) final_clf.fit(X_best, y_best)\nprint(f”[Final Train] Done on {chosen_ablation} - {chosen_model} | n_samples = {len(df_best)}“)"
   },
   {
     "objectID": "presentation.html#our-dataset",
@@ -284,84 +284,84 @@
     "href": "presentation.html#section",
     "title": "",
     "section": "",
-    "text": "🎯 Project Description & Goals\n  Our team is developing a machine learning system for an AI-driven music recommendation service.The main goals are:\n  \n    Build a model capable of recognizing the language(s) spoken in audio files.\n    Assess whether new songs align with a user’s musical preferences.\n  \n\n  \n\n  ❓ Research Question 1 – Language Recognition\n  How can we leverage statistical and time-frequency features from separated vocal and audio tracks to build effective language recognition models?\n  \n    What are the strengths and limitations of classical models (e.g., SVMs, Random Forest, Logistic Regression)?\n    How do feature engineering and validation improve model robustness?\n  \n\n  \n\n  ❓ Research Question 2 – Recommendation System [Genre Recognition]\n  Starting with genre recognition as part of the user UI/UX, can a user’s preferred genres be learned through feature analysis of audio files?\n  \n    Using classical supervised models: Can audio features be extracted and models trained to recognize a user's preferred genres?\n    Using frequency/time heatmap image extraction: Are classical models capable of determining musical genres?"
+    "text": "🤖 Project Description & Goals\n\n  Our team is developing a machine learning system for an AI-driven music recommendation service.\n  The main goals are:\n\n  \n    Build a model capable of recognizing the language(s) spoken in audio files.\n    Assess whether new songs align with a user’s musical preferences.\n  \n\n  \n\n  ✦ Question 1 – Language Recognition\n  How can we leverage statistical and time-frequency features from separated vocal and audio tracks to build effective language recognition models?\n  \n    What are the strengths and limitations of classical models (e.g., SVMs, Random Forest, Logistic Regression)?\n    How do feature engineering and validation improve model robustness?\n  \n\n  \n\n  ✦ Question 2 – Recommendation System [Genre Recognition]\n  Starting with genre recognition as part of the user UI/UX, can a user’s preferred genres be learned through feature analysis of audio files?\n  \n    Using classical supervised models: Can audio features be extracted and models trained to recognize a user's preferred genres?\n    Using frequency/time heatmap image extraction: Are classical models capable of determining musical genres from spectrogram-like representations?"
   },
   {
     "objectID": "presentation.html#section-1",
     "href": "presentation.html#section-1",
     "title": "",
     "section": "",
-    "text": "Data Files and Extraction Workflow\n  \n    User Input: Initial CSV files containing song names; optionally including genre, language, and artist information.\n    Data Completion: Automated web scraping to fill missing metadata fields such as genre, language, and artist.\n    YouTube Integration: Web scraping YouTube to find matching song links, then storing these links and related metadata in a JSON file.\n    Audio Acquisition: Downloading .wav audio files from YouTube links for each song.\n    Feature Extraction: Using Python scripts to analyze audio files and extract features (e.g., fundamental frequency, MFCCs, tempo).\n    Output Files: Extracted audio features are saved into CSV files; visualizations like spectrograms are saved as PNG images."
+    "text": "🧩 Data Files and Extraction Workflow\n  \n    User Input: Providing initial CSV files containing song names, optionally including genre, language, and artist information.\n    Data Completion: Performing automated web scraping with Python scripts, filling in missing metadata fields such as genre, language, and artist.\n    YouTube Integration: Scraping YouTube with Python scripts, finding matching song URLs, and storing these links and related metadata in a JSON file.\n    Audio Acquisition: Downloading .wav audio files from YouTube URLs for each song with Python scripts.\n    Feature Extraction: Using Python (numpy and librosa libraries) scripts for analyzing audio files and extracting features (e.g., fundamental frequency, MFCCs, tempo).\n    Output Files: Saving extracted audio features as CSV files; saving visualizations such as spectrograms as .png images. From here, constructing machine learning pipelines with Python libraries."
   },
   {
     "objectID": "presentation.html#section-2",
     "href": "presentation.html#section-2",
     "title": "",
     "section": "",
-    "text": "Feature Scraping\n\n\n\n\n\nFeature\n\n\nDescription\n\n\n\n\n\n\nfundamental_freq\n\n\nFundamental frequency (mean pitch via librosa.pyin)\n\n\n\n\nfreq_e_1\n\n\nDominant spectral energy #1 (highest energy frequency bin)\n\n\n\n\nfreq_e_2\n\n\nDominant spectral energy #2 (2nd highest energy frequency bin)\n\n\n\n\nfreq_e_3\n\n\nDominant spectral energy #3 (3rd highest energy frequency bin)\n\n\n\n\nkey\n\n\nEstimated musical key (C, C#, D, …, B) via chroma features\n\n\n\n\nduration\n\n\nLength of audio in seconds\n\n\n\n\nzero_crossing_rate\n\n\nAverage zero crossing rate (signal sign changes)\n\n\n\n\nmfcc_mean\n\n\nMean of 13 MFCC coefficients (timbre features)\n\n\n\n\nmfcc_std\n\n\nStandard deviation of MFCC coefficients\n\n\n\n\ntempo\n\n\nEstimated tempo in beats per minute (BPM)\n\n\n\n\nrms_energy\n\n\nRoot mean square energy (loudness measure)\n\n\n\n\ntrack_type\n\n\nAudio track type (0=full mix, 1=vocal only, 2=no vocals)\n\n\n\n\nmel_spectrogram\n\n\nMel-scaled spectrogram representing frequency content over time (human hearing range)"
+    "text": "🔍 Feature Scraping\n\n\n\n\n\n\n\n\nFeature\nDescription\n\n\n\n\nfundamental_freq\nFundamental frequency (mean pitch via librosa.pyin)\n\n\nfreq_e_1\nDominant spectral energy #1 (highest energy frequency bin)\n\n\nfreq_e_2\nDominant spectral energy #2 (2nd highest energy frequency bin)\n\n\nfreq_e_3\nDominant spectral energy #3 (3rd highest energy frequency bin)\n\n\nkey\nEstimated musical key (C, C#, D, …, B) via chroma features\n\n\nduration\nLength of audio in seconds\n\n\nzero_crossing_rate\nAverage zero crossing rate (signal sign changes)\n\n\nmfcc_mean\nMean of 13 MFCC coefficients (timbre features)\n\n\nmfcc_std\nStandard deviation of MFCC coefficients\n\n\ntempo\nEstimated tempo in beats per minute (BPM)\n\n\nrms_energy\nRoot mean square energy (loudness measure)\n\n\ntrack_type\nAudio track type (0=full mix, 1=vocal only, 2=no vocals)\n\n\nmel_spectrogram\nMel-scaled spectrogram representing frequency content over time (human hearing range)"
   },
   {
     "objectID": "presentation.html#section-3",
     "href": "presentation.html#section-3",
     "title": "",
     "section": "",
-    "text": "Q1 Overview - Yashi describe your question and how you implemented mL [libraries, validation]"
+    "text": "F1 (macro) comparison across ablations and models"
   },
   {
     "objectID": "presentation.html#section-4",
     "href": "presentation.html#section-4",
     "title": "",
     "section": "",
-    "text": "Q1 Results [1/3] - Yashi graphs? Learning Curve, ROC, any hyperparameter optimization?"
+    "text": "Q2 (A/B) Overview - Nathan describe your question and how you implemented mL [libraries, validation]"
   },
   {
     "objectID": "presentation.html#section-5",
     "href": "presentation.html#section-5",
     "title": "",
     "section": "",
-    "text": "Q1 Results [2/3] - Yashi. Results (% scores) Validation methods."
+    "text": "Q2 (A) Results - Nathan graphs? Learning Curve, ROC, any hyperparameter optimization?"
   },
   {
     "objectID": "presentation.html#section-6",
     "href": "presentation.html#section-6",
     "title": "",
     "section": "",
-    "text": "Q1 Summary [3/3] - Yashi. Summarize - what you did/results."
+    "text": "Q2 (A) Results - Nathan Results (% scores) Validation methods."
   },
   {
     "objectID": "presentation.html#section-7",
     "href": "presentation.html#section-7",
     "title": "",
     "section": "",
-    "text": "Q2 Overview - Nathan describe your question and how you implemented mL [libraries, validation]"
+    "text": "Q2 (B) Results - Nathan. Summarize - what you did/results."
   },
   {
     "objectID": "presentation.html#section-8",
     "href": "presentation.html#section-8",
     "title": "",
     "section": "",
-    "text": "Q2 Results [1/3] - Nathan graphs? Learning Curve, ROC, any hyperparameter optimization?"
+    "text": "Q2 (B) Results [3/3] - Nathan. Summarize - what you did/results."
   },
   {
     "objectID": "presentation.html#section-9",
     "href": "presentation.html#section-9",
     "title": "",
     "section": "",
-    "text": "Q2 Results [2/3] - Nathan Results (% scores) Validation methods."
+    "text": "Q2 Summary - Nathan"
   },
   {
     "objectID": "presentation.html#section-10",
     "href": "presentation.html#section-10",
     "title": "",
     "section": "",
-    "text": "Q2 Results [3/3] - Nathan. Summarize - what you did/results."
+    "text": "Full Summary - Nathan talk about both question findings."
   },
   {
     "objectID": "presentation.html#section-11",
     "href": "presentation.html#section-11",
     "title": "",
     "section": "",
-    "text": "Q2 Summary - Nathan"
+    "text": "Thank you for listening\n      \n        Your attention was appreciated.\n        Questions welcome.\n      \n      Team Members:"
   },
   {
     "objectID": "presentation.html#section-12",
@@ -390,5 +390,145 @@
     "title": "",
     "section": "🔍 Project Overview & Research Questions",
     "text": "🔍 Project Overview & Research Questions\n\n\n  🎯 Project Description & Goals\n  \n    Our team is developing a machine learning system for an AI-driven music recommendation service. The main goals are:\n  \n  \n    To build a model capable of recognizing the language(s) spoken in audio files\n    To assess whether new songs align with a user’s musical preferences\n  \n  \n    By separating vocal tracks and analyzing audio features such as tempo, loudness, genre, and language, we aim to create a highly personalized and accurate recommendation system.\n  \n\n  \n\n  ❓ Research Question 1 – Language Recognition\n  How can we leverage statistical and time-frequency features extracted from separated vocal and audio tracks to build effective language recognition models?\n  \n    What are the strengths and limitations of classical methods like SVMs or GMMs in this domain?\n    How do engineered features and model validation techniques impact robustness?\n    Does file format (.wav vs .mp3) affect accuracy due to compression artifacts?\n  \n\n  \n\n  ❓ Research Question 2 – Recommendation System\n  How can user interaction data combined with audio and metadata be used to build an effective recommendation system using collaborative filtering or traditional ML?\n  \n    Can audio features and clustering improve personalization?\n    What impact do vocal vs. full-mix inputs have?\n    Does audio quality (.wav vs .mp3) influence feature extraction and recommendation performance?"
+  },
+  {
+    "objectID": "presentation.html#learning-curve-f1-score",
+    "href": "presentation.html#learning-curve-f1-score",
+    "title": "",
+    "section": "Learning Curve (F1 Score)",
+    "text": "Learning Curve (F1 Score)\n\n\nF1 (macro) comparison across ablations and models"
+  },
+  {
+    "objectID": "presentation.html#question-1-summary",
+    "href": "presentation.html#question-1-summary",
+    "title": "",
+    "section": "📌 Question 1-Summary",
+    "text": "📌 Question 1-Summary\n\n  \n    What we did:\n      \n        Designed a supervised ML pipeline with feature scaling, label encoding, stratified CV.\n        Evaluated three classifiers on different track-type subsets.\n      \n    \n    Results:\n      \n        Best model = Linear SVM trained on vocal_only data.\n        Achieved ~80% performance across all metrics.\n      \n    \n    Conclusion:\n      \n        Vocal features are sufficient to classify language with strong accuracy.\n        Next: expand dataset, apply hyperparameter optimization, and test on external songs."
+  },
+  {
+    "objectID": "presentation.html#section-39",
+    "href": "presentation.html#section-39",
+    "title": "",
+    "section": "",
+    "text": "Q2 Overview - Nathan describe your question and how you implemented mL [libraries, validation]"
+  },
+  {
+    "objectID": "presentation.html#section-40",
+    "href": "presentation.html#section-40",
+    "title": "",
+    "section": "",
+    "text": "Q2 Results [1/3] - Nathan graphs? Learning Curve, ROC, any hyperparameter optimization?"
+  },
+  {
+    "objectID": "presentation.html#section-41",
+    "href": "presentation.html#section-41",
+    "title": "",
+    "section": "",
+    "text": "Q2 Results [2/3] - Nathan Results (% scores) Validation methods."
+  },
+  {
+    "objectID": "presentation.html#section-42",
+    "href": "presentation.html#section-42",
+    "title": "",
+    "section": "",
+    "text": "Q2 Results [3/3] - Nathan. Summarize - what you did/results."
+  },
+  {
+    "objectID": "presentation.html#section-43",
+    "href": "presentation.html#section-43",
+    "title": "",
+    "section": "",
+    "text": "Q2 Summary - Nathan"
+  },
+  {
+    "objectID": "presentation.html#section-44",
+    "href": "presentation.html#section-44",
+    "title": "",
+    "section": "",
+    "text": "Full Summary - Nathan talk about both question findings."
+  },
+  {
+    "objectID": "presentation.html#section-45",
+    "href": "presentation.html#section-45",
+    "title": "",
+    "section": "",
+    "text": "In Closing - Nathan"
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Audio Alchemy",
+    "section": "Introduction",
+    "text": "Introduction\nMusic genre classification is a central task in the field of music information retrieval, combining elements of signal processing, machine learning, and deep learning. Accurate genre identification not only enhances music recommendation systems and streaming platforms but also deepens our understanding of audio structure and human perception of sound. Traditional approaches have relied on handcrafted audio features analyzed with machine learning techniques such as Random Forests and Gaussian Mixture Models, offering interpretable yet limited performance[1]. Recent advances, however, leverage deep learning methods—particularly convolutional neural networks (CNNs)—to extract high-level representations directly from spectrograms, achieving state-of-the-art results[2]. This project explores both paradigms: first applying classical machine learning with 5-fold cross-validation, and then advancing to CNN-based classification on spectrogram heat maps, with results evaluated using standard metrics including accuracy, precision, recall, F1-score, confusion matrices, and ROC curves."
+  },
+  {
+    "objectID": "index.html#questions",
+    "href": "index.html#questions",
+    "title": "Audio Alchemy",
+    "section": "Questions",
+    "text": "Questions\n\n1. Language Recognition with Separated Vocal & Audio Tracks\n\ninitial formulation\nHow can we leverage statistical and time-frequency features extracted from separated vocal and audio tracks to build effective language recognition models? Specifically, how can traditional machine learning methods — ranging from classical classifiers on simple statistical summaries to Gaussian Mixture Models on richer time-frequency features — be applied in this context?\n\nWhat are the key benefits and limitations of these approaches?\n\nHow can careful feature engineering, feature integration, and thorough model evaluation improve the accuracy and robustness of language recognition systems?\n\nHow do model results compare and contrast when using .wav files versus .mp3 files?\n\n\n\nsecondary formulation\n\nYashi #_to_Do\n\nFrom the initial problems statement - what did you change?\n\n\n\n2. Recommendation Systems Using Audio Features & User Data\n\ninitial formulation\nHow can user interaction data, combined with basic track metadata and simple audio features, be used to build an effective recommendation system using collaborative filtering and traditional machine learning methods?\n\nFurthermore, how can advanced audio features, dimensionality reduction, and clustering techniques improve personalized recommendations by better capturing user preferences and track characteristics from both vocal and non-vocal components?\n\nHow do recommendation model results compare and contrast when using .wav files versus .mp3 files, considering the potential impact of audio quality and compression artifacts on feature extraction and recommendation performance?\n\n\n\nsecondary formulation\n\nNathan #_to_Do\n\nFrom the initial problems statement - what did you change?"
+  },
+  {
+    "objectID": "index.html#dataset",
+    "href": "index.html#dataset",
+    "title": "Audio Alchemy",
+    "section": "Dataset",
+    "text": "Dataset\n\ndata provenance\n\nNathan #_to_Do\n\n\n\nsoftware distriubtion\n\nNathan #_to_Do\n\n\n\ndata collection\n\nNathan #_to_Do\n\n\n\ndata storage\n\nNathan #_to_Do\n\n\n\ngraphs?\n\nNathan #_to_Do\n\n.. any feature graphs I can think of…"
+  },
+  {
+    "objectID": "index.html#analysis-plan",
+    "href": "index.html#analysis-plan",
+    "title": "Audio Alchemy",
+    "section": "Analysis Plan",
+    "text": "Analysis Plan\n\nGeneral\n\n\nQ1 - Yashi\n\nYashi #_to_Do - entire section for your problem\n\n\nput any graphs in this section.\ndo you have learning curve, ROC curves? Feature importance graphs?\n\n\nrestate question\ndata collection - data set size/composition (var types) Data was collected through a series of Python scripts. [see slide 3] You had an extra layer of feature extraction - removing vocal/instrumental tracts.\ndata processing - any PCA, correlation, imputation, outlier removal?\nmodel selection - what models, why? (if any reason), what Python libraries did you use?\nmodel validation - what metrics? why?\nmodel evaluation - what metrics? why? Note: the ‘no vocal’ track - behaved at about 50% accuracy - which is what you’d expect for a control group.\nfuture steps/recommendations\n\n\n\nQ2\n\nNathan #_to_Do\n\n\nput any graphs in this section.\ndo you have learning curve, ROC curves? Feature importance graphs?\n\n\nrestate question\ndata collection - data set size/composition (var types) Data was collected through a series of Python scripts. [see slide 3] You had an extra layer of feature extraction - removing vocal/instrumental tracts.\ndata processing - any PCA, correlation, imputation, outlier removal?\nmodel selection - what models, why? (if any reason), what Python libraries did you use?\nmodel validation - what metrics? why?\nmodel evaluation - what metrics? why?\nfuture steps/recommendations"
+  },
+  {
+    "objectID": "index.html#results-conclusion",
+    "href": "index.html#results-conclusion",
+    "title": "Audio Alchemy",
+    "section": "Results & Conclusion",
+    "text": "Results & Conclusion\n\nYashi\n\nYashi #_to_Do\n\nRestate the project goal, and the goal of your question. What was done in the analysis, and what was found with the features extracted. (1 paragraph)\n\nNathan #_to_Do\n\nRestate the project goal, and the goal of your question. What was done in the analysis, and what was found with the features extracted. (1 paragraph)"
+  },
+  {
+    "objectID": "index.html#video-links",
+    "href": "index.html#video-links",
+    "title": "Audio Alchemy",
+    "section": "Video links",
+    "text": "Video links\n\nNathan #_to_Do"
+  },
+  {
+    "objectID": "index.html#audio-player-demo",
+    "href": "index.html#audio-player-demo",
+    "title": "Audio Alchemy",
+    "section": "Audio Player Demo",
+    "text": "Audio Player Demo\n\nNathan #_to_Do"
+  },
+  {
+    "objectID": "index.html#team-member-workload",
+    "href": "index.html#team-member-workload",
+    "title": "Audio Alchemy",
+    "section": "Team member workload",
+    "text": "Team member workload\n\nYashi #_to_Do\n\nJust type 3-4 sentences about workload go off the proposal ‘week work map/individual duties section’ - but, put into into paragraph form."
+  },
+  {
+    "objectID": "index.html#sources",
+    "href": "index.html#sources",
+    "title": "Audio Alchemy",
+    "section": "sources",
+    "text": "sources\n\nNathan #_to_Do\n\n[1] https://link.springer.com/chapter/10.1007/978-981-97-4533-3_6\n[2] https://arxiv.org/html/2411.14474v1"
+  },
+  {
+    "objectID": "index.html#a-note-on-spectographic-features-of-.mp3-vs.-.wav",
+    "href": "index.html#a-note-on-spectographic-features-of-.mp3-vs.-.wav",
+    "title": "Audio Alchemy",
+    "section": "A note on spectographic features of .mp3 vs. .wav",
+    "text": "A note on spectographic features of .mp3 vs. .wav\n\nNathan #_to_Do\n\nHere i’ll add a graph, and discuss who despite the large disparity in file size the two file types are nearly similar in audio data. Making it not a good research path to compare .mp3 and .wav files."
+  },
+  {
+    "objectID": "index.html#problem-analysis-and-results",
+    "href": "index.html#problem-analysis-and-results",
+    "title": "Audio Alchemy",
+    "section": "Problem analysis and results",
+    "text": "Problem analysis and results\n\nGeneral\n\nNathan #_to_Do\n\nDiscuss what the original plan was, and what was done - in terms of easy, med problem design.\n\n\nQ1 - Yashi\n\nYashi #_to_Do - entire section for your problem\n\n\nput any graphs in this section.\ndo you have learning curve, ROC curves? Feature importance graphs?\n\n\nrestate question\ndata collection - data set size/composition (var types) Data was collected through a series of Python scripts. [see slide 3] You had an extra layer of feature extraction - removing vocal/instrumental tracts.\ndata processing - any PCA, correlation, imputation, outlier removal?\nmodel selection - what models, why? (if any reason), what Python libraries did you use?\nmodel validation - what metrics? why?\nmodel evaluation - what metrics? why? Note: the ‘no vocal’ track - behaved at about 50% accuracy - which is what you’d expect for a control group.\nfuture steps/recommendations\n\n\n\nQ2\n\nNathan #_to_Do\n\n\nput any graphs in this section.\ndo you have learning curve, ROC curves? Feature importance graphs?\n\n\nrestate question\ndata collection - data set size/composition (var types) Data was collected through a series of Python scripts. [see slide 3] You had an extra layer of feature extraction - removing vocal/instrumental tracts.\ndata processing - any PCA, correlation, imputation, outlier removal?\nmodel selection - what models, why? (if any reason), what Python libraries did you use?\nmodel validation - what metrics? why?\nmodel evaluation - what metrics? why?\nfuture steps/recommendations"
   }
 ]

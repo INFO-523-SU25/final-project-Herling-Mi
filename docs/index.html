@@ -4808,6 +4808,35 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#a-note-on-spectographic-features-of-.mp3-vs.-.wav" id="toc-a-note-on-spectographic-features-of-.mp3-vs.-.wav" class="nav-link" data-scroll-target="#a-note-on-spectographic-features-of-.mp3-vs.-.wav">A note on spectographic features of <code>.mp3</code> vs. <code>.wav</code></a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a>
+  <ul class="collapse">
+  <li><a href="#language-recognition-with-separated-vocal-audio-tracks" id="toc-language-recognition-with-separated-vocal-audio-tracks" class="nav-link" data-scroll-target="#language-recognition-with-separated-vocal-audio-tracks">1. Language Recognition with Separated Vocal &amp; Audio Tracks</a></li>
+  <li><a href="#recommendation-systems-using-audio-features-user-data" id="toc-recommendation-systems-using-audio-features-user-data" class="nav-link" data-scroll-target="#recommendation-systems-using-audio-features-user-data">2. Recommendation Systems Using Audio Features &amp; User Data</a></li>
+  </ul></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a>
+  <ul class="collapse">
+  <li><a href="#data-provenance" id="toc-data-provenance" class="nav-link" data-scroll-target="#data-provenance">data provenance</a></li>
+  <li><a href="#software-distriubtion" id="toc-software-distriubtion" class="nav-link" data-scroll-target="#software-distriubtion">software distriubtion</a></li>
+  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection">data collection</a></li>
+  <li><a href="#data-storage" id="toc-data-storage" class="nav-link" data-scroll-target="#data-storage">data storage</a></li>
+  <li><a href="#graphs" id="toc-graphs" class="nav-link" data-scroll-target="#graphs">graphs?</a></li>
+  </ul></li>
+  <li><a href="#team-member-workload" id="toc-team-member-workload" class="nav-link" data-scroll-target="#team-member-workload">Team member workload</a></li>
+  <li><a href="#problem-analysis-and-results" id="toc-problem-analysis-and-results" class="nav-link" data-scroll-target="#problem-analysis-and-results">Problem analysis and results</a>
+  <ul class="collapse">
+  <li><a href="#general" id="toc-general" class="nav-link" data-scroll-target="#general">General</a></li>
+  <li><a href="#q1---yashi" id="toc-q1---yashi" class="nav-link" data-scroll-target="#q1---yashi">Q1 - Yashi</a></li>
+  <li><a href="#q2" id="toc-q2" class="nav-link" data-scroll-target="#q2">Q2</a></li>
+  </ul></li>
+  <li><a href="#results-conclusion" id="toc-results-conclusion" class="nav-link" data-scroll-target="#results-conclusion">Results &amp; Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#yashi" id="toc-yashi" class="nav-link" data-scroll-target="#yashi">Yashi</a></li>
+  </ul></li>
+  <li><a href="#video-links" id="toc-video-links" class="nav-link" data-scroll-target="#video-links">Video links</a></li>
+  <li><a href="#audio-player-demo" id="toc-audio-player-demo" class="nav-link" data-scroll-target="#audio-player-demo">Audio Player Demo</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">sources</a></li>
   </ul>
 </nav>
     </div>
@@ -4854,7 +4883,192 @@ vertical-align: -.125em;
 
 <section id="abstract" class="level2">
 <h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
-<p>Add project abstract here.</p>
+Music recommendation systems increasingly rely on machine learning to capture the complexity of user preferences, yet existing models struggle to account for language diversity and nuanced audio features in songs. This project applies signal processing, vocal separation (DEMUCS library), and machine learning techniques to classify song languages and integrate them with genre metadata for improved personalization. By combining automated data collection with advanced audio analysis, the system provides a foundation for smarter, more inclusive recommendation platforms that enhance user experience across diverse musical contexts. The project first applied Random Forests and Gaussian Mixture Models with 5-fold cross-validation for audio genre identification, then advanced to CNNs on spectrogram heat maps validated via a train/validation/test split with early stopping, evaluated through accuracy, precision, recall, F1-score, confusion matrices, and ROC curves.
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+(Nathan) - sentence about results.
+<div style="background-color: orange; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Yashi #_to_Do</b></p>
+</div>
+<p>(Yashi) - sentence about Part 2. <br>(Yashi) - sentence about results.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Music genre classification is a central task in the field of music information retrieval, combining elements of signal processing, machine learning, and deep learning. Accurate genre identification not only enhances music recommendation systems and streaming platforms but also deepens our understanding of audio structure and human perception of sound. Traditional approaches have relied on handcrafted audio features analyzed with machine learning techniques such as Random Forests and Gaussian Mixture Models, offering interpretable yet limited performance[1]. Recent advances, however, leverage deep learning methods—particularly convolutional neural networks (CNNs)—to extract high-level representations directly from spectrograms, achieving state-of-the-art results[2]. This project explores both paradigms: first applying classical machine learning with 5-fold cross-validation, and then advancing to CNN-based classification on spectrogram heat maps, with results evaluated using standard metrics including accuracy, precision, recall, F1-score, confusion matrices, and ROC curves.</p>
+</section>
+<section id="a-note-on-spectographic-features-of-.mp3-vs.-.wav" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-on-spectographic-features-of-.mp3-vs.-.wav">A note on spectographic features of <code>.mp3</code> vs. <code>.wav</code></h2>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+<p>Here i’ll add a graph, and discuss who despite the large disparity in file size the two file types are nearly similar in audio data. Making it not a good research path to compare .mp3 and .wav files.</p>
+</section>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions</h2>
+<section id="language-recognition-with-separated-vocal-audio-tracks" class="level3">
+<h3 class="anchored" data-anchor-id="language-recognition-with-separated-vocal-audio-tracks">1. Language Recognition with Separated Vocal &amp; Audio Tracks</h3>
+<section id="initial-formulation" class="level4">
+<h4 class="anchored" data-anchor-id="initial-formulation"><b>initial formulation</b></h4>
+<p>How can we leverage <strong>statistical</strong> and <strong>time-frequency features</strong> extracted from separated vocal and audio tracks to build effective language recognition models? Specifically, how can traditional machine learning methods — ranging from <strong>classical classifiers</strong> on simple statistical summaries to <strong>Gaussian Mixture Models</strong> on richer time-frequency features — be applied in this context?</p>
+<ul>
+<li>What are the key <strong>benefits</strong> and <strong>limitations</strong> of these approaches?<br>
+</li>
+<li>How can <strong>careful feature engineering</strong>, <strong>feature integration</strong>, and <strong>thorough model evaluation</strong> improve the accuracy and robustness of language recognition systems?<br>
+</li>
+<li>How do model results compare and contrast when using <strong>.wav</strong> files versus <strong>.mp3</strong> files?</li>
+</ul>
+</section>
+<section id="secondary-formulation" class="level4">
+<h4 class="anchored" data-anchor-id="secondary-formulation"><b>secondary formulation</b></h4>
+<div style="background-color: orange; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Yashi #_to_Do</b></p>
+</div>
+<p>From the initial problems statement - what did you change?</p>
+</section>
+</section>
+<section id="recommendation-systems-using-audio-features-user-data" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation-systems-using-audio-features-user-data">2. Recommendation Systems Using Audio Features &amp; User Data</h3>
+<section id="initial-formulation-1" class="level4">
+<h4 class="anchored" data-anchor-id="initial-formulation-1"><b>initial formulation</b></h4>
+<p>How can <strong>user interaction data</strong>, combined with basic track metadata and simple audio features, be used to build an effective recommendation system using <strong>collaborative filtering</strong> and traditional machine learning methods?</p>
+<ul>
+<li>Furthermore, how can <strong>advanced audio features</strong>, <strong>dimensionality reduction</strong>, and <strong>clustering techniques</strong> improve personalized recommendations by better capturing user preferences and track characteristics from both vocal and non-vocal components?<br>
+</li>
+<li>How do recommendation model results compare and contrast when using <strong>.wav</strong> files versus <strong>.mp3</strong> files, considering the potential impact of audio quality and compression artifacts on feature extraction and recommendation performance?</li>
+</ul>
+</section>
+<section id="secondary-formulation-1" class="level4">
+<h4 class="anchored" data-anchor-id="secondary-formulation-1"><b>secondary formulation</b></h4>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+<p>From the initial problems statement - what did you change?</p>
+</section>
+</section>
+</section>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<section id="data-provenance" class="level3">
+<h3 class="anchored" data-anchor-id="data-provenance">data provenance</h3>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+</section>
+<section id="software-distriubtion" class="level3">
+<h3 class="anchored" data-anchor-id="software-distriubtion">software distriubtion</h3>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+</section>
+<section id="data-collection" class="level3">
+<h3 class="anchored" data-anchor-id="data-collection">data collection</h3>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+</section>
+<section id="data-storage" class="level3">
+<h3 class="anchored" data-anchor-id="data-storage">data storage</h3>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+</section>
+<section id="graphs" class="level3">
+<h3 class="anchored" data-anchor-id="graphs">graphs?</h3>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+<p><br><b>.. any feature graphs I can think of…</b></p>
+</section>
+</section>
+<section id="team-member-workload" class="level2">
+<h2 class="anchored" data-anchor-id="team-member-workload">Team member workload</h2>
+<div style="background-color: orange; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Yashi #_to_Do</b></p>
+</div>
+<p>Just type 3-4 sentences about workload go off the proposal ‘week work map/individual duties section’ - but, put into into paragraph form.</p>
+</section>
+<section id="problem-analysis-and-results" class="level2">
+<h2 class="anchored" data-anchor-id="problem-analysis-and-results">Problem analysis and results</h2>
+<section id="general" class="level3">
+<h3 class="anchored" data-anchor-id="general">General</h3>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+<p>Discuss what the original plan was, and what was done - in terms of easy, med problem design.</p>
+</section>
+<section id="q1---yashi" class="level3">
+<h3 class="anchored" data-anchor-id="q1---yashi">Q1 - Yashi</h3>
+<div style="background-color: orange; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Yashi #_to_Do - entire section for your problem</b></p>
+</div>
+<ul>
+<li>put any graphs in this section.</li>
+<li>do you have learning curve, ROC curves? Feature importance graphs?</li>
+</ul>
+<ol type="1">
+<li>restate question</li>
+<li>data collection - data set size/composition (var types) Data was collected through a series of Python scripts. [see slide 3] You had an extra layer of feature extraction - removing vocal/instrumental tracts.</li>
+<li>data processing - any PCA, correlation, imputation, outlier removal?</li>
+<li>model selection - what models, why? (if any reason), what Python libraries did you use?</li>
+<li>model validation - what metrics? why?</li>
+<li>model evaluation - what metrics? why? <strong>Note: the ‘no vocal’ track - behaved at about 50% accuracy - which is what you’d expect for a control group.</strong></li>
+<li>future steps/recommendations</li>
+</ol>
+</section>
+<section id="q2" class="level3">
+<h3 class="anchored" data-anchor-id="q2">Q2</h3>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+<ul>
+<li>put any graphs in this section.</li>
+<li>do you have learning curve, ROC curves? Feature importance graphs?</li>
+</ul>
+<ol type="1">
+<li>restate question</li>
+<li>data collection - data set size/composition (var types) Data was collected through a series of Python scripts. [see slide 3] You had an extra layer of feature extraction - removing vocal/instrumental tracts.</li>
+<li>data processing - any PCA, correlation, imputation, outlier removal?</li>
+<li>model selection - what models, why? (if any reason), what Python libraries did you use?</li>
+<li>model validation - what metrics? why?</li>
+<li>model evaluation - what metrics? why?</li>
+<li>future steps/recommendations</li>
+</ol>
+</section>
+</section>
+<section id="results-conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="results-conclusion">Results &amp; Conclusion</h2>
+<section id="yashi" class="level3">
+<h3 class="anchored" data-anchor-id="yashi">Yashi</h3>
+<div style="background-color: orange; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Yashi #_to_Do</b></p>
+</div>
+<p>Restate the project goal, and the goal of your question. What was done in the analysis, and what was found with the features extracted. (1 paragraph)</p>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+<p>Restate the project goal, and the goal of your question. What was done in the analysis, and what was found with the features extracted. (1 paragraph)</p>
+</section>
+</section>
+<section id="video-links" class="level2">
+<h2 class="anchored" data-anchor-id="video-links">Video links</h2>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+</section>
+<section id="audio-player-demo" class="level2">
+<h2 class="anchored" data-anchor-id="audio-player-demo">Audio Player Demo</h2>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">sources</h2>
+<div style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;">
+<p><b>Nathan #_to_Do</b></p>
+</div>
+<p>[1] https://link.springer.com/chapter/10.1007/978-981-97-4533-3_6</p>
+<p>[2] https://arxiv.org/html/2411.14474v1</p>
 
 
 <!-- -->
@@ -5477,7 +5691,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Audio Alchemy&quot;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> &quot;INFO 523 - Final Project&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: &quot;Yashi Mi &amp; Nathan Herling&quot;</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliations:</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">      - name: &quot;College of Information Science, University of Arizona&quot;</span></span>
@@ -5496,7 +5710,164 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Abstract</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>Add project abstract here.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>Music recommendation systems increasingly rely on machine learning to capture the complexity of user preferences, yet existing models struggle to account for language diversity and nuanced audio features in songs. This project applies signal processing, vocal separation (DEMUCS library), and machine learning techniques to classify song languages and integrate them with genre metadata for improved personalization. By combining automated data collection with advanced audio analysis, the system provides a foundation for smarter, more inclusive recommendation platforms that enhance user experience across diverse musical contexts.</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>The project first applied Random Forests and Gaussian Mixture Models with 5-fold cross-validation for audio genre identification, then advanced to CNNs on spectrogram heat maps validated via a train/validation/test split with early stopping, evaluated through accuracy, precision, recall, F1-score, confusion matrices, and ROC curves.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>(Nathan) - sentence about results.</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: orange; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Yashi #_to_Do&lt;/b&gt;</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>(Yashi) - sentence about Part 2.</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;(Yashi) - sentence about results.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Music genre classification is a central task in the field of music information retrieval, combining elements of signal processing, machine learning, and deep learning. Accurate genre identification not only enhances music recommendation systems and streaming platforms but also deepens our understanding of audio structure and human perception of sound. Traditional approaches have relied on handcrafted audio features analyzed with machine learning techniques such as Random Forests and Gaussian Mixture Models, offering interpretable yet limited performance<span class="co">[</span><span class="ot">1</span><span class="co">]</span>. Recent advances, however, leverage deep learning methods—particularly convolutional neural networks (CNNs)—to extract high-level representations directly from spectrograms, achieving state-of-the-art results<span class="co">[</span><span class="ot">2</span><span class="co">]</span>. This project explores both paradigms: first applying classical machine learning with 5-fold cross-validation, and then advancing to CNN-based classification on spectrogram heat maps, with results evaluated using standard metrics including accuracy, precision, recall, F1-score, confusion matrices, and ROC curves.</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## A note on spectographic features of &lt;code&gt;.mp3&lt;/code&gt; vs. &lt;code&gt;.wav&lt;/code&gt;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>Here i&#39;ll add a graph, and discuss who despite the large disparity in file size the two file types are nearly similar in audio data. Making it not a good research path to compare .mp3 and .wav files.</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Language Recognition with Separated Vocal &amp; Audio Tracks</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">#### &lt;b&gt;initial formulation&lt;/b&gt; </span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>How can we leverage **statistical** and **time-frequency features** extracted from separated vocal and audio tracks to build effective language recognition models? Specifically, how can traditional machine learning methods — ranging from **classical classifiers** on simple statistical summaries to **Gaussian Mixture Models** on richer time-frequency features — be applied in this context?</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>What are the key **benefits** and **limitations** of these approaches?\</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>How can **careful feature engineering**, **feature integration**, and **thorough model evaluation** improve the accuracy and robustness of language recognition systems?\</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>How do model results compare and contrast when using **.wav** files versus **.mp3** files?</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">#### &lt;b&gt;secondary formulation&lt;/b&gt;</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: orange; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Yashi #_to_Do&lt;/b&gt;</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>From the initial problems statement - what did you change?</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Recommendation Systems Using Audio Features &amp; User Data</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="fu">#### &lt;b&gt;initial formulation&lt;/b&gt; </span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>How can **user interaction data**, combined with basic track metadata and simple audio features, be used to build an effective recommendation system using **collaborative filtering** and traditional machine learning methods?</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Furthermore, how can **advanced audio features**, **dimensionality reduction**, and **clustering techniques** improve personalized recommendations by better capturing user preferences and track characteristics from both vocal and non-vocal components?\</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>How do recommendation model results compare and contrast when using **.wav** files versus **.mp3** files, considering the potential impact of audio quality and compression artifacts on feature extraction and recommendation performance?</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="fu">#### &lt;b&gt;secondary formulation&lt;/b&gt;</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>From the initial problems statement - what did you change?</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dataset</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### data provenance</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="fu">### software distriubtion</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="fu">### data collection</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="fu">### data storage</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="fu">### graphs?</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;&lt;b&gt;.. any feature graphs I can think of...&lt;/b&gt;</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## Team member workload</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: orange; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Yashi #_to_Do&lt;/b&gt;</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>Just type 3-4 sentences about workload go off the proposal &#39;week work map/individual duties section&#39; - but, put into into paragraph form.</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problem analysis and results</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="fu">### General</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>Discuss what the original plan was, and what was done - in terms of easy, med problem design.</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="fu">### Q1 - Yashi</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: orange; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Yashi #_to_Do - entire section for your problem&lt;/b&gt;</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>put any graphs in this section.</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>do you have learning curve, ROC curves? Feature importance graphs?</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>(1) restate question</span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>(2) data collection - data set size/composition (var types)</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>Data was collected through a series of Python scripts.</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">see slide 3</span><span class="co">]</span> You had an extra layer of feature extraction - removing vocal/instrumental tracts.</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>(3) data processing - any PCA, correlation, imputation, outlier removal?</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>(4) model selection - what models, why? (if any reason), what Python libraries did you use?</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>(5) model validation - what metrics? why?</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>(6) model evaluation - what metrics? why?</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>**Note: the &#39;no vocal&#39; track - behaved at about 50% accuracy - which is what you&#39;d expect for a control group.**</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>(7) future steps/recommendations</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a><span class="fu">### Q2</span></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>put any graphs in this section.</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>do you have learning curve, ROC curves? Feature importance graphs?</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>(1) restate question</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>(2) data collection - data set size/composition (var types)</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>Data was collected through a series of Python scripts.</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">see slide 3</span><span class="co">]</span> You had an extra layer of feature extraction - removing vocal/instrumental tracts.</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>(3) data processing - any PCA, correlation, imputation, outlier removal?</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>(4) model selection - what models, why? (if any reason), what Python libraries did you use?</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>(5) model validation - what metrics? why?</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>(6) model evaluation - what metrics? why?</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>(7) future steps/recommendations</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results &amp; Conclusion</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a><span class="fu">### Yashi</span></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: orange; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Yashi #_to_Do&lt;/b&gt;</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>Restate the project goal, and the goal of your question. What was done in the analysis, and what was found with the features extracted. (1 paragraph)</span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>Restate the project goal, and the goal of your question. What was done in the analysis, and what was found with the features extracted. (1 paragraph)</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## Video links</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Audio Player Demo</span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## sources</span></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;&quot;&gt;</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>  &lt;b&gt;Nathan #_to_Do&lt;/b&gt;</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span> https://link.springer.com/chapter/10.1007/978-981-97-4533-3_6</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">2</span><span class="co">]</span> https://arxiv.org/html/2411.14474v1</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
