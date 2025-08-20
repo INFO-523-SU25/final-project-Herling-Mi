@@ -1,5 +1,5 @@
 {
-  "hash": "ea13f5177f3b92a1a6680532c1053f56",
+  "hash": "e4ce7154c9e3ba40562ab5dab1f0c5b9",
   "result": {
     "engine": "jupyter",
     "markdown": "---\ntitle: \"About\"\nformat: html\neditor: visual\njupyter: python3\n---\n\n\n\n\nThis project was developed by **The AudioPhiles** For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\n-   Team member 1: Yashi Mi - Data Science MS student - year 1.\n\n-   Team member 2: Nathan Herling - Data Science MS student - year 1.\n\n",
