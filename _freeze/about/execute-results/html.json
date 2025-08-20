@@ -1,10 +1,10 @@
 {
-  "hash": "bf64c1122284261b8a39c420c192e275",
+  "hash": "ea13f5177f3b92a1a6680532c1053f56",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"About\"\nformat: html\neditor: visual\njupyter: python3\n---\n\n\n\n\n\nThis project was developed by **\\[Team Name\\]** For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\n-   Team member 1: Yashi Mi - Data Science MS student - year 1.\n\n-   Team member 2: Nathan Herling - Data Science MS student - year 1.\n\n",
+    "markdown": "---\ntitle: \"About\"\nformat: html\neditor: visual\njupyter: python3\n---\n\n\n\n\nThis project was developed by **The AudioPhiles** For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\n-   Team member 1: Yashi Mi - Data Science MS student - year 1.\n\n-   Team member 2: Nathan Herling - Data Science MS student - year 1.\n\n",
     "supporting": [
-      "about_files\\figure-html"
+      "about_files"
     ],
     "filters": [],
     "includes": {}

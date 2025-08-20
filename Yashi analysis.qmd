@@ -1,21 +1,21 @@
+---
+title: "Yashi Analysis"
+format:
+  html:
+    code-fold: false        # Show code by default
+    code-copy: true         # Enable copy button for code blocks
+execute:
+  echo: true               # Globally show code unless overridden
+jupyter: python3
+---
+
+## 1. Data Loading & Overview
+
+```{python}
+#| label: data-loading
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from pandas.plotting import scatter_matrix
 
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.feature_selection import SelectKBest, f_regression
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from sklearn.model_selection import train_test_split, StratifiedKFold, cross_validate
-from sklearn.decomposition import PCA
-from sklearn.linear_model import LogisticRegression, Ridge, RidgeCV, LassoCV
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score, mean_squared_error, r2_score, make_scorer, precision_score, recall_score, f1_score
-
-# Load the dataset
 df = pd.read_csv("_extra/_Audio_Files_/Yashi_s_Music/Y_audio_philes_final_features_mk1_filled_Yashi.csv")
 
 print(df.head())
@@ -23,12 +23,17 @@ print(df.info())
 print("Missing values per column:")
 print(df.isnull().sum())
 
-# Feature selection
+#| label: preprocessing
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
 df_non_feature = ["artist", "country", "language", "track_type"]
-df_number_feature = [c for c in df.select_dtypes(include=[np.number]).columns if c not in df_non_feature]
+df_number_feature = [
+  c for c in df.select_dtypes(include=[np.number]).columns 
+  if c not in df_non_feature
+]
 print("Numerical features used:", df_number_feature)
 
-# Standardize numerical features globally
+# Standardize numerical features
 scaler = StandardScaler()
 df[df_number_feature] = scaler.fit_transform(df[df_number_feature])
 
@@ -37,78 +42,84 @@ le = LabelEncoder()
 y_all = le.fit_transform(df["language"].astype(str))
 label_names = le.classes_
 
-# Define track_type groups
-track_type_all = {0: "complete_song", 1: "vocal_only", 2: "no_vocal"}
-track_type_specs = {name: (df["track_type"] == code) for code, name in track_type_all.items()}
-for name, mask in track_type_specs.items():
-    print(f"{name}: {int(mask.sum())} samples")
 
-# Set up Stratified K-Fold cross-validation
+#| label: track-type-distribution
+track_type_all = {0: "complete_song", 1: "vocal_only", 2: "no_vocal"}
+track_type_specs = {
+  name: (df["track_type"] == code) 
+  for code, name in track_type_all.items()
+}
+
+for name, mask in track_type_specs.items():
+  print(f"{name}: {int(mask.sum())} samples")
+
+#| label: model-comparison
+import numpy as np
+from sklearn.model_selection import StratifiedKFold, cross_validate
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, f1_score, make_scorer
+)
+
 k = 5
 skf = StratifiedKFold(n_splits=k, shuffle=True, random_state=42)
 
-# Define models
 models = {
-    "LogReg": LogisticRegression(max_iter=500, class_weight="balanced", random_state=42),
-    "RandomForest": RandomForestClassifier(
-        n_estimators=400, class_weight="balanced_subsample", random_state=42, n_jobs=-1
-    ),
-    "SVM_linear": SVC(kernel="linear", class_weight="balanced", random_state=42),
+  "LogReg": LogisticRegression(max_iter=500, class_weight="balanced", random_state=42),
+  "RandomForest": RandomForestClassifier(
+      n_estimators=400, class_weight="balanced_subsample", random_state=42, n_jobs=-1
+  ),
+  "SVM_linear": SVC(kernel="linear", class_weight="balanced", random_state=42),
 }
 
-# Define scoring dictionary with exact metric names
 scoring = {
-    "accuracy": make_scorer(accuracy_score),
-    "precision": make_scorer(precision_score, average="macro"),
-    "recall": make_scorer(recall_score, average="macro"),
-    "f1": make_scorer(f1_score, average="macro"),
+  "accuracy": make_scorer(accuracy_score),
+  "precision": make_scorer(precision_score, average="macro"),
+  "recall": make_scorer(recall_score, average="macro"),
+  "f1": make_scorer(f1_score, average="macro"),
 }
 
-rows = []
+results = []
 
-# Model evaluation loop
-for track_type_code, ablation_name in track_type_all.items():
-    mask = df["track_type"] == track_type_code
-    df_eval = df.loc[mask].reset_index(drop=True)
+for code, name in track_type_all.items():
+  df_eval = df.loc[df["track_type"] == code].reset_index(drop=True)
+  X = df_eval[df_number_feature]
+  y = le.transform(df_eval["language"].astype(str))
+  
+  for model_name, clf in models.items():
+    cv = cross_validate(
+      clf, X, y, cv=skf, scoring=scoring, n_jobs=1, return_train_score=False
+    )
+    metrics = {metric: np.mean(cv[f"test_{metric}"]) for metric in scoring}
+    results.append({
+      "track_type": name,
+      "model": model_name,
+      **metrics
+    })
+    print(
+      f"[{name} - {model_name}] "
+      f"Acc={metrics['accuracy']:.3f} | "
+      f"Prec={metrics['precision']:.3f} | "
+      f"Rec={metrics['recall']:.3f} | "
+      f"F1={metrics['f1']:.3f}"
+    )
 
-    X = df_eval[df_number_feature].copy()
-    y = le.transform(df_eval["language"].astype(str))
+#| label: final-model-training
+final_ablation = "vocal_only"
+final_model_name = "SVM_linear"
+print(f"[Final model] Ablation = {final_ablation} | Model = {final_model_name}")
 
-    for name, clf in models.items():
-        # Use skf and n_jobs=1 to avoid multiprocessing errors
-        cv_results = cross_validate(
-            clf,
-            X,
-            y,
-            cv=skf,
-            scoring=scoring,
-            n_jobs=1,
-            return_train_score=False,
-        )
-        acc = np.mean(cv_results["test_accuracy"])
-        prec = np.mean(cv_results["test_precision"])
-        rec = np.mean(cv_results["test_recall"])
-        f1 = np.mean(cv_results["test_f1"])
-        rows.append({
-            "ablation": ablation_name,
-            "model": name,
-            "acc": acc,
-            "prec": prec,
-            "rec": rec,
-            "f1": f1,
-        })
-        print(f"[{ablation_name} - {name}] Acc={acc:.3f} | Prec={prec:.3f} | Rec={rec:.3f} | F1={f1:.3f}")
-
-# Final model selection
-chosen_ablation = "vocal_only"
-chosen_model = "SVM_linear"
-print(f"[Final model] Ablation = {chosen_ablation} | Model = {chosen_model}")
-
-df_best = df.loc[track_type_specs[chosen_ablation]].reset_index(drop=True)
-X_best = df_best[df_number_feature].copy()
+df_best = df.loc[track_type_specs[final_ablation]].reset_index(drop=True)
+X_best = df_best[df_number_feature]
 y_best = le.transform(df_best["language"].astype(str))
 
 final_clf = SVC(kernel="linear", class_weight="balanced", random_state=42)
 final_clf.fit(X_best, y_best)
 
-print(f"[Final Train] Done on {chosen_ablation} - {chosen_model} | n_samples = {len(df_best)}")
+print(
+  f"[Final Train] Done on {final_ablation} - {final_model_name} | "
+  f"n_samples = {len(df_best)}"
+)
+
