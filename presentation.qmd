@@ -165,7 +165,9 @@ plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
 ```
 
 <!--Slide 3-->
+
 ## 
+
 ```{=html}
 <div style="margin: -20px -60px -80px -80px; border: 5px solid midnightblue; border-radius: 10px; padding: 12px 20px; background-color: #fdfdfd; font-size: 0.75em; line-height: 1.3; width: 110%;">
 
@@ -187,48 +189,34 @@ plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
 
 :::: cell
 ::: {style="width: 125%; margin: -40px -140px 30px -160px; font-family: Arial, sans-serif; font-size: 0.65em; line-height: 1.2; border: 5px solid midnightblue; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;"}
-
 <h2 style="color: #007ACC; margin: -10px 0 -10px 0; text-align: center; font-size: 2.0em;">
 
 🔍 Feature Scraping
 
 </h2>
 
-+--------------------+---------------------------------------------------------------------------------------+
-| Feature            | Description                                                                           |
-+====================+=======================================================================================+
-| fundamental_freq   | Fundamental frequency (mean pitch via librosa.pyin)                                   |
-+--------------------+---------------------------------------------------------------------------------------+
-| freq_e_1           | Dominant spectral energy #1 (highest energy frequency bin)                            |
-+--------------------+---------------------------------------------------------------------------------------+
-| freq_e_2           | Dominant spectral energy #2 (2nd highest energy frequency bin)                        |
-+--------------------+---------------------------------------------------------------------------------------+
-| freq_e_3           | Dominant spectral energy #3 (3rd highest energy frequency bin)                        |
-+--------------------+---------------------------------------------------------------------------------------+
-| key                | Estimated musical key (C, C#, D, ..., B) via chroma features                          |
-+--------------------+---------------------------------------------------------------------------------------+
-| duration           | Length of audio in seconds                                                            |
-+--------------------+---------------------------------------------------------------------------------------+
-| zero_crossing_rate | Average zero crossing rate (signal sign changes)                                      |
-+--------------------+---------------------------------------------------------------------------------------+
-| mfcc_mean          | Mean of 13 MFCC coefficients (timbre features)                                        |
-+--------------------+---------------------------------------------------------------------------------------+
-| mfcc_std           | Standard deviation of MFCC coefficients                                               |
-+--------------------+---------------------------------------------------------------------------------------+
-| tempo              | Estimated tempo in beats per minute (BPM)                                             |
-+--------------------+---------------------------------------------------------------------------------------+
-| rms_energy         | Root mean square energy (loudness measure)                                            |
-+--------------------+---------------------------------------------------------------------------------------+
-| track_type         | Audio track type (0=full mix, 1=vocal only, 2=no vocals)                              |
-+--------------------+---------------------------------------------------------------------------------------+
-| mel_spectrogram    | Mel-scaled spectrogram representing frequency content over time (human hearing range) |
-+--------------------+---------------------------------------------------------------------------------------+
+| Feature | Description |
+|-----------------|-------------------------------------------------------|
+| fundamental_freq | Fundamental frequency (mean pitch via librosa.pyin) |
+| freq_e_1 | Dominant spectral energy #1 (highest energy frequency bin) |
+| freq_e_2 | Dominant spectral energy #2 (2nd highest energy frequency bin) |
+| freq_e_3 | Dominant spectral energy #3 (3rd highest energy frequency bin) |
+| key | Estimated musical key (C, C#, D, ..., B) via chroma features |
+| duration | Length of audio in seconds |
+| zero_crossing_rate | Average zero crossing rate (signal sign changes) |
+| mfcc_mean | Mean of 13 MFCC coefficients (timbre features) |
+| mfcc_std | Standard deviation of MFCC coefficients |
+| tempo | Estimated tempo in beats per minute (BPM) |
+| rms_energy | Root mean square energy (loudness measure) |
+| track_type | Audio track type (0=full mix, 1=vocal only, 2=no vocals) |
+| mel_spectrogram | Mel-scaled spectrogram representing frequency content over time (human hearing range) |
 :::
 ::::
 
 ------------------------------------------------------------------------
 
 <!--Slide 5 -->
+
 ```{=html}
 <div>
   <div style="text-align: center; margin-bottom: 16px;">
@@ -256,43 +244,44 @@ plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
   </div>
 </div>
 ```
+
 ------------------------------------------------------------------------
 
 <!--Slide 6 -->
 
-<div style="text-align: center; margin-bottom: 12px;">
-  <h4>Evaluation Results</h4>
-</div>
+::: {style="text-align: center; margin-bottom: 12px;"}
+<h4>Evaluation Results</h4>
+:::
 
 :::: cell
 ::: {style="width: 120%; margin: 20px -140px 30px -120px; font-family: Arial, sans-serif; font-size: 0.65em; line-height: 1.2; border: 2px solid midnightblue; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;"}
-
 <h2 style="color: #007ACC; margin: 0 0 8px 0; text-align: center; font-size: 1.2em;">
+
 Model Performance – Ablation Study
+
 </h2>
 
-| Ablation      | Model          | Accuracy | Precision | Recall | F1   |
-|---------------|---------------|---------|-----------|-------|------|
-| complete_song | LogReg        | 0.399   | 0.398     | 0.447 | 0.387|
-| complete_song | RandomForest  | 0.626   | 0.469     | 0.410 | 0.401|
-| complete_song | SVM_linear    | 0.432   | 0.443     | 0.504 | 0.427|
-| vocal_only    | LogReg        | 0.560   | 0.531     | 0.567 | 0.509|
-| vocal_only    | RandomForest  | 0.552   | 0.426     | 0.404 | 0.385|
-| vocal_only    | SVM_linear    | 0.544   | 0.542     | 0.583 | 0.514|
-| no_vocal      | LogReg        | 0.333   | 0.371     | 0.364 | 0.316|
-| no_vocal      | RandomForest  | 0.577   | 0.436     | 0.349 | 0.328|
-| no_vocal      | SVM_linear    | 0.366   | 0.418     | 0.411 | 0.347|
-| **Column Min**| -             | 0.333   | 0.371     | 0.349 | 0.316|
-| **Column Max**| -             | 0.626   | 0.542     | 0.583 | 0.514|
-
+| Ablation       | Model        | Accuracy | Precision | Recall | F1    |
+|----------------|--------------|----------|-----------|--------|-------|
+| complete_song  | LogReg       | 0.399    | 0.398     | 0.447  | 0.387 |
+| complete_song  | RandomForest | 0.626    | 0.469     | 0.410  | 0.401 |
+| complete_song  | SVM_linear   | 0.432    | 0.443     | 0.504  | 0.427 |
+| vocal_only     | LogReg       | 0.560    | 0.531     | 0.567  | 0.509 |
+| vocal_only     | RandomForest | 0.552    | 0.426     | 0.404  | 0.385 |
+| vocal_only     | SVM_linear   | 0.544    | 0.542     | 0.583  | 0.514 |
+| no_vocal       | LogReg       | 0.333    | 0.371     | 0.364  | 0.316 |
+| no_vocal       | RandomForest | 0.577    | 0.436     | 0.349  | 0.328 |
+| no_vocal       | SVM_linear   | 0.366    | 0.418     | 0.411  | 0.347 |
+| **Column Min** | \-           | 0.333    | 0.371     | 0.349  | 0.316 |
+| **Column Max** | \-           | 0.626    | 0.542     | 0.583  | 0.514 |
 :::
-:::: 
+::::
 
-<!--Slide 7 -->
-------------------------------------------------------------------------
-<div style="text-align: center; margin-top: -40px; margin-right: 10px; margin-bottom: 30px; margin-left: 5px;">
-  <h4>F1 (macro) comparison across ablations and models</h4>
-</div>
+## <!--Slide 7 -->
+
+::: {style="text-align: center; margin-top: -40px; margin-right: 10px; margin-bottom: 30px; margin-left: 5px;"}
+<h4>F1 (macro) comparison across ablations and models</h4>
+:::
 
 ```{python}
 #| echo: false
@@ -328,9 +317,11 @@ ax.set_ylabel("F1 (macro)")
 ax.set_title("F1 (macro) by Track Type and Model")
 plt.show()
 ```
+
 <!--Slide 8 -->
 
 ## 📌 Question 1-Summary
+
 ```{=html}
 <div style="font-size: 30px; line-height: 1.4;">
   <ul>
@@ -343,7 +334,7 @@ plt.show()
     <li><strong>Results</strong>:
       <ul>
         <li>Best model = <strong>Linear SVM</strong> trained on <strong>vocal_only</strong> data.</li>
-        <li>Achieved ~80% performance across all metrics.</li>
+        <li>Achieved ~50% performance across all metrics.</li>
       </ul>
     </li>
     <li><strong>Conclusion</strong>:
@@ -372,7 +363,7 @@ Q2 (A) Results - Nathan graphs? Learning Curve, ROC, any hyperparameter optimiza
 
 ## 
 
-Q2 (A) Results  - Nathan Results (% scores) Validation methods.
+Q2 (A) Results - Nathan Results (% scores) Validation methods.
 
 <!--Slide 12 -->
 
@@ -380,14 +371,14 @@ Q2 (A) Results  - Nathan Results (% scores) Validation methods.
 
 Q2 (B) Results - Nathan. Summarize - what you did/results.
 
-
 <!--Slide 13 -->
+
 ## 
+
 Q2 (B) Results \[3/3\] - Nathan. Summarize - what you did/results.
 
-
-
 <!--Slide 14 -->
+
 ## 
 
 Q2 Summary - Nathan
@@ -399,11 +390,15 @@ Q2 Summary - Nathan
 Full Summary - Nathan talk about both question findings.
 
 <!--Slide 16 -->
+
 ## 
+
 ::: {.banner-container style="margin-bottom: 30px; margin-left: -130px;"}
 ![](images/banner_mk2.png){.banner-image style="max-width: 100%; height: auto;"}
 :::
+
 <!-- Parent container -->
+
 ```{=html}
 <div style="
     display: flex;
