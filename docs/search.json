@@ -403,7 +403,7 @@
     "href": "presentation.html#question-1-summary",
     "title": "",
     "section": "📌 Question 1-Summary",
-    "text": "📌 Question 1-Summary\n\n  \n    What we did:\n      \n        Designed a supervised ML pipeline with feature scaling, label encoding, stratified CV.\n        Evaluated three classifiers on different track-type subsets.\n      \n    \n    Results:\n      \n        Best model = Linear SVM trained on vocal_only data.\n        Achieved ~80% performance across all metrics.\n      \n    \n    Conclusion:\n      \n        Vocal features are sufficient to classify language with strong accuracy.\n        Next: expand dataset, apply hyperparameter optimization, and test on external songs."
+    "text": "📌 Question 1-Summary\n\n  \n    What we did:\n      \n        Designed a supervised ML pipeline with feature scaling, label encoding, stratified CV.\n        Evaluated three classifiers on different track-type subsets.\n      \n    \n    Results:\n      \n        Best model = Linear SVM trained on vocal_only data.\n        Achieved ~50% performance across all metrics.\n      \n    \n    Conclusion:\n      \n        Vocal features are sufficient to classify language with strong accuracy.\n        Next: expand dataset, apply hyperparameter optimization, and test on external songs."
   },
   {
     "objectID": "presentation.html#section-39",
