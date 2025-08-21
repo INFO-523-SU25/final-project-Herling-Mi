@@ -18,21 +18,48 @@ execute:
 jupyter: python3
 ---
 
+
+## Python libraries
+
+```{python}
+#| label: load-pkgs
+#| message: false
+#| echo: false
+import os
+import json
+import subprocess
+import numpy as np
+import pandas as pd
+
+# === Machine Learning & Evaluation ===
+import sklearn  # Models, preprocessing, cross-validation, metrics
+import lightgbm as lgb  # Gradient boosting
+import xgboost as xgb  # Gradient boosting
+#import surprise  # Consider removing if problematic, see alternatives
+
+# === Deep Learning Frameworks ===
+import torch  # PyTorch (used with Demucs, CNNs, etc.)
+import tensorflow as tf  # TensorFlow
+from tensorflow import keras  # Keras API
+
+# === Audio Processing ===
+import librosa  # Feature extraction (ZCR, RMS, tempo, etc.)
+import torchaudio  # Audio I/O and transformations with PyTorch
+from demucs.apply import apply_model
+from demucs.pretrained import get_model  # Vocal separation
+
+# === Visualization ===
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# === Display & Formatting (for .qmd / Jupyter) ===
+from IPython.display import display, HTML
+
+```
+
 ## Abstract
 
-Music recommendation systems increasingly rely on machine learning to capture the complexity of user preferences, yet existing models struggle to account for language diversity and nuanced audio features in songs. This project applies signal processing, vocal separation (DEMUCS library), and machine learning techniques to classify song languages and integrate them with genre metadata for improved personalization. By combining automated data collection with advanced audio analysis, the system provides a foundation for smarter, more inclusive recommendation platforms that enhance user experience across diverse musical contexts. The project first applied Random Forests and Gaussian Mixture Models with 5-fold cross-validation for audio genre identification, then advanced to CNNs on spectrogram heat maps validated via a train/validation/test split with early stopping, evaluated through accuracy, precision, recall, F1-score, confusion matrices, and ROC curves.
-
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
-
-(Nathan) - sentence about results.
-
-::: {style="background-color: orange; color: black; margin: 0px 0px 0px 0px;"}
-<b>By applying statistical and time-frequency features to separated vocal and instrumental tracks, we evaluated the feasibility of machine learning models in song language recognition. Classical approaches such as Logistic Regression, Random Forests, and SVMs were trained with 5-fold cross-validation. Results showed that vocal-only features provided the strongest signals for classification. The analysis demonstrated that language prediction from raw audio is viable when leveraging targeted feature engineering.</b>
-:::
-
-(Yashi) - sentence about Part 2. <br>(Yashi) - sentence about results.
+Music recommendation systems increasingly rely on machine learning to capture the complexity of user preferences, yet existing models struggle to account for language diversity and nuanced audio features in songs. This project applies signal processing, vocal separation (DEMUCS library), and machine learning techniques to develop a framework for classifying both music genres and song languages, integrating these predictions with genre metadata for improved personalization. By combining automated data collection with advanced audio analysis, the system provides a foundation for smarter, more inclusive recommendation platforms that enhance user experience across diverse musical contexts. The focus of the project was: langauge and genre recognition. For language recognition, classical models—including Logistic Regression, Random Forests, and SVMs—were trained on extracted statistical and time-frequency features using 5-fold cross-validation. These models showed modest predictive performance, with accuracy, precision, recall, and F1-scores generally ranging from 10–60%, while vocal features provided stronger signals than instrumental components. Next, KNNs and Random Forests were applied with 'genre' as the target variable. Finally, CNNs were applied to Mel spectrogram images—both grayscale and color scale—with train/validation/test splits, early stopping, and hyperparameter sweeps to capture complex audio patterns. While all models had limited performance, CNNs have strong theoretical potential, as reported in the literature, and improved recognition compared to classical models, highlighting the promise of deep learning and feature engineering for future music recommendation and language identification systems.
 
 ## Introduction
 
@@ -40,110 +67,229 @@ Music genre classification is a central task in the field of music information r
 
 ## A note on spectographic features of <code>.mp3</code> vs. <code>.wav</code>
 
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
+Initially, it was assumed that the typical size difference between .mp3 and .wav files would reflect meaningful differences in their spectral properties. However, analysis revealed that the differences were minimal, leading us to abandon the idea of using the two file types as comparative baselines for our models. As shown in Figure 1, the typical similarity between <code>.wav</code> and <code>.mp3</code> files exceeds 98%, rendering the expectation of differing training results between the two data types a moot point.
 
-Here i'll add a graph, and discuss who despite the large disparity in file size the two file types are nearly similar in audio data. Making it not a good research path to compare .mp3 and .wav files.
+<div style="margin: 20px 40px; text-align: center;">
+
+<img src="images/mp3_v_wav.png" 
+     alt="MP3 vs WAV" 
+     style="max-width: 80%; border-radius: 8px;">
+
+<p style="margin-top: 10px; font-size: 14px; color: #444;">
+Figure 1: Frequency histogram comparison between MP3 and WAV audio files.
+</p>
+
+</div>
+
+## A note on project software
+It's generally easier and faster to run Python scrips separately and use the results in the discussion of the results. All scripts used are stored in:<br>
+<code>**Herling-Mi\_extra\0_mL_scripts\0_p1**</code><br>
+<code>**Herling-Mi\_extra\0_mL_scripts\0_p2**</code><br>
 
 ## Questions
 
 ### 1. Language Recognition with Separated Vocal & Audio Tracks
 
-#### <b>initial formulation</b>
+#### <b>Initial Problem Formulation</b>
 
 How can we leverage **statistical** and **time-frequency features** extracted from separated vocal and audio tracks to build effective language recognition models? Specifically, how can traditional machine learning methods — ranging from **classical classifiers** on simple statistical summaries to **Gaussian Mixture Models** on richer time-frequency features — be applied in this context?
 
 -   What are the key **benefits** and **limitations** of these approaches?\
 -   How can **careful feature engineering**, **feature integration**, and **thorough model evaluation** improve the accuracy and robustness of language recognition systems?\
--   How do model results compare and contrast when using **.wav** files versus **.mp3** files?
+-   How do model results compare and contrast when using <code>**.wav**</code> files versus <code>**.mp3**</code> files?
 
-#### <b>secondary formulation</b>
+#### <b>Secondary Problem formulation</b>
 
-::: {style="background-color: orange; color: black; margin: 0px 0px 0px 0px;"}
-<b>From the initial formulation, we refined the question to specifically compare how different ablations of the audio track (complete song, vocal-only, and non-vocal) affect model performance.
+
+From the initial formulation, we refined the question to specifically compare how different ablations of the audio track (complete song, vocal-only, and non-vocal) affect model performance.
 
 -   How does model performance differ when predicting song language using features from complete songs, vocal-only tracks, and instrumental-only tracks?
 
 -   What are the relative strengths and limitations of classical machine learning models (Logistic Regression, Random Forest, SVM) when applied to language recognition?
 
-</b>
-:::
-
-From the initial problems statement - what did you change?
 
 ### 2. Recommendation Systems Using Audio Features & User Data
 
-#### <b>initial formulation</b>
+#### <b>Initial Problem Formulation</b>
 
 How can **user interaction data**, combined with basic track metadata and simple audio features, be used to build an effective recommendation system using **collaborative filtering** and traditional machine learning methods?
 
 -   Furthermore, how can **advanced audio features**, **dimensionality reduction**, and **clustering techniques** improve personalized recommendations by better capturing user preferences and track characteristics from both vocal and non-vocal components?\
--   How do recommendation model results compare and contrast when using **.wav** files versus **.mp3** files, considering the potential impact of audio quality and compression artifacts on feature extraction and recommendation performance?
+-   How do recommendation model results compare and contrast when using <code>**.wav**</code> files versus <code>**.mp3**</code> files, considering the potential impact of audio quality and compression artifacts on feature extraction and recommendation performance?
 
-#### <b>secondary formulation</b>
-
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
-
-From the initial problems statement - what did you change?
+#### <b>Secondary Problem Formulation</b>
+We abandoned the use of <code>.wav</code> versus <code>.mp3</code> formats for the reasons previously mentioned. Instead, the idea of using heat maps/spectrograms was discovered and pursued. A CNN was built for both grayscale and viridis-scale inputs. As will be discussed in the <b>Problem Analysis and Results</b> section, training outcomes were poor despite what initially seemed to be a solid approach. The current hypothesis is that the dataset is too small to produce a robust model, that the extracted song metrics are insufficient to support effective training, or a combination of both. The Likert scale—with options of 'Likert 2,' 'Likert 3,' and 'Likert 5'—was not employed, as it represents a second phase of recommendation by genre, contingent on reliable genre recognition.
 
 ## Dataset
 
 ### data provenance
 
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
+The data collection process involved several custom Python scripts designed to scrape and download the necessary information and audio files:
+
+<code>**artist_5_song_list_scrape.py**</code> — Retrieves the top five songs per artist from Google search results.
+
+<code>**artist_genre_scrape.py**</code> — Gathers genre metadata for each artist from public sources.
+
+<code>**artist_country_of_origin_scrape.py**</code> — Extracts the country of origin for each artist.
+
+<code>**audio_scrape_wav_mp3.py**</code> — Downloads audio files from YouTube links in WAV and MP3 formats.
+
+Together, these scripts automate the extraction of both audio data and relevant metadata to support training and evaluation of the recommendation system.
+
+<b>For question 1</b><br> 
+A total of 123 songs were scraped, each was turned into the triplicate of (1) complete song, (2) audio only (3) vocal only. Yielding 369 observations to work with. The complete extraction pipeline for question 1 was around 15 hours.
+
+<b>For question 2</b><br> 
+A total of 20 genres were examined, each with 10 example songs from relevant artists - yielding a set of 200 observations to work with. The complete extraction pipeline for question 2 was around 5 hours - due to the use of parallel threads in a reconfigured software file.
 
 ### software distriubtion
 
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
+Initially, the plan was to distribute a software package to both partners so they could each collect their song files and extract the data locally. However, due to the ambitious goals and the multifaceted software requirements needed to accomplish them, the team soon felt as if we were flying the plane while building it. Ultimately, one team member (Nathan) took responsibility for collecting the song file data and generating the features. These features were then distributed to other members, replacing the originally envisioned feature-extraction software suite.
+
+### data features
+
+In addition to the artist and song name, the features listed in Table 1 were scraped for each track. The final selection of features was guided as much by curiosity—‘I wonder what this will do’—as by deliberate planning. Research was done - but, until you try to build the model yourself you're not aware of what works under what condtions.
+
+:::: cell
+::: {style="width: 110%; margin: 0px -20px 30px -50px; font-family: Arial, sans-serif; font-size: 1.2em; line-height: 1.2; border: 5px solid midnightblue; border-radius: 8px; padding: 8px 12px; background-color: #fdfdfd; overflow-x: auto;"}
+<h2 style="color: #007ACC; margin: -10px 0 0px -20px; text-align: center; font-size: 2.0em;">
+🔍 Feature Scraping
+</h2>
+
+| Feature | Description |
+|-----------------|-------------------------------------------------------|
+| fundamental_freq | Fundamental frequency (mean pitch via librosa.pyin) |
+| freq_e_1 | Dominant spectral energy #1 (highest energy frequency bin) |
+| freq_e_2 | Dominant spectral energy #2 (2nd highest energy frequency bin) |
+| freq_e_3 | Dominant spectral energy #3 (3rd highest energy frequency bin) |
+| key | Estimated musical key (C, C#, D, ..., B) via chroma features |
+| duration | Length of audio in seconds |
+| zero_crossing_rate | Average zero crossing rate (signal sign changes) |
+| mfcc_mean | Mean of 13 MFCC coefficients (timbre features) |
+| mfcc_std | Standard deviation of MFCC coefficients |
+| tempo | Estimated tempo in beats per minute (BPM) |
+| rms_energy | Root mean square energy (loudness measure) |
+| track_type | Audio track type (0=full mix, 1=vocal only, 2=no vocals) |
+| mel_spectrogram | Mel-scaled spectrogram representing frequency content over time (human hearing range) |
 :::
+::::
+<p style="text-align:center; font-style:italic; margin-top:-20px;">
+Table 1: Extracted Audio Features
+</p>
 
-### data collection
 
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
+### data storge
 
-### data storage
+This <code>JSON</code> schema, as proposed in the original plan, was refactored as needed. The multiple pipeline components required to gather and merge the information made it more expedient to use a combination of the <code>.json</code> design and <code>.csv</code> files. Shown below is the main <code>.json</code> design used for the project.
 
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
+```{python}
+#| label: json-ex
+#| echo: false
+# Your JSON dict & display code here
+# Your JSON data as a Python dictionary
+node = {
+    "AudioFile": {
+        "yt_link": [],
+        "wav_link": [],
+        "mp3_link": []
+    },
+    "Region": ["America"],
+    "Data": {
+        "Artist": "Lady Gaga",
+        "Song Title": "",
+        "Genre": [],
+        "Mean (of features)": None,
+        "Variance": None,
+        "Skewness": None,
+        "Kurtosis": None,
+        "Zero Crossing Rate": None,
+        "RMS Energy": None,
+        "Loudness": None,
+        "Energy": None,
+        "Tempo": None,
+        "Danceability": None,
+        "Key / Key Name": "",
+        "Mode / Mode Name": "",
+        "Mel-Spectrogram": None,
+        "Duration (ms)": None
+    },
+}
 
-### graphs?
 
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
+json_str = json.dumps(node, indent=4)
+html_code = f"""
+<div style="max-height: 400px; overflow: auto; border: 1px solid #ccc; padding: 10px; background: #f9f9f9; white-space: pre-wrap; font-family: monospace;font-size: 11px;">
+{json_str}
+</div>
+"""
+display(HTML(html_code))
+```
 
-<br><b>.. any feature graphs I can think of...</b>
+
+## Data - Second Tier Features
+```{=html}
+<p>After the initial <code>.wav</code> data collection, the following '2nd tier' data were generated/collected:</p>
+<ul>
+  <li><code>.mp3</code></li>
+  <li>Separated vocal track</li>
+  <li>Separated audio track</li>
+  <li>Spectrogram data (viridis scale)</li>
+  <li>Spectrogram data (grey scale)</li>
+</ul>
+```
+
+The <code>Demucs</code> library turned out to be easy to use and very good at vocal and background track separation.
+Scripts that run `Demucs` using system commands—typically through Python’s `subprocess` or `os` libraries—offer a straightforward way to integrate audio separation tools into Python workflows while interacting with the operating system’s file structure and command-line utilities. In order to run files in parallel, a <code>main_script.py</code> capable of generating mulitple threads would call a <code>worker_script.py</code> such as the one below.
+
+```{python}
+#| label: ex_script_1
+#| message: false
+#| eval: false
+#| echo: true
+import os
+import subprocess
+
+# Path to your input audio file
+audio_file = r"~\Gloria_Gaynor_I_Will_Survive.wav"
+
+# Optional: check if file exists
+if not os.path.exists(audio_file):
+    raise FileNotFoundError(f"Audio file not found: {audio_file}")
+
+# Build the Demucs command
+# You can change --two-stems to 'drums' or 'bass' if needed
+command = [
+    "demucs",
+    "--two-stems=vocals",  # Extract vocals only
+    "--out", "demucs_output",  # Output folder
+    audio_file
+]
+
+# Run the command
+print("🔄 Running Demucs...")
+subprocess.run(command)
+
+print("✅ Separation complete. Check the 'demucs_output' folder for results.")
+
+```
+
+
+ 
 
 ## Team member workload
 
-::: {style="background-color: orange; color: black; margin: 0px 0px 0px 0px;"}
-<b>Our project workload followed a structured week-by-week workflow, with responsibilities distributed among team members. We began by finalizing and sharing the proposal, followed by the individual collection and organization of \~200 audio files per person. Nathan Herling led the processing and validation of metadata, while each member focused on building machine learning pipelines and conducting iterative testing. The project concluded with a collaborative effort on final model evaluation, report preparation, and presentation development.</b>
-:::
+Our project workload followed a structured week-by-week workflow as proposed in the initial proposal, with responsibilities distributed among team members. We began by finalizing and sharing the proposal, followed by the individual collection and organization of \~200 audio files per person. Nathan Herling led the processing and validation of metadata, while each member focused on building machine learning pipelines and conducting iterative testing. The project concluded with a collaborative effort on final model evaluation, report preparation, and presentation development.
 
-Just type 3-4 sentences about workload go off the proposal 'week work map/individual duties section' - but, put into into paragraph form.
 
 ## Problem analysis and results
 
 ### General
 
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
-
-Discuss what the original plan was, and what was done - in terms of easy, med problem design.
+Easy and medium paths, as proposed in the proposal morphed into multiple paths to tackle the problem, some bearing fruit, some not. In Q1, it could be argued that three easy paths were taken in an attempt to explore which may work better, and in Q2 two easy paths and a medium path were explored.
 
 ### Q1 - Yashi
 
-:::: {style="background-color: orange; color: black; margin: 0px 0px 0px 0px;"}
+
 <b>**How can we leverage audio features from separated vocal and instrumental tracks to improve language recognition in music?**
 
 **Data Collection:** The dataset consisted of \~200 audio files, preprocessed into three ablations: complete songs, vocal-only tracks, and instrumental-only tracks. Features included time-domain statistics (mean, variance, skewness, kurtosis).
@@ -207,7 +353,6 @@ Discuss what the original plan was, and what was done - in terms of easy, med pr
     plt.show()
     ```
 
-::: {style="background-color: orange; color: black; margin: 0px 0px 0px 0px;"}
 <b>**Results:**
 
 -   Vocal-only tracks: Provided the best classification signal, with SVM achieving \~0.51 macro F1, outperforming Random Forest and Logistic Regression.
@@ -215,32 +360,26 @@ Discuss what the original plan was, and what was done - in terms of easy, med pr
 -   Complete songs: Models achieved moderate performance (\~0.40 F1), reflecting a mixture of useful vocal cues diluted by instrumental content.
 
 -   Non_vocal tracks: Accuracy dropped to \~0.50 (random baseline), validating the expectation that language recognition requires vocal content.
-:::
-::::
 
-(1) restate question
-(2) data collection - data set size/composition (var types) Data was collected through a series of Python scripts. \[see slide 3\] You had an extra layer of feature extraction - removing vocal/instrumental tracts.
-(3) data processing - any PCA, correlation, imputation, outlier removal?
-(4) model selection - what models, why? (if any reason), what Python libraries did you use?
-(5) model validation - what metrics? why?
-(6) model evaluation - what metrics? why? **Note: the 'no vocal' track - behaved at about 50% accuracy - which is what you'd expect for a control group.**
-(7) future steps/recommendations
+- Future reommendations: larger data sets and more hyperparameter exploration
+
 
 ### Q2
 
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
+How can we leverage audio features to construct a machine learning model capable of genre recognition?
 
--   put any graphs in this section.
--   do you have learning curve, ROC curves? Feature importance graphs?
+- Data Collection:
 
-(1) restate question
-(2) data collection - data set size/composition (var types) Data was collected through a series of Python scripts. \[see slide 3\] You had an extra layer of feature extraction - removing vocal/instrumental tracts.
-(3) data processing - any PCA, correlation, imputation, outlier removal?
-(4) model selection - what models, why? (if any reason), what Python libraries did you use?
-(5) model validation - what metrics? why?
-(6) model evaluation - what metrics? why?
+- Data Processing:
+
+- Model Selection:
+
+- Model Validation:
+
+- Model Metrics
+
+
+
 (7) future steps/recommendations
 
 ## Results & Conclusion
