@@ -494,14 +494,14 @@
     "href": "index.html#video-links",
     "title": "Audio Alchemy",
     "section": "Video links",
-    "text": "Video links\n\nNathan #_to_Do"
+    "text": "Video links\n\n\n  poster=\"_extra/_images/data_group.png\"\n  \n  Your browser does not support the video tag."
   },
   {
     "objectID": "index.html#audio-player-demo",
     "href": "index.html#audio-player-demo",
     "title": "Audio Alchemy",
     "section": "Audio Player Demo",
-    "text": "Audio Player Demo\nA demo of the Ui/Ux audio player written for this project. First a few songs are scrolled through to demonstarate the functionality of ‘real time’ generation of dB v. freq. curves for .wav and .mp3. Next a song is played to demonstrat the ‘real time’ audio analysis with the spectrogram (heat map) feature.\n\n  \n  Your browser does not support the video tag."
+    "text": "Audio Player Demo\nA demo of the Ui/Ux audio player written for this project. First a few songs are scrolled through to demonstarate the functionality of ‘real time’ generation of dB v. freq. curves for .wav and .mp3. Next a song is played to demonstrat the ‘real time’ audio analysis with the spectrogram (heat map) feature.\n\n  \n    Your browser does not support the video tag."
   },
   {
     "objectID": "index.html#team-member-workload",

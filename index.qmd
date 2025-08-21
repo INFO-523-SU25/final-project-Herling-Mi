@@ -795,19 +795,26 @@ To address these goals, the team experimented with a variety of models. Classica
 
 
 ## Video links
-
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
+```{=html}
+<div class="video-container" style="text-align:center;">
+<video width="640" height="360" controls>
+  poster="_extra/_images/data_group.png"
+  <source src="_extra/523_proj_video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</div>
+```
 
 ## Audio Player Demo
 
 A demo of the Ui/Ux audio player written for this project. First a few songs are scrolled through to demonstarate the functionality of 'real time' generation of dB v. freq. curves for <code>.wav</code> and <code>.mp3</code>. Next a song is played to demonstrat the 'real time' audio analysis with the spectrogram (heat map) feature.
 ```{=html}
-<video width="640" height="360" controls>
-  <source src="_extra/2025-08-20 19-39-35.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<div class="video-container" style="text-align:center;">
+  <video width="640" height="360" controls 
+    <source src="_extra/2025-08-20 19-39-35.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
 ```
 
 ## sources
