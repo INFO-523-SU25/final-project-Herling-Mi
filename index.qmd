@@ -119,6 +119,7 @@ How can **user interaction data**, combined with basic track metadata and simple
 
 #### <b>Secondary Problem Formulation</b>
 We abandoned the use of <code>.wav</code> versus <code>.mp3</code> formats for the reasons previously mentioned. Instead, the idea of using heat maps/spectrograms was discovered and pursued. A CNN was built for both grayscale and viridis-scale inputs. As will be discussed in the <b>Problem Analysis and Results</b> section, training outcomes were poor despite what initially seemed to be a solid approach. The current hypothesis is that the dataset is too small to produce a robust model, that the extracted song metrics are insufficient to support effective training, or a combination of both. The Likert scale—with options of 'Likert 2,' 'Likert 3,' and 'Likert 5'—was not employed, as it represents a second phase of recommendation by genre, contingent on reliable genre recognition. 
+
 ## Dataset
 
 ### data provenance
@@ -237,8 +238,6 @@ display(HTML(html_code))
 </ul>
 ```
 
-The <code>Demucs</code> library turned out to be easy to use and very good at vocal and background track separation.
-Scripts that run `Demucs` using system commands—typically through Python’s `subprocess` or `os` libraries—offer a straightforward way to integrate audio separation tools into Python workflows while interacting with the operating system’s file structure and command-line utilities. In order to run files in parallel, a <code>main_script.py</code> capable of generating mulitple threads would call a <code>worker_script.py</code> such as the one below.
 
 Below are two representatives of spectrogram feature extraction.
 ```{=html}
@@ -257,6 +256,8 @@ Below are two representatives of spectrogram feature extraction.
 ```
 
 
+The <code>Demucs</code> library turned out to be easy to use and very good at vocal and background track separation.
+Scripts that run `Demucs` using system commands—typically through Python’s `subprocess` or `os` libraries—offer a straightforward way to integrate audio separation tools into Python workflows while interacting with the operating system’s file structure and command-line utilities. In order to run files in parallel, a <code>main_script.py</code> capable of generating mulitple threads would call a <code>worker_script.py</code> such as the one below.
 ```{python}
 #| label: ex_script_1
 #| message: false
@@ -303,7 +304,7 @@ Our project workload followed a structured week-by-week workflow as proposed in 
 
 Easy and medium paths, as proposed in the proposal morphed into multiple paths to tackle the problem, some bearing fruit, some not. In Q1, it could be argued that three easy paths were taken in an attempt to explore which may work better, and in Q2 two easy paths and a medium path were explored.
 
-### Q1 - Yashi
+### Q1
 
 
 <b>**How can we leverage audio features from separated vocal and instrumental tracks to improve language recognition in music?**
@@ -444,7 +445,7 @@ Three supervised machine learning methods were chosen: (1) Knn [classic baseline
 
   <div style="text-align: center; margin-right: 20px;">
     <img src="_extra/0_mL_scripts/0_p2/0_knn/hyper_param_sweep.png" alt="Hyperparameter Sweep" style="width: 130%; height: auto;">
-    <p>Hyperparameter Swee</p>
+    <p>Hyperparameter Sweep</p>
   </div>
 
   <div style="text-align: center; margin-right: 50px;">
@@ -784,7 +785,7 @@ Three supervised machine learning methods were chosen: (1) Knn [classic baseline
   <p><em>Note:</em> Epoch 2 was the optimal epoch from the hyperparameter sweep. A postulated fix is to use a larger dataset to improve generalization and model performance.</p>
 </div>
 ```
-<br>(7) future steps/recommendations
+<br> 
 
 ## Results & Conclusion
 

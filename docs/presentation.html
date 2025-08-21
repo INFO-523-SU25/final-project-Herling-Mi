@@ -514,37 +514,304 @@ F1 (macro) comparison across ablations and models
 </section>
 <section id="section-4" class="slide level2">
 <h2></h2>
-<p>Q2 (A/B) Overview - Nathan describe your question and how you implemented mL [libraries, validation]</p>
+<div style="margin: -50px 40px 0px 40px;">
+  <div style="text-align: center; margin-bottom: 16px;">
+    <h4>📊 <strong>Research Question 2 – Genre Recognition</strong></h4>
+  </div>
+
+  <div style="display: flex; gap: 80px; font-size: 20px; line-height: 1.2;">
+    <!-- Left Column -->
+    <div style="flex: 1;">
+      <ul>
+        <li><strong>Goal</strong>: Classify songs by <strong>Genre</strong> using audio-derived numerical features.</li>
+        <li><strong>Dataset</strong>: Extracted features from 200 tracks, annotated with artist, country, language, and track type.</li>
+        <li><strong>Preprocessing</strong>:
+          <ul>
+            <li>Standardized all numeric features.</li>
+            <li>Encoded target variable (genre) with LabelEncoder.</li>
+          </ul>
+        </li>
+        <li><strong>Validation</strong>:
+          <ul>
+            <li>Applied <strong>Stratified K-Fold (k=5)</strong> cross-validation.</li>
+            <li>Used multiple metrics: Accuracy, Precision, Recall, and F1-score.</li>
+          </ul>
+        </li>
+        <li><strong>Hyperparameter Tuning</strong>:
+          <ul>
+            <li>Performed grid search across different CNN configurations.</li>
+            <li>Tuned parameters: convolution filters, kernel size, dropout, and learning rate.</li>
+            <li>Selected the combination yielding the best cross-validation performance.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right Column -->
+    <div style="flex: 1;">
+      <ul>
+        <li><strong>Models</strong>: Knn, Random Forest, CNN.</li>
+        <li><strong>Results</strong>:
+          <ul>
+            <li>Maximum accuracy across models: ~0.60 (Random Forest).</li>
+            <li>Precision and F1-scores were generally low, indicating difficulty distinguishing genres.</li>
+          </ul>
+        </li>
+        <li><strong>Interpretation</strong>:
+          <ul>
+            <li>Models are learning some patterns but struggling with feature overlap between genres.</li>
+            <li>Random Forest performs slightly better due to ensemble averaging, but overall results remain modest.</li>
+          </ul>
+        </li>
+        <li><strong>Limitations &amp; Next Steps</strong>:
+          <ul>
+            <li>Dataset is small; increasing the number of tracks could improve generalization.</li>
+            <li>Consider richer feature extraction (e.g., spectrogram-based CNNs) for better genre discrimination.</li>
+            <li>Hyperparameter tuning and data augmentation could further boost performance.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
 <!--Slide 10 -->
 </section>
 <section id="section-5" class="slide level2">
 <h2></h2>
-<p>Q2 (A) Results - Nathan graphs? Learning Curve, ROC, any hyperparameter optimization?</p>
+<!-- Slide Header -->
+<h2 style="text-align: center; font-size: 36px; margin-bottom: 20px;margin-top: -30px">Knn Stats</h2>
+
+<!-- Main Container -->
+<div style="display: flex; flex-direction: column; gap: 20px;"> <!-- smaller gap -->
+
+  <!-- Row 1: Graphs Side by Side -->
+  <div style="display: flex; flex-direction: row; gap: 10px; justify-content: flex-start;margin-left: -120px">
+    <img src="_extra/0_mL_scripts/0_p2/0_knn/hyper_param_sweep.png" alt="Hyperparameter Sweep" style="width: 50%; height: auto;">
+    <img src="_extra/0_mL_scripts/0_p2/0_knn/learning_curve.png" alt="Learning Curve Knn" style="width: 50%; height: auto;">
+  </div>
+
+  <!-- Row 2: Metrics Table -->
+  <div style="border: 2px solid #444; border-radius: 15px; padding: 20px; 
+              box-shadow: 2px 2px 10px rgba(0,0,0,0.2); text-align: left; max-width: 800px; margin-top: -10px;">
+    <h4 style="font-size: 25px; margin-bottom: 10px;">Metric / Score</h4>
+    
+<table class="caption-top" data-quarto-postprocess="true" data-border="0" data-cellpadding="3" data-cellspacing="0" style="font-size: 20px;">
+<tbody>
+<tr class="odd">
+<td>Test Precision (weighted)</td>
+<td>0.1017</td>
+</tr>
+<tr class="even">
+<td>Test F1 Score (weighted)</td>
+<td>0.1117</td>
+</tr>
+<tr class="odd">
+<td>LOOCV Accuracy</td>
+<td>0.1350</td>
+</tr>
+</tbody>
+</table>
+
+  </div>
+
+</div>
 <!--Slide 11 -->
 </section>
 <section id="section-6" class="slide level2">
 <h2></h2>
-<p>Q2 (A) Results - Nathan Results (% scores) Validation methods.</p>
+<!-- Slide Header -->
+<h2 style="text-align: center; font-size: 36px; margin-bottom: 20px;margin-top: -30px">Random Forest Stats</h2>
+
+<!-- Main Container -->
+<div style="display: flex; flex-direction: column; gap: 20px;"> <!-- smaller gap -->
+
+  <!-- Row 1: Graphs Side by Side -->
+  <div style="display: flex; flex-direction: row; gap: 10px; justify-content: flex-start;margin-left: -120px">
+    <img src="_extra\0_mL_scripts\0_p2\0_Random_Forest\RF_HP_Sweep_graph.png" alt="Hyperparameter Sweep" style="width: 50%; height: auto;">
+    <img src="_extra\0_mL_scripts\0_p2\0_Random_Forest\RF_LC.png" alt="Learning Curve Random Forest" style="width: 50%; height: auto;">
+  </div>
+
+  <!-- Row 2: Metrics Table -->
+<div style="border: 2px solid #444; border-radius: 15px; padding: 20px; 
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2); text-align: left; max-width: 800px; margin-top: -10px;">
+  <h4 style="font-size: 25px; margin-bottom: 10px;">Metric / Score</h4>
+  
+<table class="caption-top" data-quarto-postprocess="true" data-border="1" data-cellpadding="5" data-cellspacing="0" style="border-collapse: collapse; font-size: 20px; text-align: left;">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Metric</th>
+<th data-quarto-table-cell-role="th">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accuracy</td>
+<td>0.925</td>
+</tr>
+<tr class="even">
+<td>Precision</td>
+<td>0.927554</td>
+</tr>
+<tr class="odd">
+<td>F1 Score</td>
+<td>0.924728</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
 <!--Slide 12 -->
 </section>
 <section id="section-7" class="slide level2">
 <h2></h2>
-<p>Q2 (B) Results - Nathan. Summarize - what you did/results.</p>
+<!-- Main Container -->
+<div style="display: flex; flex-direction: column; gap: 20px;"> <!-- smaller gap -->
+<h2 style="text-align: center; font-size: 36px; margin-bottom: 20px;margin-top: -30px">CNN - Grey stats</h2>
+  <!-- Row 1: Graphs Side by Side -->
+  <div style="display: flex; flex-direction: row; gap: 10px; justify-content: flex-start; margin-left: -120px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_grey_Mel_Train\HP_sweep.png" alt="Hyperparameter Sweep" style="width: 50%; height: auto;">
+    <img src="_extra\0_mL_scripts\0_p2\0_grey_Mel_Train\lc_grey_.png" alt="Learning Curve CNN Grey" style="width: 50%; height: auto;">
+  </div>
+
+  <!-- Row 2: Table + Image Side by Side -->
+  <div style="display: flex; flex-direction: row; gap: 30px; align-items: flex-start; justify-content: center; margin-top: -10px;">
+
+    <!-- Metrics Table -->
+    <div style="border: 2px solid #444; border-radius: 15px; padding: 20px; 
+                box-shadow: 2px 2px 10px rgba(0,0,0,0.2); text-align: left; max-width: 400px;">
+      <h4 style="font-size: 25px; margin-bottom: 10px;">Metric / Score</h4>
+      
+<table class="caption-top" data-quarto-postprocess="true" data-border="1" data-cellpadding="5" data-cellspacing="0" style="border-collapse: collapse; font-size: 20px; text-align: left;">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Metric</th>
+<th data-quarto-table-cell-role="th">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accuracy</td>
+<td>0.1000</td>
+</tr>
+<tr class="even">
+<td>Precision</td>
+<td>0.0100</td>
+</tr>
+<tr class="odd">
+<td>F1 Score</td>
+<td>0.0182</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    <!-- Image with Caption -->
+    <div style="text-align: center;">
+      <img src="_extra\0_mL_scripts\0_p2\0_grey_Mel_Train\Queen_We Will Rock You_gray.png" alt="Example Grey Scale Spectrogram" style="max-width: 300px; height: auto; border-radius: 10px; box-shadow: 2px 2px 8px rgba(0,0,0,0.2);">
+      <p style="font-size: 16px; margin-top: 8px;">Example Grey-Scale Spectrogram</p>
+    </div>
+
+  </div>
+
+</div>
 <!--Slide 13 -->
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
-<p>Q2 (B) Results [3/3] - Nathan. Summarize - what you did/results.</p>
+<!-- Slide Header -->
+<h2 style="text-align: center; font-size: 36px; margin-bottom: 20px; margin-top: -30px;">
+  CNN - Color Scale - Stats
+</h2>
+
+<!-- Main Container -->
+<div style="display: flex; flex-direction: column; gap: 20px;">
+
+  <!-- Row 1: Graphs Side by Side -->
+  <div style="display: flex; flex-direction: row; gap: 10px; justify-content: flex-start; margin-left: -120px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_col_Mel_Tran\HP_Sweep_Mel_col.png" alt="Hyperparameter Sweep" style="width: 50%; height: auto;">
+    <img src="_extra/0_mL_scripts/0_p2/0_knn/learning_curve.png" alt="Learning Curve KNN" style="width: 50%; height: auto;">
+  </div>
+
+<!-- Row 2: Metrics Table + Bottom Right Image -->
+<div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 20px;">
+
+  <!-- Metrics Table -->
+  <div style="border: 2px solid #444; border-radius: 15px; padding: 20px; 
+              box-shadow: 2px 2px 10px rgba(0,0,0,0.2); text-align: center; max-width: 50%;">
+    <h4 style="font-size: 25px; margin-bottom: 20px;">Metric / Score</h4>
+    <ul style="list-style: none; display: flex; justify-content: center; gap: 50px; padding: 0; font-size: 20px;">
+      <li><strong>Accuracy:</strong> 0.1000</li>
+      <li><strong>Precision:</strong> 0.0100</li>
+      <li><strong>F1 Score:</strong> 0.0182</li>
+    </ul>
+  </div>
+
+  <!-- Bottom Right Image with Caption -->
+  <div style="text-align: center; width: 40%;">
+    <img src="_extra\0_mL_scripts\0_p2\0_grey_Mel_Train\Billie Eilish_bad guy_viridis.png" alt="Bottom Right Graph" style="width: 100%; height: auto;">
+    <p style="font-size: 16px; margin-top: -50px;">Example Color-Scale Spectrogram</p>
+  </div>
+
+</div>
+
 <!--Slide 14 -->
-</section>
+</div></section>
 <section id="section-9" class="slide level2">
 <h2></h2>
-<p>Q2 Summary - Nathan</p>
+<!-- Q2 Slide Summary -->
+<div style="text-align: left; font-size: 30px; line-height: 1.5; margin: 20px;">
+<h3 style="text-align: center; font-size: 40px; margin-bottom: 15px;">
+📌 Question 2 - Summary
+</h3>
+<ul>
+<li>
+Extracted Audio file data.
+</li>
+<li>
+Built KNN models and Random Forests models - both performed poorly.
+</li>
+<li>
+Built CNN models using grayscale and viridis-scale spectrograms.
+</li>
+<li>
+Dataset was small, limiting model performance and generalization.
+</li>
+<li>
+Grayscale spectrograms slightly outperformed viridis, but overall accuracy remained low.
+</li>
+<li>
+Highlights need for larger datasets and richer audio features for reliable genre recognition.
+</li>
+</ul>
+</div>
 <!--Slide 15 -->
 </section>
 <section id="section-10" class="slide level2">
 <h2></h2>
-<p>Full Summary - Nathan talk about both question findings.</p>
+<div style="text-align: left; font-size: 30px; line-height: 1.5; margin: 20px;">
+<h3 style="text-align: center; font-size: 40px; margin-bottom: 15px;">
+Summary of Findings
+</h3>
+<ul>
+<li>
+Q1 models - did show trends in reference to Vocal, no Vocal complete song.
+</li>
+<li>
+Q2 models - only the viridis spectrogram appears to look like more data may help wiht training.
+</li>
+<li>
+Overall extremely low model performance
+</li>
+<li>
+Current hypothesis is the data set is too small, we need better features or both
+</li>
+</ul>
+</div>
 <!--Slide 16 -->
 </section>
 <section id="section-11" class="slide level2">
