@@ -1,0 +1,15 @@
+import pandas as pd
+
+# Path to your CSV
+csv_path = r"C:\Users\Mr_Green\OneDrive\Desktop\0_Sum_25\INFO_523\0_Final_Proj_N\0_grey_Mel_Train\output_sorted_with_grey_viridis.csv"
+
+# Path to save as Excel
+excel_path = csv_path.replace('.csv', '.xlsx')
+
+# Read CSV
+df = pd.read_csv(csv_path, encoding='utf-8-sig')
+
+# Save as Excel
+df.to_excel(excel_path, index=False)
+
+print(f"Excel file saved at: {excel_path}")

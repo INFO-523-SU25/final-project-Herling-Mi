@@ -1,0 +1,6 @@
+
+[1m10/10[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m1s[0m 84ms/step - accuracy: 0.1937 - loss: 2.1730 - val_accuracy: 0.1750 - val_loss: 2.1234
+Epoch 5: early stopping
+Restoring model weights from the end of the best epoch: 1.
+Final Best Model Metrics:
+Accuracy: 0.1000, Precision: 0.0100, F1: 0.0182

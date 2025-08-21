@@ -63,7 +63,7 @@ Music recommendation systems increasingly rely on machine learning to capture th
 
 ## Introduction
 
-Music genre classification is a central task in the field of music information retrieval, combining elements of signal processing, machine learning, and deep learning. Accurate genre identification not only enhances music recommendation systems and streaming platforms but also deepens our understanding of audio structure and human perception of sound. Traditional approaches have relied on handcrafted audio features analyzed with machine learning techniques such as Random Forests and Gaussian Mixture Models, offering interpretable yet limited performance\[1\]. Recent advances, however, leverage deep learning methods—particularly convolutional neural networks (CNNs)—to extract high-level representations directly from spectrograms, achieving state-of-the-art results\[2\]. This project explores both paradigms: first applying classical machine learning with 5-fold cross-validation, and then advancing to CNN-based classification on spectrogram heat maps, with results evaluated using standard metrics including accuracy, precision, recall, F1-score, confusion matrices, and ROC curves.
+Music genre classification is a central task in the field of music information retrieval, combining elements of signal processing, machine learning, and deep learning. Accurate genre identification not only enhances music recommendation systems and streaming platforms but also deepens our understanding of audio structure and human perception of sound. Traditional approaches have relied on handcrafted audio features analyzed with machine learning techniques such as Random Forests and Gaussian Mixture Models, offering interpretable yet limited performance \[1\]. Recent advances, however, leverage deep learning methods—particularly convolutional neural networks (CNNs)—to extract high-level representations directly from spectrograms, achieving state-of-the-art results \[2\]. This project explores both paradigms: first applying classical machine learning with 5-fold cross-validation, and then advancing to CNN-based classification on spectrogram heat maps, with results evaluated using standard metrics including accuracy, precision, recall, F1-score, confusion matrices, and ROC curves.
 
 ## A note on spectographic features of <code>.mp3</code> vs. <code>.wav</code>
 
@@ -118,8 +118,7 @@ How can **user interaction data**, combined with basic track metadata and simple
 -   How do recommendation model results compare and contrast when using <code>**.wav**</code> files versus <code>**.mp3**</code> files, considering the potential impact of audio quality and compression artifacts on feature extraction and recommendation performance?
 
 #### <b>Secondary Problem Formulation</b>
-We abandoned the use of <code>.wav</code> versus <code>.mp3</code> formats for the reasons previously mentioned. Instead, the idea of using heat maps/spectrograms was discovered and pursued. A CNN was built for both grayscale and viridis-scale inputs. As will be discussed in the <b>Problem Analysis and Results</b> section, training outcomes were poor despite what initially seemed to be a solid approach. The current hypothesis is that the dataset is too small to produce a robust model, that the extracted song metrics are insufficient to support effective training, or a combination of both. The Likert scale—with options of 'Likert 2,' 'Likert 3,' and 'Likert 5'—was not employed, as it represents a second phase of recommendation by genre, contingent on reliable genre recognition.
-
+We abandoned the use of <code>.wav</code> versus <code>.mp3</code> formats for the reasons previously mentioned. Instead, the idea of using heat maps/spectrograms was discovered and pursued. A CNN was built for both grayscale and viridis-scale inputs. As will be discussed in the <b>Problem Analysis and Results</b> section, training outcomes were poor despite what initially seemed to be a solid approach. The current hypothesis is that the dataset is too small to produce a robust model, that the extracted song metrics are insufficient to support effective training, or a combination of both. The Likert scale—with options of 'Likert 2,' 'Likert 3,' and 'Likert 5'—was not employed, as it represents a second phase of recommendation by genre, contingent on reliable genre recognition. 
 ## Dataset
 
 ### data provenance
@@ -240,6 +239,23 @@ display(HTML(html_code))
 
 The <code>Demucs</code> library turned out to be easy to use and very good at vocal and background track separation.
 Scripts that run `Demucs` using system commands—typically through Python’s `subprocess` or `os` libraries—offer a straightforward way to integrate audio separation tools into Python workflows while interacting with the operating system’s file structure and command-line utilities. In order to run files in parallel, a <code>main_script.py</code> capable of generating mulitple threads would call a <code>worker_script.py</code> such as the one below.
+
+Below are two representatives of spectrogram feature extraction.
+```{=html}
+<div style="display: flex; justify-content: flex-start; align-items: flex-start; margin-bottom: 20px; margin-left: -110px;">
+  <div style="text-align: center; margin-right: 20px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_grey_Mel_Train\Queen_We Will Rock You_gray.png" alt="~Q" style="width: 90%; height: auto;">
+    <p style="margin-left: 0px; margin-right: 5px;">image 1.<br>Queen_we_will_rock_you - spectrograph - grey scale</p>
+  </div>
+
+  <div style="text-align: center; margin-right: 50px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_grey_Mel_Train\Billie Eilish_bad guy_viridis.png" alt="Billy~" style="width: 90%; height: auto;">
+    <p style="margin-left: 0px; margin-right: 5px;">image 2.<br>Billie Eilish - bad guy - spectrograph - vridis scale</p>
+  </div>
+
+</div>
+```
+
 
 ```{python}
 #| label: ex_script_1
@@ -368,35 +384,414 @@ Easy and medium paths, as proposed in the proposal morphed into multiple paths t
 
 How can we leverage audio features to construct a machine learning model capable of genre recognition?
 
-- Data Collection:
+- Data Collection:<br>
+Data collection was performed with python scripts for each feature listed in Table 1. Ten genres were chosen and twenty representative artists for each genre - were both choosen by google search.
+- Data Processing:<br>
+All data was present, no imputation was needed. It was decided to not eliminate statistical outliers, since the model design hasn't been explored thoroughly enough to warrant selecting out data.
+- Model Selection:<br>
+Three supervised machine learning methods were chosen: (1) Knn [classic baseline] (2) Random Forest [with the hope of good baseline results] (3) CNN performed with the numerical dataset and spectograph extracted files.
+- Model Validation:<br>
+```{=html}
+<div style="margin-left: 20px;">
+  <p><strong>(1) KNN</strong></p>
+  <ul>
+    <li>LOOCV: Validates and selects the best hyperparameters.</li>
+    <li>5-Fold CV learning curve: Validates generalization performance as a function of training size.</li>
+  </ul>
 
-- Data Processing:
+  <p><strong>(2) Random Forest</strong></p>
+  <ul>
+    <li>Cross validation</li>
+    <li>Learning curve</li>
+  </ul>
 
-- Model Selection:
+  <p><strong>(3) CNN</strong></p>
+  <ul>
+    <li>Early stopping</li>
+  </ul>
 
-- Model Validation:
+  <p><strong>Model Metrics</strong></p>
 
-- Model Metrics
+  <p><strong>(1) KNN - hyperparameter sweep:</strong></p>
+  <ul>
+    <li>n_neighbors: [1, 3, 5, 7, 9]</li>
+    <li>weights: ['uniform', 'distance']</li>
+    <li>metric: ['euclidean', 'manhattan']</li>
+    <li>p: [1, 2] (only relevant if metric='minkowski')</li>
+  </ul>
 
+  <p><strong>(2) Random Forest - hyperparameter sweep:</strong></p>
+  <ul>
+    <li>n_estimators: [10, 50, 100, 200]</li>
+    <li>max_depth: [None, 5, 10, 15]</li>
+    <li>min_samples_split: [2, 5, 10]</li>
+    <li>min_samples_leaf: [1, 2, 4]</li>
+  </ul>
 
+  <p><strong>(3) CNN - hyperparameter sweep:</strong></p>
+  <ul>
+    <li>conv_filters: [[32, 64], [64, 128], [32, 64, 128]]</li>
+    <li>kernel_size: [(3,3), (5,5)]</li>
+    <li>dropout: [0.2, 0.3, 0.5]</li>
+    <li>learning_rate: [0.01, 0.001, 0.0001]</li>
+  </ul>
+</div>
+```
 
-(7) future steps/recommendations
+## Metrics and Results (Knn)
+```{=html}
+<div style="display: flex; justify-content: flex-start; align-items: flex-start; margin-bottom: 20px; margin-left: -140px;">
+
+  <div style="text-align: center; margin-right: 20px;">
+    <img src="_extra/0_mL_scripts/0_p2/0_knn/hyper_param_sweep.png" alt="Hyperparameter Sweep" style="width: 130%; height: auto;">
+    <p>Hyperparameter Swee</p>
+  </div>
+
+  <div style="text-align: center; margin-right: 50px;">
+    <img src="_extra/0_mL_scripts/0_p2/0_knn/learning_curve.png" alt="Learning Curve 2" style="width: 130%; height: auto;">
+    <p>Learning Curve Knn</p>
+  </div>
+
+</div>
+```
+```{=html}
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; text-align: center;">
+  <thead>
+    <tr>
+      <th colspan="2">Best Hyperparameters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>knn__algorithm</td>
+      <td>auto</td>
+    </tr>
+    <tr>
+      <td>knn__n_neighbors</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>knn__p</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>knn__weights</td>
+      <td>uniform</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; text-align: center;">
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Test Precision (weighted)</td>
+      <td>0.1017</td>
+    </tr>
+    <tr>
+      <td>Test F1 Score (weighted)</td>
+      <td>0.1117</td>
+    </tr>
+    <tr>
+      <td>LOOCV Accuracy</td>
+      <td>0.1350</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; text-align: center;">
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1-Score</th>
+      <th>Support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>0.00</td><td>0.00</td><td>0.00</td><td>4</td></tr>
+    <tr><td>1</td><td>0.25</td><td>0.25</td><td>0.25</td><td>4</td></tr>
+    <tr><td>2</td><td>0.20</td><td>0.25</td><td>0.22</td><td>4</td></tr>
+    <tr><td>3</td><td>0.17</td><td>0.25</td><td>0.20</td><td>4</td></tr>
+    <tr><td>4</td><td>0.00</td><td>0.00</td><td>0.00</td><td>4</td></tr>
+    <tr><td>5</td><td>0.00</td><td>0.00</td><td>0.00</td><td>4</td></tr>
+    <tr><td>6</td><td>0.00</td><td>0.00</td><td>0.00</td><td>4</td></tr>
+    <tr><td>7</td><td>0.20</td><td>0.25</td><td>0.22</td><td>4</td></tr>
+    <tr><td>8</td><td>0.20</td><td>0.25</td><td>0.22</td><td>4</td></tr>
+    <tr><td>9</td><td>0.00</td><td>0.00</td><td>0.00</td><td>4</td></tr>
+    <tr><td colspan="4">Accuracy</td><td>0.12</td></tr>
+    <tr><td colspan="4">Macro Avg</td><td>0.11</td></tr>
+    <tr><td colspan="4">Weighted Avg</td><td>0.11</td></tr>
+  </tbody>
+</table>
+
+```
+```{=html}
+<div style="margin-left: 20px; margin-right: 20px; line-height: 1.6;">
+  <p><b>Knn Evaluation</b><br>This learning curve reveals a significant gap between training and cross-validation performance for your KNN classifier:</p>
+  
+  <p>🔵 <strong>Training Score:</strong> The model achieves a perfect F1 score of 1.0 across all training set sizes, which is a strong indicator of overfitting—the model memorizes the training data rather than generalizing from it.</p>
+  
+  <p>🟢 <strong>Cross-Validation Score:</strong> Starts near 0.0 and only climbs to about 0.2 even with 160 training samples. This suggests the model struggles to generalize and perform well on unseen data.</p>
+  
+  <p>📉 <strong>Implication:</strong> Despite using the best hyperparameters, the model may be too sensitive to noise or lacks sufficient complexity to capture meaningful patterns. KNN’s reliance on local structure might be failing due to sparse or high-dimensional data.</p>
+</div>
+```
+
+## Metrics and Results (Random Forest)
+```{=html}
+<div style="display: flex; justify-content: flex-start; align-items: flex-start; margin-bottom: 20px; margin-left: -140px;">
+
+  <div style="text-align: center; margin-right: 20px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_Random_Forest\RF_HP_Sweep_graph.png" alt="Hyperparameter Sweep" style="width: 130%; height: auto;">
+    <p>Hyperparameter Sweep - RF</p>
+  </div>
+
+  <div style="text-align: center; margin-right: 50px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_Random_Forest\RF_LC.png" alt="Learning Curve 2" style="width: 130%; height: auto;">
+    <p>Learning Curve - RF</p>
+  </div>
+
+</div>
+```
+
+```{=html}
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; text-align: left;">
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>max_depth</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <td>min_samples_leaf</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td>min_samples_split</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td>n_estimators</td>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <td>accuracy</td>
+      <td>0.925</td>
+    </tr>
+    <tr>
+      <td>precision</td>
+      <td>0.927554</td>
+    </tr>
+    <tr>
+      <td>recall</td>
+      <td>0.925</td>
+    </tr>
+    <tr>
+      <td>f1_score</td>
+      <td>0.924728</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+```{=html}
+<div style="margin-left: 20px; margin-right: 20px; line-height: 1.6;">
+  <p><b>Random Forrest Analysis</b><br>Yes, this random forest model appears to be overtrained, and here’s why:</p>
+
+  <h4>🔍 Key Indicators of Overtraining</h4>
+  <ul>
+    <li><strong>Training Accuracy = 1.0</strong> across all training set sizes:
+      <p>This suggests the model is memorizing the training data perfectly, which is a classic sign of overfitting.</p>
+    </li>
+    <li><strong>Validation Accuracy starts low (~0.1) and rises to ~0.85</strong>:
+      <p>While the validation accuracy improves with more data, the persistent gap between training and validation accuracy indicates poor generalization early on.</p>
+    </li>
+    <li>Even at the largest training size, the model still performs significantly worse on unseen data than on training data.</li>
+  </ul>
+
+  <h4>📈 What a Healthy Learning Curve Might Look Like</h4>
+  <ul>
+    <li>Training accuracy should decrease slightly as training size increases (less memorization).</li>
+    <li>Validation accuracy should increase and converge toward training accuracy.</li>
+    <li>A smaller gap between the two curves suggests better generalization.</li>
+  </ul>
+
+  <h4>🧠 Why Random Forests Can Overfit</h4>
+  <ul>
+    <li>If the number of trees is too high or if each tree is allowed to grow too deep, the ensemble can overfit.</li>
+    <li>Especially with small datasets, random forests can memorize patterns that don’t generalize.</li>
+  </ul>
+</div>
+```
+
+## Metrics and Results (CNN - Grey scale)
+```{=html}
+<div style="display: flex; justify-content: flex-start; align-items: flex-start; margin-bottom: 20px; margin-left: -140px;">
+
+  <div style="text-align: center; margin-right: 20px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_grey_Mel_Train\HP_sweep.png" alt="Hyperparameter Sweep" style="width: 130%; height: auto;">
+    <p style="margin-left: 50px; margin-right: -40px;">Hyperparameter Sweep CNN - grey scale</p>
+  </div>
+
+  <div style="text-align: center; margin-right: 50px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_grey_Mel_Train\lc_grey_.png" alt="Learning Curve 2" style="width: 130%; height: auto;">
+    <p style="margin-left: 50px; margin-right: -40px;">Learning Curve CNN - grey scale</p>
+  </div>
+
+</div>
+```
+```{=html}
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Conv Layers</th>
+      <th>Epochs</th>
+      <th>Patience</th>
+      <th>Accuracy</th>
+      <th>F1</th>
+      <th>Precision</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>2</td><td>10</td><td>2</td><td>0.0750</td><td>0.0143</td><td>0.0079</td></tr>
+    <tr><td>2</td><td>10</td><td>5</td><td>0.1000</td><td>0.0229</td><td>0.0129</td></tr>
+    <tr><td>3</td><td>10</td><td>2</td><td>0.1000</td><td>0.0182</td><td>0.0100</td></tr>
+    <tr><td>3</td><td>10</td><td>5</td><td>0.1000</td><td>0.0182</td><td>0.0100</td></tr>
+    <tr><td>2</td><td>15</td><td>2</td><td>0.1000</td><td>0.0186</td><td>0.0103</td></tr>
+    <tr><td>2</td><td>15</td><td>5</td><td>0.1000</td><td>0.0186</td><td>0.0103</td></tr>
+    <tr><td>3</td><td>15</td><td>2</td><td>0.1250</td><td>0.0450</td><td>0.0361</td></tr>
+    <tr><td>3</td><td>15</td><td>5</td><td>0.1000</td><td>0.0182</td><td>0.0100</td></tr>
+    <tr><td>2</td><td>30</td><td>2</td><td>0.1000</td><td>0.0182</td><td>0.0100</td></tr>
+    <tr><td>2</td><td>30</td><td>5</td><td>0.2000</td><td>0.0750</td><td>0.0476</td></tr>
+    <tr><td>3</td><td>30</td><td>2</td><td>0.1000</td><td>0.0182</td><td>0.0100</td></tr>
+    <tr><td>3</td><td>30</td><td>5</td><td>0.1000</td><td>0.0182</td><td>0.0100</td></tr>
+  </tbody>
+</table>
+```
+
+```{=html}
+<div style="border: 2px solid #ccc; padding: 15px; margin: 20px; background-color: #f9f9f9; border-radius: 10px;">
+  <p><strong>CNN Model Assessment - Grayscale Data</strong></p>
+  
+  <p>🚨 <strong>Red Flags in the Learning Curve</strong></p>
+  <ul>
+    <li><strong>Training Accuracy rises to 1.0 by epoch 5:</strong> The model is perfectly memorizing the training data.</li>
+    <li><strong>Validation Accuracy stays flat at ~0.2:</strong> The model is not generalizing at all. It is essentially guessing on unseen data.</li>
+  </ul>
+  
+  <p>🔍 <strong>Possible Causes</strong></p>
+  <ul>
+    <li><strong>Data Issues:</strong>
+      <ul>
+        <li>Grayscale input might lack sufficient contrast or features.</li>
+        <li>Labels could be noisy or mismatched.</li>
+      </ul>
+    </li>
+    <li><strong>Model Complexity:</strong> The CNN might be too deep or have too many parameters for the dataset size.</li>
+    <li><strong>Overtraining:</strong>
+      <ul>
+        <li>No regularization (e.g., dropout, weight decay).</li>
+        <li>No early stopping.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><strong>Note:</strong> All attempts to reduce overtraining did not work. It is postulated that the dataset needs to be larger for the CNN to learn meaningful patterns.</p>
+</div>
+```
+
+## Metrics and Results (CNN - Color scale)
+```{=html}
+<div style="display: flex; justify-content: flex-start; align-items: flex-start; margin-bottom: 20px; margin-left: -140px;">
+
+  <div style="text-align: center; margin-right: 20px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_col_Mel_Tran\HP_Sweep_Mel_col.png" alt="Hyperparameter Sweep" style="width: 130%; height: auto;">
+    <p style="margin-left: 50px; margin-right: -40px;">Hyperparameter Sweep - Color Spectrogram - CNN</p>
+  </div>
+
+  <div style="text-align: center; margin-right: 50px;">
+    <img src="_extra\0_mL_scripts\0_p2\0_col_Mel_Tran\learning_curve.png" alt="Learning Curve 2" style="width: 130%; height: auto;">
+    <p style="margin-left: 50px; margin-right: -40px;">Learning Curve - Color Spectrogram - CNN</p>
+  </div>
+
+</div>
+```
+```{=html}
+<div style="border: 2px solid #ccc; padding: 15px; margin: 20px; background-color: #f5f5f5; border-radius: 10px; font-family: Arial, sans-serif;">
+  <p><strong>Final CNN Model Stats</strong></p>
+  
+  <ul>
+    <li><strong>Training Accuracy:</strong> 0.1937</li>
+    <li><strong>Training Loss:</strong> 2.1730</li>
+    <li><strong>Validation Accuracy:</strong> 0.1750</li>
+    <li><strong>Validation Loss:</strong> 2.1234</li>
+    <li><strong>Epoch 5:</strong> Early stopping triggered</li>
+    <li>Restoring model weights from the best epoch: 1</li>
+  </ul>
+
+  <p><strong>Final Best Model Metrics:</strong></p>
+  <ul>
+    <li>Accuracy: 0.1000</li>
+    <li>Precision: 0.0100</li>
+    <li>F1 Score: 0.0182</li>
+  </ul>
+</div>
+```
+
+```{=html}
+<div style="border: 2px solid #ccc; padding: 15px; margin: 20px; background-color: #f9f9f9; border-radius: 10px; font-family: Arial, sans-serif;">
+  <p><strong>Color Spectrogram CNN Learning Curve</strong></p>
+
+  <p>This graph shows a modestly improving CNN model trained on color spectrogram data, but it’s still underperforming overall.</p>
+
+  <p><strong>📈 What the Learning Curve Shows:</strong></p>
+  <ul>
+    <li>Training Accuracy steadily increases from 0.0 to ~0.18 by epoch 4.</li>
+    <li>Validation Accuracy peaks at epoch 2 (~0.20), then slightly declines and flattens.</li>
+  </ul>
+
+  <p><strong>🧠 Interpretation:</strong></p>
+  <ul>
+    <li>The model is learning, but very slowly.</li>
+    <li>The validation peak at epoch 2 suggests the model briefly generalized well, but then started to overfit.</li>
+    <li>The low overall accuracy (max ~0.20) implies the model is struggling to extract meaningful features from the spectrograms.</li>
+  </ul>
+
+  <p><strong>🔍 Possible Issues:</strong></p>
+  <ul>
+    <li>Spectrogram preprocessing might be suboptimal (e.g., poor resolution, noisy input).</li>
+    <li>Model architecture may be too shallow or not well-tuned for this type of data.</li>
+    <li>Class imbalance or label noise could be limiting performance.</li>
+    <li>Too few epochs — the model might need more time to converge.</li>
+  </ul>
+
+  <p><em>Note:</em> Epoch 2 was the optimal epoch from the hyperparameter sweep. A postulated fix is to use a larger dataset to improve generalization and model performance.</p>
+</div>
+```
+<br>(7) future steps/recommendations
 
 ## Results & Conclusion
 
-### Yashi
+The primary goal of this project was to develop a machine learning system capable of recognizing both the language spoken in audio files and the musical genre, in order to enhance personalization in AI-driven music recommendation platforms. By accurately identifying spoken language within songs and combining this information with genre metadata, the system aims to suggest tracks that more closely align with individual user preferences. The challenge involved processing raw audio data, separating vocal from instrumental components, extracting meaningful statistical and time-frequency features, and applying both classical machine learning models and deep learning architectures to capture the underlying patterns in music.
 
-::: {style="background-color: orange; color: black; margin: 0px 0px 0px 0px;"}
-<b>The project goal was to investigate how audio feature engineering can support language classification in music. Our analysis demonstrated that vocal-only features drive most of the predictive signal, confirming that separated vocals provide the strongest basis for language recognition. These results demonstrate the potential of classical machine learning for this task, but also highlight its limits，larger datasets and deep learning methods will be needed for stronger multilingual classification in the future.</b>
-:::
+To address these goals, the team experimented with a variety of models. Classical approaches—including Logistic Regression, Random Forests, and Support Vector Machines—were trained on extracted audio features using cross-validation, yielding modest predictive performance with accuracy, precision, recall, and F1-scores generally between 10–60%. K-Nearest Neighbors and Random Forests were applied for genre classification, while Convolutional Neural Networks were trained on Mel spectrogram images (grayscale and color), using early stopping and hyperparameter sweeps to optimize performance. Although the models demonstrated only limited overall accuracy, CNNs showed comparatively stronger results and align with literature on deep learning’s potential for audio analysis. Future improvements may include expanding the dataset size, refining spectrogram preprocessing, exploring deeper or more specialized architectures, and integrating more robust feature engineering to enhance both language and genre recognition for more effective recommendation systems.
 
-Restate the project goal, and the goal of your question. What was done in the analysis, and what was found with the features extracted. (1 paragraph)
-
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
-
-Restate the project goal, and the goal of your question. What was done in the analysis, and what was found with the features extracted. (1 paragraph)
 
 ## Video links
 
@@ -406,15 +801,15 @@ Restate the project goal, and the goal of your question. What was done in the an
 
 ## Audio Player Demo
 
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
+A demo of the Ui/Ux audio player written for this project. First a few songs are scrolled through to demonstarate the functionality of 'real time' generation of dB v. freq. curves for <code>.wav</code> and <code>.mp3</code>. Next a song is played to demonstrat the 'real time' audio analysis with the spectrogram (heat map) feature.
+```{=html}
+<video width="640" height="360" controls>
+  <source src="_extra/2025-08-20 19-39-35.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+```
 
 ## sources
-
-::: {style="background-color: #4CBB17; color: black; margin: 0px 0px 0px 0px;"}
-<b>Nathan #\_to_Do</b>
-:::
 
 \[1\] https://link.springer.com/chapter/10.1007/978-981-97-4533-3_6
 
